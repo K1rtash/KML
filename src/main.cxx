@@ -21,9 +21,11 @@ struct WindowCtx{
 struct Input {
     double scrollDelta = 0.0;
     float scrollDX = 0.0f, scrollDY = 0.0f;
-    bool mouseCaptured = true;
+    bool mouseCaptured = false;
     bool keyboard[GLFW_KEY_LAST]{false};
+    bool mouseButtons[GLFW_MOUSE_BUTTON_LAST]{false};
     KeyState keys[GLFW_KEY_LAST]{UP};
+    KeyState buttons[GLFW_MOUSE_BUTTON_LAST]{UP};
 } input;
 
 /* ---------- Declaraciones propias ---------- */
@@ -32,6 +34,7 @@ void setLogicalPresentation(int width, int height);
 void printGLInfo();
 void updateKeyboard();
 KeyState getKey(int key);
+KeyState getMouseButton(int button);
 
 /* ---------- Declaraciones de callbacks de GLFW ---------- */
 
@@ -41,6 +44,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void cursor_callback(GLFWwindow* window, double xpos, double ypos);
 void window_focus_callback(GLFWwindow* window, int focused);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 /* ---------- Main ---------- */
 
@@ -104,6 +108,7 @@ int main(void)
     glfwSetCursorPosCallback(window, cursor_callback);
     glfwSetWindowFocusCallback(window, window_focus_callback);
     glfwSetKeyCallback(window, key_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     glfwSwapInterval(false);
@@ -124,8 +129,20 @@ int main(void)
         glfwPollEvents();
         updateKeyboard();
 
-        if(getKey(GLFW_KEY_ESCAPE) == PRESS || getKey(GLFW_KEY_ESCAPE) == HOLD) {
-            glfwSetWindowShouldClose(window, true);
+        if(getKey(GLFW_KEY_ESCAPE) == PRESS) {
+            std::cout << "raton al momento de esc: " << (input.mouseCaptured ? "CAPTURADO" : "no capturado") << std::endl;
+            if (!input.mouseCaptured) {
+                glfwSetWindowShouldClose(window, true);
+            }
+            else {
+                input.mouseCaptured = false;
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            }
+        }
+
+        if(getMouseButton(GLFW_MOUSE_BUTTON_LEFT) == PRESS) {
+            input.mouseCaptured = true;
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         }
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -141,22 +158,33 @@ int main(void)
 
 /* ---------- Declaraciones propias ---------- */
 
+// Según como estaban en el frame anterior, le asignamos un nuevo estado
+KeyState setButtonState(int i, bool isDown) {
+    switch (input.keys[i]) {
+        case UP: return isDown ? PRESS : UP;
+        case PRESS: return isDown ? HOLD : RELEASE;
+        case HOLD: return isDown ? HOLD : RELEASE;
+        case RELEASE: return isDown ? PRESS : UP;
+    }   
+    return UP;
+}
+
 void updateKeyboard() {
     for (int i = GLFW_KEY_SPACE; i < GLFW_KEY_LAST; i++) {
-        bool isDown = input.keyboard[i];
+        input.keys[i] = setButtonState(i, input.keyboard[i]);
+    }
 
-        /* Según como estaban en el frame anterior, le asignamos un nuevo estado */
-        switch (input.keys[i]) {
-            case UP: if(isDown) input.keys[i] = PRESS; break;
-            case PRESS: input.keys[i] = isDown ? HOLD : RELEASE; break;
-            case HOLD: if(!isDown) input.keys[i] = RELEASE; break;
-            case RELEASE: input.keys[i] = isDown ? PRESS : UP; break;
-        }     
+    for(int i = GLFW_MOUSE_BUTTON_1; i < GLFW_MOUSE_BUTTON_LAST; i++) {
+        input.buttons[i] = setButtonState(i, input.mouseButtons[i]);
     }
 }
 
 KeyState getKey(int key) {
     return input.keys[key];
+}
+
+KeyState getMouseButton(int button) {
+    return input.buttons[button];
 }
 
 void setLogicalPresentation(int width, int height) {
@@ -254,4 +282,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         input.keyboard[key] = true;
     else if (action == GLFW_RELEASE) 
         input.keyboard[key] = false;
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    if(button < 0 || button >= GLFW_MOUSE_BUTTON_LAST) return;
+    std::cout << "callback: boton -> " << button << " = " << action << std::endl;
+    input.mouseButtons[button] = action;
 }
