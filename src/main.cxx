@@ -130,7 +130,6 @@ int main(void)
         updateKeyboard();
 
         if(getKey(GLFW_KEY_ESCAPE) == PRESS) {
-            std::cout << "raton al momento de esc: " << (input.mouseCaptured ? "CAPTURADO" : "no capturado") << std::endl;
             if (!input.mouseCaptured) {
                 glfwSetWindowShouldClose(window, true);
             }
@@ -230,10 +229,6 @@ void error_callback(int error, const char* description) {
 }
 
 void resize_callback(GLFWwindow *window, int width, int height) {
-    if(winCtx.mode == MAXIMIZED_WINDOWED) {
-        glfwMaximizeWindow(window);
-        return;
-    }
     setLogicalPresentation(width, height);
 }
 
@@ -286,6 +281,5 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
     if(button < 0 || button >= GLFW_MOUSE_BUTTON_LAST) return;
-    std::cout << "callback: boton -> " << button << " = " << action << std::endl;
     input.mouseButtons[button] = action;
 }
