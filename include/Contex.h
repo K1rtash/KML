@@ -1,8 +1,5 @@
-#include <glad/glad.h>
-
 namespace KML {
     enum class KeyState{PRESS, RELEASE, HOLD, UP};
-    enum class WindowMode{FULLSCREEN, MAXIMIZED_BORDERLESS, MAXIMIZED_WINDOWED};
     enum WindowFlags : unsigned int {
         NONE = 0,
         RESIZABLE = 1 << 0,
@@ -14,9 +11,8 @@ namespace KML {
         BORDERLESS = 1 << 6,
         FULLSCREEN = 1 << 7,
     };
-    #define WindowFlags unsigned int
 
-    bool Init(int width, int height, const char* title, WindowFlags flags);
+    bool Init(int width, int height, const char* title, unsigned int flags = 0);
     bool ProcessEvents();
     bool GetMouseCaptureState();
 

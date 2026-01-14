@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main(void) {
-    KML::Init(800, 600, "KML Window", KML::RESIZABLE | KML::BORDERLESS);
+    KML::Init(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA4);
 
     while(KML::ProcessEvents()) {
 

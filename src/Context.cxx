@@ -1,7 +1,9 @@
 #define GLFW_INCLUDE_NONE
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include <iostream>
+
 #include "Contex.h"
 
 /* ---------- Declaraciones de callbacks ---------- */
@@ -26,7 +28,6 @@ struct WindowCtx{
     int width, height;
     bool focused = true;
     const char* title = "KML Window";
-    KML::WindowMode mode = KML::WindowMode::MAXIMIZED_WINDOWED;
     GLFWwindow* handle = nullptr;
 } window;
 
@@ -34,15 +35,13 @@ struct Input {
     double scrollDelta = 0.0;
     float scrollDX = 0.0f, scrollDY = 0.0f;
     bool mouseCaptured = false;
-    //bool keyboard[GLFW_KEY_LAST]{false};
     bool rawButtons[GLFW_KEY_LAST]{false};
     KML::KeyState buttons[GLFW_KEY_LAST]{KML::KeyState::UP};
-    //KML::KeyState buttons[GLFW_MOUSE_BUTTON_LAST]{KML::KeyState::UP};
 } input;
 
 /* ---------- Definiciones ---------- */
 
-bool KML::Init(int width, int height, const char* title, WindowFlags flags) {
+bool KML::Init(int width, int height, const char* title, unsigned int flags) {
     glfwSetErrorCallback(error_callback);
     glfwInit();
         
@@ -53,50 +52,51 @@ bool KML::Init(int width, int height, const char* title, WindowFlags flags) {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_REFRESH_RATE, video->refreshRate);
-    glfwWindowHint(GLFW_SAMPLES, 8);
     #ifdef __APPLE__
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
-    
-    switch (window.mode) {
-        case KML::WindowMode::FULLSCREEN: {
-            glfwWindowHint(GLFW_RED_BITS, video->redBits);
-            glfwWindowHint(GLFW_GREEN_BITS, video->greenBits);
-            glfwWindowHint(GLFW_BLUE_BITS, video->blueBits);
-            int w, h;
-            w = video->width;  // Use our 'desktop' resolution for window size
-            h = video->height; // to get a 'full screen borderless' window.
-            window.handle = glfwCreateWindow(w, h, title, monitor, nullptr);
-            break;
-        }
-        case KML::WindowMode::MAXIMIZED_BORDERLESS: {
-            glfwWindowHint(GLFW_DECORATED, false);
-            int x, y, w, h;
-            glfwGetMonitorWorkarea(monitor, &x, &y, &w, &h);
-            window.handle = glfwCreateWindow(w, h, title, nullptr, nullptr);
-            glfwSetWindowPos(window.handle, x, y);
-            break;
-        }
-        case KML::WindowMode::MAXIMIZED_WINDOWED: {
-            window.handle = glfwCreateWindow(width, height, title, nullptr, nullptr);
-            glfwMaximizeWindow(window.handle);
-            break;
-        }
-        default:
-            glfwWindowHint(GLFW_RESIZABLE, true);
-            window.handle = glfwCreateWindow(width, height, title, nullptr, nullptr);
-    }
 
-    if(window.handle == nullptr) return false;
+    int aasamples =
+        (flags & KML::MSAA8) ? 8 :
+        (flags & KML::MSAA4) ? 4 :
+        (flags & KML::MSAA2) ? 2 : 0;
+    
+    if(aasamples > 0) glfwWindowHint(GLFW_SAMPLES, aasamples);
+    glfwWindowHint(GLFW_DECORATED, (flags & KML::BORDERLESS) ? 0 : 1);
+    glfwWindowHint(GLFW_RESIZABLE, (flags & KML::RESIZABLE) ? 1 : 0);
+
+    if(flags & KML::MAXIMIZED && flags & KML::BORDERLESS && !(flags & KML::FULLSCREEN)) 
+    {
+        int x, y, w, h;
+        glfwGetMonitorWorkarea(monitor, &x, &y, &w, &h);
+        window.handle = glfwCreateWindow(w, h, title, nullptr, nullptr);
+        glfwSetWindowPos(window.handle, x, y);
+    }
+    else if(flags & KML::MAXIMIZED && !(flags & KML::BORDERLESS) && !(flags & KML::FULLSCREEN)) 
+    {
+        window.handle = glfwCreateWindow(width, height, title, nullptr, nullptr);
+        glfwMaximizeWindow(window.handle);
+    }
+    else if(flags & KML::FULLSCREEN) 
+    {
+        glfwWindowHint(GLFW_RED_BITS, video->redBits);
+        glfwWindowHint(GLFW_GREEN_BITS, video->greenBits);
+        glfwWindowHint(GLFW_BLUE_BITS, video->blueBits);
+        int w, h;
+        w = video->width;  // Use our 'desktop' resolution for window size
+        h = video->height; // to get a 'full screen borderless' window.
+        window.handle = glfwCreateWindow(w, h, title, monitor, nullptr);
+    }
+    else window.handle = glfwCreateWindow(width, height, title, nullptr, nullptr);
 
     glfwMakeContextCurrent(window.handle);
     glfwGetWindowSize(window.handle, &window.width, &window.height);
     window.title = title;
 
-    if (glfwRawMouseMotionSupported()) 
-        glfwSetInputMode(window.handle, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+    if(glfwRawMouseMotionSupported())
+        glfwSetInputMode(window.handle, GLFW_RAW_MOUSE_MOTION, 1);
     else 
-        std::cerr << "[WARNING] This machine does not support raw mouse input\n";
+        std::cout << "Raw mouse imput is not supported on this device!\n";
 
     glfwSetWindowSizeCallback(window.handle, resize_callback);
     glfwSetScrollCallback(window.handle, scroll_callback);
@@ -106,12 +106,12 @@ bool KML::Init(int width, int height, const char* title, WindowFlags flags) {
     glfwSetMouseButtonCallback(window.handle, mouse_button_callback);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) return false;
-    glfwSwapInterval(false);
+    glfwSwapInterval(flags & KML::ENABLE_VSYNC);
 
     setLogicalPresentation(window.width, window.height);
     printGLInfo();
 
-    glEnable(GL_MULTISAMPLE); 
+    if(aasamples > 0) glEnable(GL_MULTISAMPLE); 
     //glEnable(GL_DEPTH_TEST);
     //glEnable(GL_CULL_FACE);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -119,7 +119,7 @@ bool KML::Init(int width, int height, const char* title, WindowFlags flags) {
     //glCullFace(GL_FRONT);
     //glFrontFace(GL_CCW);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    return true;
+    return window.handle;
 }
 
 void KML::Terminate() {
