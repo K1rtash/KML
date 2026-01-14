@@ -4,7 +4,9 @@
 
 #include <iostream>
 
-#include "Contex.h"
+#include "KML/Contex.h"
+#include "KML/Keycodes.h"
+#include "graphics.h"
 
 /* ---------- Declaraciones de callbacks ---------- */
 
@@ -18,8 +20,9 @@ void mouse_button_callback(GLFWwindow*, int, int, int);
 
 /* ---------- Declaraciones propias ---------- */
 
+void setGLcontext(int& major, int& minor, bool useLatestCtx);
 void setLogicalPresentation(int, int);
-void printGLInfo();
+void printGLInfo(bool);
 void updateKeyboard();
 
 struct WindowCtx{
@@ -39,6 +42,8 @@ struct Input {
     KML::KeyState buttons[GLFW_KEY_LAST]{KML::KeyState::UP};
 } input;
 
+int glCtxMajor = 3, glCtxMinor = 3;
+
 /* ---------- Definiciones ---------- */
 
 bool KML::Init(int width, int height, const char* title, unsigned int flags) {
@@ -48,8 +53,9 @@ bool KML::Init(int width, int height, const char* title, unsigned int flags) {
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* video = glfwGetVideoMode(monitor);
     
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    setGLcontext(glCtxMajor, glCtxMinor, (flags & KML::GL_CONTEXT_LATEST) ? true : false);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, glCtxMajor);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, glCtxMinor);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_REFRESH_RATE, video->refreshRate);
     #ifdef __APPLE__
@@ -109,7 +115,7 @@ bool KML::Init(int width, int height, const char* title, unsigned int flags) {
     glfwSwapInterval(flags & KML::ENABLE_VSYNC);
 
     setLogicalPresentation(window.width, window.height);
-    printGLInfo();
+    printGLInfo(false);
 
     if(aasamples > 0) glEnable(GL_MULTISAMPLE); 
     //glEnable(GL_DEPTH_TEST);
@@ -119,6 +125,8 @@ bool KML::Init(int width, int height, const char* title, unsigned int flags) {
     //glCullFace(GL_FRONT);
     //glFrontFace(GL_CCW);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    shader_setup();
+
     return window.handle;
 }
 
@@ -158,20 +166,6 @@ void setLogicalPresentation(int width, int height) {
     }
 
     glViewport(viewportX, viewportY, viewportW, viewportH);
-}
-
-
-void printGLInfo() { 
-    const GLubyte* renderer = glGetString(GL_RENDERER); // GPU
-    const GLubyte* vendor   = glGetString(GL_VENDOR);   // fabricante
-    const GLubyte* version  = glGetString(GL_VERSION);  // versión OpenGL
-    const GLubyte* glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION); // GLSL
-
-    std::cout << "[INFO] Printing machine specifications: \n"
-                << "* GPU: " << reinterpret_cast<const char*>(renderer) << "\n" 
-                << "* Vendor: " << reinterpret_cast<const char*>(vendor) << "\n"
-                << "* OpenGL version supported: " << reinterpret_cast<const char*>(version) << "\n"
-                << "* GLSL version supported: " << reinterpret_cast<const char*>(glslVersion) << "\n";
 }
 
 void error_callback(int error, const char* description) {
@@ -274,5 +268,62 @@ bool KML::GetMouseCaptureState() {
 void KML::PresentFrame(float r, float g, float b, float a) {
     glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    render();
     glfwSwapBuffers(window.handle);
+}
+
+bool tryGLcontext(int major, int minor) {
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    GLFWwindow* th = glfwCreateWindow(1, 1, "test", nullptr, nullptr);
+    bool valid = th;
+    glfwDestroyWindow(th);
+
+    std::cout << "[INFO] Tried GL version: " << major << "." << minor << (valid ? " (SUPPORTED)" : " (UNSUPORTED)") << std::endl;
+    return valid;
+}
+
+void setGLcontext(int& major, int& minor, bool useLatestCtx) {
+    if(tryGLcontext(major, minor) && !useLatestCtx) return;
+
+    int availible[][2] = { {4,6}, {4,5}, {4,3}, {4,1}, {3,3} };
+
+    for(int i = 0; i < sizeof(availible)/sizeof(int[2]); i++) {
+        if(tryGLcontext(availible[i][0], availible[i][1])) {
+            major = availible[i][0];
+            minor = availible[i][1];
+            break;
+        }
+    }
+
+    if(major == 0 && minor == 0) throw std::runtime_error("Device drivers cant support minimum required GL version");
+}
+
+void printGLInfo(bool showExt) /// Se debe llamar siempre despues de crear el contexto OpenGL makeContextCurrent
+{ 
+    const GLubyte* renderer = glGetString(GL_RENDERER); // GPU
+    const GLubyte* vendor   = glGetString(GL_VENDOR);   // fabricante
+    const GLubyte* version  = glGetString(GL_VERSION);  // versión OpenGL
+    const GLubyte* glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION); // GLSL
+    int profile, ext_n = 0, ext_i;
+    glGetIntegerv(GL_CONTEXT_PROFILE_MASK, &profile);
+    glGetIntegerv(GL_NUM_EXTENSIONS, &ext_n);
+    glGetStringi(GL_EXTENSIONS, ext_i);
+
+    std::cout << "[INFO] Printing machine specifications: \n"
+                << "* GPU: " << reinterpret_cast<const char*>(renderer) << "\n" 
+                << "* Vendor: " << reinterpret_cast<const char*>(vendor) << "\n"
+                << "* OpenGL version: " << reinterpret_cast<const char*>(version) << " " << ((profile & GL_CONTEXT_CORE_PROFILE_BIT) ? "Core" : "Compatibility") << "\n"
+                << "* GLSL version: " << reinterpret_cast<const char*>(glslVersion) << "\n"
+                << "* Extensions";
+
+    if(showExt) {
+        std::cout << ": (" << ext_n << ")\n";
+        for (int i = 0; i < ext_n; ++i) {
+            const char* ext = reinterpret_cast<const char*>(glGetStringi(GL_EXTENSIONS, i));
+            std::cout << "  - " << ext << "\n";
+        }
+    } else std::cout << ": " << ext_n << '\n';
 }

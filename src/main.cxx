@@ -1,12 +1,10 @@
-#include "Contex.h"
-#include "Keycodes.h"
+#include "KML/kml.h"
 #include <iostream>
 
 int main(void) {
-    KML::Init(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA4);
+    KML::Init(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA4 | KML::GL_CONTEXT_LATEST);
 
     while(KML::ProcessEvents()) {
-
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
             if (!KML::GetMouseCaptureState())
                 KML::Close();

@@ -10,6 +10,7 @@ namespace KML {
         MAXIMIZED = 1 << 5,
         BORDERLESS = 1 << 6,
         FULLSCREEN = 1 << 7,
+        GL_CONTEXT_LATEST = 1 << 8
     };
 
     bool Init(int width, int height, const char* title, unsigned int flags = 0);
