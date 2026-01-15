@@ -1,3 +1,6 @@
+#ifndef KML_CONTEXT_H
+#define KML_CONTEXT_H
+
 namespace KML {
     enum class KeyState{PRESS, RELEASE, HOLD, UP};
     enum WindowFlags : unsigned int {
@@ -25,3 +28,4 @@ namespace KML {
     KeyState GetKey(int key);
     KeyState GetMouseButton(int button);
 }
+#endif

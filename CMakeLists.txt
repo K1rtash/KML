@@ -17,14 +17,14 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/third-party/glad/include 
     ${PROJECT_SOURCE_DIR}/third-party/glm/include 
-    ${PROJECT_SOURCE_DIR}/third-party/stb 
+    ${PROJECT_SOURCE_DIR}/third-party/stb/include 
 )
 
 file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cxx)
 
 add_executable(${PROJECT_NAME}
     ${SRC_FILES} 
-    ${CMAKE_SOURCE_DIR}/third-party/stb/stb_image.c
+    ${CMAKE_SOURCE_DIR}/third-party/stb/src/stb_image.c
     ${CMAKE_SOURCE_DIR}/third-party/glad/src/glad.c
 )
 

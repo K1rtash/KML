@@ -1,5 +1,5 @@
-#ifndef KML_MAIN_H
-#define KML_MAIN_H
+#ifndef KML_KML_H
+#define KML_KML_H
 
 #include "Contex.h"
 #include "Keycodes.h"
