@@ -6,7 +6,7 @@
 
 #include "KML/Contex.h"
 #include "KML/Keycodes.h"
-#include "graphics.h"
+#include "__KML/__graphics/graphics.h"
 
 /* ---------- Declaraciones de callbacks ---------- */
 
@@ -26,8 +26,7 @@ void printGLInfo(bool);
 void updateKeyboard();
 
 struct WindowCtx{
-    const int LOG_WIDTH = 1080, LOG_HEIGHT = 720;
-    const float LOG_ASPECT = (float)LOG_WIDTH / (float)LOG_HEIGHT;
+    const float LOG_ASPECT = (float)LOG_SCREEN_WIDTH / (float)LOG_SCREEN_HEIGHT;
     int width, height;
     bool focused = true;
     const char* title = "KML Window";
@@ -118,14 +117,14 @@ bool KML::Init(int width, int height, const char* title, unsigned int flags) {
     printGLInfo(false);
 
     if(aasamples > 0) glEnable(GL_MULTISAMPLE); 
-    //glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_CULL_FACE);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     //glDepthFunc(GL_LESS);
     //glCullFace(GL_FRONT);
     //glFrontFace(GL_CCW);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    shader_setup();
+    kml__shader_setup();
 
     return window.handle;
 }
@@ -266,10 +265,9 @@ bool KML::GetMouseCaptureState() {
 }
 
 void KML::PresentFrame(float r, float g, float b, float a) {
-    glClearColor(r, g, b, a);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    render();
     glfwSwapBuffers(window.handle);
+    glClearColor(r, g, b, a);
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 bool tryGLcontext(int major, int minor) {

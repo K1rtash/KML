@@ -3,5 +3,7 @@
 
 #include "Contex.h"
 #include "Keycodes.h"
+#include "Graphics.h"
+#include "Surface.h"
 
 #endif

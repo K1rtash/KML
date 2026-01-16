@@ -36,6 +36,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${GLFW_DIR}/include
 )
 
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${PROJECT_SOURCE_DIR}/src/__KML
+)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     glfw 
     OpenGL::GL

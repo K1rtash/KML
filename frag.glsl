@@ -4,8 +4,11 @@ out vec4 FragColor;
 in vec2 uvCoords;
 
 uniform sampler2D uTex;
+uniform vec4 tint;
 
 void main()
 {
-    FragColor = texture(uTex, uvCoords);
+    vec4 texColor = texture(uTex, uvCoords);
+    if(texColor.a < 0.1) discard;
+    FragColor = texColor;
 }
