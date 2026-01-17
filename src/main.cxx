@@ -1,5 +1,6 @@
 #include "KML/kml.h"
 #include "KML/Utils.h"
+#include "KML/Layers.h"
 #include <iostream>
 
 bool keyDown(int k) {
@@ -17,8 +18,14 @@ int main(void) {
 
     KML::Surface srf2(KML::Vec2f{1000.0f, 100.0f}, KML::Vec2f{500.0f, 500.0f});
     srf2.SetColor_RGB(255, 107, 30);
-    srf2.transparency = 10;
+    srf2.transparency = 30;
     surface.transparency = 50;
+
+    KML::Layer layer0;
+    layer0.Add(srf);
+    layer0.Add(srf2);
+    KML::Layer layer1;
+    layer1.Add(surface);
     
     while(KML::ProcessEvents()) {
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
@@ -53,9 +60,8 @@ int main(void) {
         if(KML::GetMouseButton(KML_MOUSE_BUTTON_LEFT) == KML::KeyState::PRESS) 
             KML::SetMouseCaptured(true);
 
-            srf.Draw();
-            srf2.Draw();
-            surface.Draw();
+            srf.pos = srf2.pos;
+        KML::DrawLayers();
         KML::PresentFrame(0.2f, 0.3f, 0.3f, 1.0f);
     }
 

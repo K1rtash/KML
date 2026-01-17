@@ -2,8 +2,12 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
+#include <malloc.h>
+#include <vector>
 
 #include "__KML/graphics.h"
+#include "KML/Surface.h"
+#include "KML/Layers.h"
 
 __KML::Shader::Shader program;
 __KML::Shader::Shader program_noTex;
@@ -86,7 +90,6 @@ void kml__gen_buffers() {
     glBindVertexArray(0);
 }
 
-
 void __KML::Rect::draw(glm::mat4& model, KML::Vec4f color, unsigned int tex) {
     __KML::Shader::Shader* activeProgram = (tex > 0) ? &program : &program_noTex;
 
@@ -104,4 +107,38 @@ void __KML::Rect::draw(glm::mat4& model, KML::Vec4f color, unsigned int tex) {
     glUniform4f(get_uniform_loc(activeProgram, "tint"), color.x, color.y, color.z, color.w);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+std::vector<KML::Layer*>layers;
+
+KML::Layer::Layer(int maxSurfaces) {
+    max = maxSurfaces;
+    layers.push_back(this);
+}
+
+KML::Layer::Layer() {
+    max = 999999;
+    layers.push_back(this);
+}
+
+void KML::Layer::Draw() {
+    int n = 0;
+    for(auto& i : srf) {
+        if(n >= max) break;
+        if(i != nullptr) i->Draw();
+        n++;
+    }
+} 
+
+void KML::DrawLayers(int maxLayers) {
+    int n = 0;
+    for(auto& layer : layers) {
+        if(n >= maxLayers && maxLayers > 0) break;
+        if(layer != nullptr) layer->Draw();
+        n++;
+    }
+}
+
+void KML::Layer::Add(Surface& __s) {
+    srf.push_back(&__s);
 }
