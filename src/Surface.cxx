@@ -56,7 +56,7 @@ void Surface::Draw() {
     model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
 
     Vec4f finalColor = HSVtoRGBA(color);
-    finalColor.w = (float)(100 - transparency);
+    finalColor.w = (float)(100 - Clamp<int>(transparency, 0, 100)) / 100.0f;
     __KML::Rect::draw(model, finalColor, tex);
 }
 
