@@ -9,7 +9,9 @@
 #include "KML/Vector.h"
 #include "__KML/graphics.h"
 
-GLuint program, VAO, VBO, EBO;
+__KML::Shader::Shader program;
+
+GLuint VAO, VBO, EBO;
 std::unordered_map<std::string, unsigned int>textures;
 int u_Tex = 0, u_Model, u_Tint, u_Proj;
 
@@ -27,24 +29,7 @@ unsigned int indices[] = {
 
 void kml__gen_buffers();
 
-GLuint __KML::Shader::compile_src(GLenum type, const char* src, GLuint program) {
-    GLuint id = glCreateShader(type);
-    glShaderSource(id, 1, &src, nullptr);
-    glCompileShader(id);
-    
-    int status = 0;
-    glGetShaderiv(id, GL_COMPILE_STATUS, &status);
-    if(!status) {
-        char buffer[1024];
-        glGetShaderInfoLog(id, 1024, nullptr, buffer);
-        std::cout << "ERROR:SHADER_COMPILATION: " << buffer << "\nSOURCE =>\n" << src << std::endl;
-        return 0;
-    } 
-    glAttachShader(program, id);
-    return id;
-}
-
-void __KML::Shader::create_program(){
+void kml__tempPC() {
     const char* vertex_src = 
         "#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
@@ -70,11 +55,34 @@ void __KML::Shader::create_program(){
         "if(texColor.a < 0.1) discard;\n"
         "FragColor = texColor;\n"
         "}";
-    
-    program = glCreateProgram();
 
-    GLuint vert = __KML::Shader::compile_src(GL_VERTEX_SHADER, vertex_src, program);
-    GLuint frag = __KML::Shader::compile_src(GL_FRAGMENT_SHADER, fragment_src, program);
+    program = __KML::Shader::create_program(vertex_src, fragment_src);
+    std::cout << "se ha creado el programa\n";
+    kml__gen_buffers();
+}
+
+GLuint __KML::Shader::compile_src(GLenum type, const char* src, GLuint program) {
+    GLuint id = glCreateShader(type);
+    glShaderSource(id, 1, &src, nullptr);
+    glCompileShader(id);
+    
+    int status = 0;
+    glGetShaderiv(id, GL_COMPILE_STATUS, &status);
+    if(!status) {
+        char buffer[1024];
+        glGetShaderInfoLog(id, 1024, nullptr, buffer);
+        std::cout << "ERROR:SHADER_COMPILATION: " << buffer << "\nSOURCE =>\n" << src << std::endl;
+        return 0;
+    } 
+    glAttachShader(program, id);
+    return id;
+}
+
+__KML::Shader::Shader __KML::Shader::create_program(const char* v_src, const char* f_src) {
+    GLuint program = glCreateProgram();
+
+    GLuint vert = __KML::Shader::compile_src(GL_VERTEX_SHADER, v_src, program);
+    GLuint frag = __KML::Shader::compile_src(GL_FRAGMENT_SHADER, f_src, program);
 
     glLinkProgram(program);
     glDetachShader(program, vert);
@@ -95,7 +103,9 @@ void __KML::Shader::create_program(){
     u_Tint = glGetUniformLocation(program, "tint");
     u_Proj = glGetUniformLocation(program, "proj");
     u_Tex = glGetUniformLocation(program, "uTex");
-    kml__gen_buffers();
+    Shader p;
+    p.id = program;
+    return p;
 }
 
 void kml__gen_buffers() {
@@ -120,7 +130,7 @@ void kml__gen_buffers() {
 }
 
 void kml__drawVertices(glm::mat4& model, unsigned int tex, glm::vec4 color) {
-    glUseProgram(program);
+    glUseProgram(program.id);
     glBindVertexArray(VAO);
     
     glActiveTexture(GL_TEXTURE0);
