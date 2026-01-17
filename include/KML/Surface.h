@@ -16,7 +16,6 @@ namespace KML {
 
         void Draw();
         void SetTexture(std::string texture);
-        void SetTexture(unsigned int id);
         void SetColor_RGBA(const Vec4f& __v);
         void SetColor_HSV(const Vec3f& __v);
 

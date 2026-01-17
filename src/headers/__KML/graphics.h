@@ -20,10 +20,14 @@ namespace __KML::Shader {
 }
 
 namespace __KML::Rect {
-    void drawRect(glm::mat4& model, glm::vec4 color, unsigned int tex);
+    void draw(glm::mat4& model, glm::vec4 color, unsigned int tex);
+}
+
+namespace __KML::Texture {
+    unsigned int load(const char* file);
+    unsigned int get(std::string name);
 }
 
 void kml__tempPC();
-unsigned int kml__getTex(std::string name);
 
 #endif

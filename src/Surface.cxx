@@ -56,17 +56,11 @@ void Surface::Draw() {
     model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
 
     Vec4f clr = HSVtoRGBA(color);
-    __KML::Rect::drawRect(model, glm::vec4{clr.x, clr.y, clr.z, clr.w}, tex);
-}
-
-
-
-void Surface::SetTexture(unsigned int id) {
-    tex = id;
+    __KML::Rect::draw(model, glm::vec4{clr.x, clr.y, clr.z, clr.w}, tex);
 }
 
 void Surface::SetTexture(std::string texture) {
-    this->tex = kml__getTex(texture);
+    this->tex = __KML::Texture::get(texture);
 }
 
 

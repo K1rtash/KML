@@ -1,16 +1,13 @@
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <stb/stb_image.h>
 
 #include <iostream>
 
-#include "KML/Graphics.h"
 #include "__KML/graphics.h"
 
 __KML::Shader::Shader program;
 
 GLuint VAO, VBO, EBO;
-std::unordered_map<std::string, unsigned int>textures;
 
 float vertices[] = {
     0.5f,  0.5f, 0.0f,     1.0f, 1.0f,    // top right
@@ -82,7 +79,7 @@ void kml__gen_buffers() {
 }
 
 
-void __KML::Rect::drawRect(glm::mat4& model, glm::vec4 color, unsigned int tex) {
+void __KML::Rect::draw(glm::mat4& model, glm::vec4 color, unsigned int tex) {
     glUseProgram(program.id);
     glBindVertexArray(VAO);
     
@@ -97,45 +94,4 @@ void __KML::Rect::drawRect(glm::mat4& model, glm::vec4 color, unsigned int tex) 
     glUniform4fv(get_uniform_loc(&program, "tint"), 1, glm::value_ptr(color));
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-}
-
-bool KML::LoadTexture(const char* file) {
-    if(textures.find(file) != textures.end()) return false;
-    stbi_set_flip_vertically_on_load(true);
-
-    int w, h, cc;
-    unsigned char* bytes = stbi_load(file, &w, &h, &cc, 0);
-
-    GLuint id = 0;
-    glGenTextures(1, &id);
-    glBindTexture(GL_TEXTURE_2D, id);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    GLenum format;
-    if (cc >= 4) format = GL_RGBA;
-    else switch (cc) {
-        case 3: format = GL_RGB; break;
-        case 2: format = GL_RG; break;
-        case 1: format = GL_RED; break;
-        default: return false;
-    }
-
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, format, GL_UNSIGNED_BYTE, bytes);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-    stbi_image_free(bytes);
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    textures.insert({file, id});
-    return true;
-}
-
-unsigned int kml__getTex(std::string name) {
-    if(textures.find(name) == textures.end()) return 0;
-    return textures.at(name);
 }
