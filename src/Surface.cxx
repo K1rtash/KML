@@ -56,7 +56,7 @@ void Surface::Draw() {
     model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
 
     Vec4f clr = HSVtoRGBA(color);
-    __KML::Shader::drawRect(model, glm::vec4{clr.x, clr.y, clr.z, clr.w}, tex);
+    __KML::Rect::drawRect(model, glm::vec4{clr.x, clr.y, clr.z, clr.w}, tex);
 }
 
 
