@@ -16,8 +16,8 @@ namespace KML {
 
         void Draw();
         void SetTexture(std::string texture);
-        void SetColor_RGBA(const Vec4f& __v);
-        void SetColor_HSV(const Vec3f& __v);
+        void SetColor_HSV(int H, int S = 100, int V = 100);
+        void SetColor_RGBA(int R, int G, int B, int alpha = 255);
 
         Surface();
         Surface(Vec2f pos, Vec2f scale); // Solo forma

@@ -55,9 +55,7 @@ void Surface::Draw() {
     // 5. Escalar (siempre después de rotar)
     model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
 
-    KML::Vec4f v = HSVtoRGBA(color);
-    std::cout << std::format("{} {} {} {}", v.x, v.y, v.z, v.w);
-    __KML::Rect::draw(model, v, tex);
+    __KML::Rect::draw(model, HSVtoRGBA(color), tex);
 }
 
 void Surface::SetTexture(std::string texture) {
@@ -65,10 +63,10 @@ void Surface::SetTexture(std::string texture) {
 }
 
 
-void Surface::SetColor_RGBA(const Vec4f& __v) {
-    color = RGBAtoHSV(__v);
+void Surface::SetColor_RGBA(int R, int G, int B, int alpha) {
+    color = RGBAtoHSV(RGBA_v4f(R, G, B, alpha));
 }
 
-void Surface::SetColor_HSV(const Vec3f& __v) {
-    color = __v;
+void Surface::SetColor_HSV(int H, int S, int V) {
+    color = HSV_v3f(H, S, V);
 }

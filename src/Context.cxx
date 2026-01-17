@@ -44,8 +44,11 @@ struct Input {
 int glCtxMajor = 3, glCtxMinor = 3;
 
 /* ---------- Definiciones ---------- */
+bool KML::CreateWindow(int width, int height, const char* title, unsigned int flags) {
+    return CreateWindowP(width, height, title, 1080.0f, 720.0f, 3, 3, flags | GL_CONTEXT_LATEST | RESIZABLE);
+}
 
-bool KML::Init(int width, int height, const char* title, unsigned int flags) {
+bool KML::CreateWindowP(int width, int height, const char* title, float logical_width, float logical_height, int glCtxMajor, int glCtxMinor, unsigned int flags) {
     glfwSetErrorCallback(error_callback);
     glfwInit();
         

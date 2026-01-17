@@ -16,7 +16,9 @@ namespace KML {
         GL_CONTEXT_LATEST = 1 << 8
     };
 
-    bool Init(int width, int height, const char* title, unsigned int flags = 0);
+    bool CreateWindow(int width, int height, const char* title, unsigned int flags = NONE);
+    bool CreateWindowP(int width, int height, const char* title, float logical_width, float logical_height, int glCtxMajor, int glCtxMinor, unsigned int flags);
+
     bool ProcessEvents();
     bool GetMouseCaptureState();
 

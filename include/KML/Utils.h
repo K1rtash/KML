@@ -40,7 +40,7 @@ namespace KML
      *
      */
     inline Vec4f RGBA_v4f(int R, int G, int B, int A = 255) {
-        return {(float)Clamp<int>(R, 0, 255) / 255.0f, (float)Clamp<int>(G, 0, 255) / 255.0f, (float)Clamp<int>(B, 0, 255) / 255.0f, (float)Clamp<int>(A, 0, 255) / 255.0f};
+        return {(float)Clamp<int>(R, 0, 255), (float)Clamp<int>(G, 0, 255), (float)Clamp<int>(B, 0, 255), (float)Clamp<int>(A, 0, 255)};
     }
 
     /**

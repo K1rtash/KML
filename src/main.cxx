@@ -8,12 +8,15 @@ bool keyDown(int k) {
 }
 
 int main(void) {
-    KML::Init(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
+    KML::CreateWindow(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
 
     KML::LoadTexture("images.png");
     KML::Surface surface("images.png", {10.0f, 10.0f, 100.0f, 100.0f}, {0.5f, 0.0f, 0.0f});
     KML::Surface srf(KML::Vec2f{30.0f, 50.0f}, KML::Vec2f{70.0f, 1000.0f});
     srf.color = KML::Vec3f(110.0f, 30.0f, 40.0f);
+
+    KML::Surface srf2(KML::Vec2f{1000.0f, 100.0f}, KML::Vec2f{500.0f, 500.0f});
+    srf2.SetColor_RGBA(255, 107, 169);
     
     while(KML::ProcessEvents()) {
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
@@ -33,15 +36,15 @@ int main(void) {
         if(keyDown(KML_KEY_DOWN)) surface.scale -= KML::Vec2f{5.0f, 5.0f};
         if(keyDown(KML_KEY_F)) {
             surface.color.y += 10.0f;
-            surface.color.x += 10.0f;
+            surface.color.x += 5.0f;
         }
         if(keyDown(KML_KEY_V)) {
             surface.color.y -= 10.0f;
-            surface.color.x -= 10.0f;
+            surface.color.x -= 5.0f;
         }
 
         if(KML::KeyState(KML_KEY_X) == KML::KeyState::PRESS) {
-            surface.color = {0.0f, 0.0f, 100.0f};
+            surface.SetColor_HSV(0);
             surface.rotation = {0.0f, 0.0f, 0.0f};
         }
 
@@ -50,6 +53,7 @@ int main(void) {
 
         surface.Draw();
         srf.Draw();
+        srf2.Draw();
         KML::PresentFrame(0.2f, 0.3f, 0.3f, 1.0f);
     }
 
