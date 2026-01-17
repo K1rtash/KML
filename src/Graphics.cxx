@@ -7,7 +7,7 @@
 
 #include "KML/Graphics.h"
 #include "KML/Vector.h"
-#include "__KML/__graphics/graphics.h"
+#include "__KML/graphics.h"
 
 GLuint program, VAO, VBO, EBO;
 std::unordered_map<std::string, unsigned int>textures;

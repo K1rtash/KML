@@ -6,7 +6,7 @@
 
 #include "KML/Contex.h"
 #include "KML/Keycodes.h"
-#include "__KML/__graphics/graphics.h"
+#include "__KML/graphics.h"
 
 /* ---------- Declaraciones de callbacks ---------- */
 

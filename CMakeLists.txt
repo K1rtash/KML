@@ -13,13 +13,6 @@ list(APPEND CMAKE_PREFIX_PATH ${GLFW_DIR})
 find_package(glfw3 REQUIRED CONFIG)
 find_package(OpenGL REQUIRED)
 
-include_directories(
-    ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/third-party/glad/include 
-    ${PROJECT_SOURCE_DIR}/third-party/glm/include 
-    ${PROJECT_SOURCE_DIR}/third-party/stb/include 
-)
-
 file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cxx)
 
 add_executable(${PROJECT_NAME}
@@ -30,14 +23,14 @@ add_executable(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/third-party/glad/include 
-    ${PROJECT_SOURCE_DIR}/third-party/glm/include 
-    ${PROJECT_SOURCE_DIR}/third-party/stb 
-    ${GLFW_DIR}/include
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    ${PROJECT_SOURCE_DIR}/src/__KML
+    ${PROJECT_SOURCE_DIR}/third-party/glad/include 
+    ${PROJECT_SOURCE_DIR}/third-party/glm/include 
+    ${PROJECT_SOURCE_DIR}/third-party/stb/include 
+    ${GLFW_DIR}/include
+    ${PROJECT_SOURCE_DIR}/src/headers
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 

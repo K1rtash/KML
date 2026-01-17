@@ -5,7 +5,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "__KML/__graphics/graphics.h"
+#include "__KML/graphics.h"
 #include "KML/Surface.h"
 #include "KML/Vector.h"
 #include "KML/Utils.h"
