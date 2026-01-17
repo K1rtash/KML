@@ -3,7 +3,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
-#include <unordered_map>
 
 #include "KML/Graphics.h"
 #include "KML/Vector.h"
@@ -57,6 +56,12 @@ void kml__tempPC() {
         "}";
 
     program = __KML::Shader::create_program(vertex_src, fragment_src);
+    __KML::Shader::map_shader_uniforms(&program);
+
+    u_Model = __KML::Shader::get_uniform_loc(&program, "model");
+    u_Tint = __KML::Shader::get_uniform_loc(&program, "tint");
+    u_Proj = __KML::Shader::get_uniform_loc(&program, "proj");
+    u_Tex = __KML::Shader::get_uniform_loc(&program, "uTex");
     std::cout << "se ha creado el programa\n";
     kml__gen_buffers();
 }
@@ -99,14 +104,43 @@ __KML::Shader::Shader __KML::Shader::create_program(const char* v_src, const cha
     glDeleteShader(frag);
 
     glUseProgram(program);
-    u_Model = glGetUniformLocation(program, "model");
-    u_Tint = glGetUniformLocation(program, "tint");
-    u_Proj = glGetUniformLocation(program, "proj");
-    u_Tex = glGetUniformLocation(program, "uTex");
     Shader p;
     p.id = program;
     return p;
 }
+
+void __KML::Shader::map_shader_uniforms(Shader* shader) {
+    int u_count;
+    glGetProgramiv(shader->id, GL_ACTIVE_UNIFORMS, &u_count);
+
+    for (int i = 0; i < u_count; i++) {
+        char name[256];
+        GLsizei length;
+        GLint size;
+        GLenum type;
+
+        glGetActiveUniform(shader->id, i, sizeof(name), &length, &size, &type, name);
+
+        GLint location = glGetUniformLocation(shader->id, name);
+
+        shader->uniforms[std::string(name)] = location;
+    }
+}
+
+GLuint __KML::Shader::get_uniform_loc(Shader* shader, std::string name) {
+    auto i = shader->uniforms.find(name);
+    if(i == shader->uniforms.end()) {
+        shader->uniforms[name] = -1;
+        printf("Accesed unmaped uniform on shader id %d: %s", shader->id, name.c_str());
+        return -1;
+    }
+    return i->second;
+}
+
+
+
+
+
 
 void kml__gen_buffers() {
     glGenVertexArrays(1, &VAO);
