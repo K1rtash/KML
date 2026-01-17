@@ -16,7 +16,9 @@ int main(void) {
     srf.color = KML::Vec3f(110.0f, 30.0f, 40.0f);
 
     KML::Surface srf2(KML::Vec2f{1000.0f, 100.0f}, KML::Vec2f{500.0f, 500.0f});
-    srf2.SetColor_RGBA(255, 107, 169);
+    srf2.SetColor_RGB(255, 107, 30);
+    srf2.transparency = 10;
+    surface.transparency = 50;
     
     while(KML::ProcessEvents()) {
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
@@ -51,9 +53,9 @@ int main(void) {
         if(KML::GetMouseButton(KML_MOUSE_BUTTON_LEFT) == KML::KeyState::PRESS) 
             KML::SetMouseCaptured(true);
 
-        surface.Draw();
-        srf.Draw();
-        srf2.Draw();
+            srf.Draw();
+            srf2.Draw();
+            surface.Draw();
         KML::PresentFrame(0.2f, 0.3f, 0.3f, 1.0f);
     }
 

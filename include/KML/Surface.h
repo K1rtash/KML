@@ -13,11 +13,13 @@ namespace KML {
         Vec3f rotation{0.0f, 0.0f, 0.0f};
         Vec3f color{0.0f, 0.0f, 100.0f};
         bool flip_x = false, flip_y = false;
+        int transparency = 0;
 
         void Draw();
         void SetTexture(std::string texture);
         void SetColor_HSV(int H, int S = 100, int V = 100);
-        void SetColor_RGBA(int R, int G, int B, int alpha = 255);
+        void SetColor_RGB(int R, int G, int B);
+        void SetTransparency(int alpha);
 
         Surface();
         Surface(Vec2f pos, Vec2f scale); // Solo forma

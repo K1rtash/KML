@@ -126,7 +126,8 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
     //glDepthFunc(GL_LESS);
     //glCullFace(GL_FRONT);
     //glFrontFace(GL_CCW);
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     kml__tempPC();
 

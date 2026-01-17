@@ -48,7 +48,7 @@ void kml__tempPC() {
         "vec4 texColor = texture(uTex, uvCoords);\n"
         "texColor *= tint;\n"
         "if(texColor.a < 0.1) discard;\n"
-        "FragColor = texColor;\n"
+        "FragColor = vec4(texColor.rgb, texColor.a * tint.w) * tint;\n"
         "}";
 
     const char* fragment_noTex_src = 
@@ -57,7 +57,7 @@ void kml__tempPC() {
         "uniform vec4 tint;\n"
         "void main()\n"
         "{\n"
-        "FragColor = tint * vec4(1.0);\n"
+        "FragColor = tint;\n"
         "}";
 
     program = __KML::Shader::create_program(vertex_src, fragment_src);
@@ -88,7 +88,9 @@ void kml__gen_buffers() {
 
 
 void __KML::Rect::draw(glm::mat4& model, KML::Vec4f color, unsigned int tex) {
-    glUseProgram((tex > 0) ? program.id : program_noTex.id);
+    __KML::Shader::Shader* activeProgram = (tex > 0) ? &program : &program_noTex;
+
+    glUseProgram(activeProgram->id);
     glBindVertexArray(VAO);
     
     glActiveTexture(GL_TEXTURE0);
@@ -96,10 +98,10 @@ void __KML::Rect::draw(glm::mat4& model, KML::Vec4f color, unsigned int tex) {
 
     glm::mat4 projection = glm::ortho(0.0f, LOG_SCREEN_WIDTH, 0.0f, LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
     
-    glUniform1i(get_uniform_loc(&program, "uTex"), 0);
-    glUniformMatrix4fv(get_uniform_loc(&program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(get_uniform_loc(&program, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
-    glUniform4f(get_uniform_loc(&program, "tint"), color.x, color.y, color.z, color.w);
+    glUniform1i(get_uniform_loc(activeProgram, "uTex"), 0);
+    glUniformMatrix4fv(get_uniform_loc(activeProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(get_uniform_loc(activeProgram, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniform4f(get_uniform_loc(activeProgram, "tint"), color.x, color.y, color.z, color.w);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
