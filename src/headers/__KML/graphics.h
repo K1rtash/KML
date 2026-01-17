@@ -17,6 +17,7 @@ namespace __KML::Shader {
     Shader create_program(const char* v_src, const char* f_src);
     void map_shader_uniforms(Shader* shader);
     GLuint get_uniform_loc(Shader* shader, std::string name);
+    void drawRect(glm::mat4& model, glm::vec4 color, unsigned int tex);
 }
 
 void kml__tempPC();

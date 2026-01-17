@@ -163,18 +163,20 @@ void kml__gen_buffers() {
     glBindVertexArray(0);
 }
 
-void kml__drawVertices(glm::mat4& model, unsigned int tex, glm::vec4 color) {
+void __KML::Shader::drawRect(glm::mat4& model, glm::vec4 color, unsigned int tex) {
     glUseProgram(program.id);
     glBindVertexArray(VAO);
     
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
-    glUniform1i(u_Tex, 0);
 
     glm::mat4 projection = glm::ortho(0.0f, LOG_SCREEN_WIDTH, 0.0f, LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
-    glUniformMatrix4fv(u_Model, 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(u_Proj, 1, GL_FALSE, glm::value_ptr(projection));
-    glUniform4fv(u_Tint, 1, glm::value_ptr(color));
+    
+    glUniform1i(get_uniform_loc(&program, "uTex"), 0);
+    glUniformMatrix4fv(get_uniform_loc(&program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(get_uniform_loc(&program, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniform4fv(get_uniform_loc(&program, "tint"), 1, glm::value_ptr(color));
+
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
