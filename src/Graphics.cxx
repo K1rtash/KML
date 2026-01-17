@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "KML/Graphics.h"
-#include "KML/Vector.h"
+
 #include "__KML/graphics.h"
 
 GLuint __KML::Shader::compile_src(GLenum type, const char* src, GLuint program) {
@@ -25,29 +25,30 @@ GLuint __KML::Shader::compile_src(GLenum type, const char* src, GLuint program) 
 }
 
 __KML::Shader::Shader __KML::Shader::create_program(const char* v_src, const char* f_src) {
-    GLuint program = glCreateProgram();
+    Shader program;
+    program.id = glCreateProgram();
 
-    GLuint vert = __KML::Shader::compile_src(GL_VERTEX_SHADER, v_src, program);
-    GLuint frag = __KML::Shader::compile_src(GL_FRAGMENT_SHADER, f_src, program);
+    GLuint vert = __KML::Shader::compile_src(GL_VERTEX_SHADER, v_src, program.id);
+    GLuint frag = __KML::Shader::compile_src(GL_FRAGMENT_SHADER, f_src, program.id);
 
-    glLinkProgram(program);
-    glDetachShader(program, vert);
-    glDetachShader(program, frag);
+    glLinkProgram(program.id);
+    glDetachShader(program.id, vert);
+    glDetachShader(program.id, frag);
 
     int status = 0;
-    glGetProgramiv(program, GL_LINK_STATUS, &status);
+    glGetProgramiv(program.id, GL_LINK_STATUS, &status);
     if(!status) {
         char buffer[1024];
-        glGetProgramInfoLog(program, sizeof(buffer), nullptr, buffer);
+        glGetProgramInfoLog(program.id, sizeof(buffer), nullptr, buffer);
         std::cout << "ERROR:PROGRAM_LINK: " << buffer << "\n";
     } 
     glDeleteShader(vert);
     glDeleteShader(frag);
 
-    glUseProgram(program);
-    Shader p;
-    p.id = program;
-    return p;
+    glUseProgram(program.id);
+
+    map_shader_uniforms(&program);
+    return program;
 }
 
 void __KML::Shader::map_shader_uniforms(Shader* shader) {

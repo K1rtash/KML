@@ -5,6 +5,8 @@
 #include <glad/glad.h>
 #include <unordered_map>
 
+#include "KML/Vector.h"
+
 static float LOG_SCREEN_WIDTH = 1080.0f, LOG_SCREEN_HEIGHT = 720.0f, LOG_SCREEN_ASPECT = LOG_SCREEN_WIDTH/LOG_SCREEN_HEIGHT;
 
 namespace __KML::Shader {
@@ -20,7 +22,7 @@ namespace __KML::Shader {
 }
 
 namespace __KML::Rect {
-    void draw(glm::mat4& model, glm::vec4 color, unsigned int tex);
+    void draw(glm::mat4& model, KML::Vec4f color, unsigned int tex);
 }
 
 namespace __KML::Texture {

@@ -51,9 +51,6 @@ void kml__tempPC() {
         "}";
 
     program = __KML::Shader::create_program(vertex_src, fragment_src);
-    __KML::Shader::map_shader_uniforms(&program);
-
-    std::cout << "se ha creado el programa\n";
     kml__gen_buffers();
 }
 
@@ -79,7 +76,7 @@ void kml__gen_buffers() {
 }
 
 
-void __KML::Rect::draw(glm::mat4& model, glm::vec4 color, unsigned int tex) {
+void __KML::Rect::draw(glm::mat4& model, KML::Vec4f color, unsigned int tex) {
     glUseProgram(program.id);
     glBindVertexArray(VAO);
     
@@ -91,7 +88,7 @@ void __KML::Rect::draw(glm::mat4& model, glm::vec4 color, unsigned int tex) {
     glUniform1i(get_uniform_loc(&program, "uTex"), 0);
     glUniformMatrix4fv(get_uniform_loc(&program, "model"), 1, GL_FALSE, glm::value_ptr(model));
     glUniformMatrix4fv(get_uniform_loc(&program, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
-    glUniform4fv(get_uniform_loc(&program, "tint"), 1, glm::value_ptr(color));
+    glUniform4f(get_uniform_loc(&program, "tint"), color.x, color.y, color.z, color.w);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
