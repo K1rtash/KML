@@ -55,7 +55,9 @@ void Surface::Draw() {
     // 5. Escalar (siempre después de rotar)
     model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
 
-    __KML::Rect::draw(model, HSVtoRGBA(color), tex);
+    KML::Vec4f v = HSVtoRGBA(color);
+    std::cout << std::format("{} {} {} {}", v.x, v.y, v.z, v.w);
+    __KML::Rect::draw(model, v, tex);
 }
 
 void Surface::SetTexture(std::string texture) {

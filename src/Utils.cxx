@@ -6,8 +6,8 @@ using namespace KML;
 
 Vec4f KML::HSVtoRGBA(const Vec3f& __v) {
     float H = Clamp<float>(__v.x, 0.0f, 360.0f) / 360.0f;
-    float S = __v.y;
-    float V = __v.z;
+    float S = Clamp<float>(__v.y, 0.0f, 100.0f) / 100.0f;
+    float V = Clamp<float>(__v.z, 0.0f, 100.0f) / 100.0f;
 
     int i = int(H * 6);
     float f = H * 6 - i;
@@ -27,9 +27,9 @@ Vec4f KML::HSVtoRGBA(const Vec3f& __v) {
 }
 
 Vec3f KML::RGBAtoHSV(const Vec4f& c) {
-    float r = c.x;
-    float g = c.y;
-    float b = c.z;
+    float r = Clamp<float>(c.x, 0.0f, 255.0f) / 255.0f;
+    float g = Clamp<float>(c.y, 0.0f, 255.0f) / 255.0f;
+    float b = Clamp<float>(c.z, 0.0f, 255.0f) / 255.0f;
 
     float maxc = std::max(r, std::max(g, b));
     float minc = std::min(r, std::min(g, b));
@@ -54,5 +54,6 @@ Vec3f KML::RGBAtoHSV(const Vec4f& c) {
         if (H < 0.0f)
             H += 360.0f;
     }
-    return Vec3f{H, S, V};
+
+    return Vec3f{H, S * 100.0f, V * 100.0f}; // HSV humano
 }

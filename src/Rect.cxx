@@ -6,6 +6,7 @@
 #include "__KML/graphics.h"
 
 __KML::Shader::Shader program;
+__KML::Shader::Shader program_noTex;
 
 GLuint VAO, VBO, EBO;
 
@@ -50,7 +51,17 @@ void kml__tempPC() {
         "FragColor = texColor;\n"
         "}";
 
+    const char* fragment_noTex_src = 
+        "#version 330 core\n"
+        "out vec4 FragColor;\n"
+        "uniform vec4 tint;\n"
+        "void main()\n"
+        "{\n"
+        "FragColor = tint * vec4(1.0);\n"
+        "}";
+
     program = __KML::Shader::create_program(vertex_src, fragment_src);
+    program_noTex = __KML::Shader::create_program(vertex_src, fragment_noTex_src);
     kml__gen_buffers();
 }
 
@@ -77,7 +88,7 @@ void kml__gen_buffers() {
 
 
 void __KML::Rect::draw(glm::mat4& model, KML::Vec4f color, unsigned int tex) {
-    glUseProgram(program.id);
+    glUseProgram((tex > 0) ? program.id : program_noTex.id);
     glBindVertexArray(VAO);
     
     glActiveTexture(GL_TEXTURE0);

@@ -9,6 +9,7 @@ uniform vec4 tint;
 void main()
 {
     vec4 texColor = texture(uTex, uvCoords);
+    texColor *= tint;
     if(texColor.a < 0.1) discard;
     FragColor = texColor;
 }
