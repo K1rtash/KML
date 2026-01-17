@@ -11,7 +11,7 @@ int main(void) {
     KML::Init(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
 
     KML::LoadTexture("images.png");
-    KML::Surface surface("images.png", {10.0f, 10.0f, 10.0f, 10.0f}, {0.5f, 0.0f, 0.0f});
+    KML::Surface surface("images.png", {10.0f, 10.0f, 100.0f, 100.0f}, {0.5f, 0.0f, 0.0f});
 
     KML::Vec3f hsv = KML::HSV_v3f(28.0f, 1.0f, 1.0f);
     

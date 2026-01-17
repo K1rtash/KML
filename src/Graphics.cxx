@@ -25,11 +25,10 @@ unsigned int indices[] = {
     1, 2, 3
 };
 
-void kml__process_shader(unsigned int id, const char* src);
-void kml__setup_textures();
 void kml__gen_buffers();
 
-void kml__process_shader(unsigned int id, const char* src) {
+GLuint __KML::Shader::compile_src(GLenum type, const char* src, GLuint program) {
+    GLuint id = glCreateShader(type);
     glShaderSource(id, 1, &src, nullptr);
     glCompileShader(id);
     
@@ -39,16 +38,13 @@ void kml__process_shader(unsigned int id, const char* src) {
         char buffer[1024];
         glGetShaderInfoLog(id, 1024, nullptr, buffer);
         std::cout << "ERROR:SHADER_COMPILATION: " << buffer << "\nSOURCE =>\n" << src << std::endl;
+        return 0;
     } 
-    else glAttachShader(program, id);
+    glAttachShader(program, id);
+    return id;
 }
 
-void kml__setup_textures() {
-    u_Tex = glGetUniformLocation(program, "uTex");
-    stbi_set_flip_vertically_on_load(true);
-}
-
-void kml__shader_setup(){
+void __KML::Shader::create_program(){
     const char* vertex_src = 
         "#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
@@ -74,13 +70,11 @@ void kml__shader_setup(){
         "if(texColor.a < 0.1) discard;\n"
         "FragColor = texColor;\n"
         "}";
-
-    GLuint vert = glCreateShader(GL_VERTEX_SHADER), frag = glCreateShader(GL_FRAGMENT_SHADER);
     
     program = glCreateProgram();
 
-    kml__process_shader(vert, vertex_src);
-    kml__process_shader(frag, fragment_src);
+    GLuint vert = __KML::Shader::compile_src(GL_VERTEX_SHADER, vertex_src, program);
+    GLuint frag = __KML::Shader::compile_src(GL_FRAGMENT_SHADER, fragment_src, program);
 
     glLinkProgram(program);
     glDetachShader(program, vert);
@@ -100,8 +94,8 @@ void kml__shader_setup(){
     u_Model = glGetUniformLocation(program, "model");
     u_Tint = glGetUniformLocation(program, "tint");
     u_Proj = glGetUniformLocation(program, "proj");
+    u_Tex = glGetUniformLocation(program, "uTex");
     kml__gen_buffers();
-    kml__setup_textures();
 }
 
 void kml__gen_buffers() {
@@ -142,6 +136,7 @@ void kml__drawVertices(glm::mat4& model, unsigned int tex, glm::vec4 color) {
 
 bool KML::LoadTexture(const char* file) {
     if(textures.find(file) != textures.end()) return false;
+    stbi_set_flip_vertically_on_load(true);
 
     int w, h, cc;
     unsigned char* bytes = stbi_load(file, &w, &h, &cc, 0);

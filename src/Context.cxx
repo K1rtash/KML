@@ -124,7 +124,7 @@ bool KML::Init(int width, int height, const char* title, unsigned int flags) {
     //glCullFace(GL_FRONT);
     //glFrontFace(GL_CCW);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    kml__shader_setup();
+    __KML::Shader::create_program();
 
     return window.handle;
 }
