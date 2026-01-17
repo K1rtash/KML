@@ -7,10 +7,10 @@
 
 namespace KML {
     class Surface {
-    public:
-        Vec2f pos{1.0f};
-        Vec2f scale{1.0f};
-        Vec3f rotation{0.0f}; 
+      public:
+        Vec2f pos{1.0f, 1.0f};
+        Vec2f scale{1.0f, 1.0f};
+        Vec3f rotation{0.0f, 0.0f, 0.0f};
         Vec3f color{0.0f, 0.0f, 1.0f};
         bool flip_x = false, flip_y = false;
 

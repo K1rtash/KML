@@ -6,6 +6,7 @@
 
 #include "KML/Contex.h"
 #include "KML/Keycodes.h"
+
 #include "__KML/graphics.h"
 
 /* ---------- Declaraciones de callbacks ---------- */
@@ -25,8 +26,7 @@ void setLogicalPresentation(int, int);
 void printGLInfo(bool);
 void updateKeyboard();
 
-struct WindowCtx{
-    const float LOG_ASPECT = (float)LOG_SCREEN_WIDTH / (float)LOG_SCREEN_HEIGHT;
+struct Window{
     int width, height;
     bool focused = true;
     const char* title = "KML Window";
@@ -152,14 +152,14 @@ void setLogicalPresentation(int width, int height) {
     float aspect = (float)width / (float)height;
     int viewportX, viewportY, viewportW, viewportH;
 
-    if (aspect > window.LOG_ASPECT) {
+    if (aspect > LOG_SCREEN_ASPECT) {
         viewportH = height;
-        viewportW = (int)(height * window.LOG_ASPECT);
+        viewportW = (int)(height * LOG_SCREEN_ASPECT);
         viewportX = (width - viewportW) / 2;
         viewportY = 0;
     } else {
         viewportW = width;
-        viewportH = (int)(width / window.LOG_ASPECT);
+        viewportH = (int)(width /LOG_SCREEN_ASPECT);
         viewportX = 0;
         viewportY = (height - viewportH) / 2;
     }

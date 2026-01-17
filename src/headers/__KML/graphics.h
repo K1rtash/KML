@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-static float LOG_SCREEN_WIDTH = 1080.0f, LOG_SCREEN_HEIGHT = 720.0f;
+static float LOG_SCREEN_WIDTH = 1080.0f, LOG_SCREEN_HEIGHT = 720.0f, LOG_SCREEN_ASPECT = LOG_SCREEN_WIDTH/LOG_SCREEN_HEIGHT;
 
 void kml__shader_setup();
 void kml__drawVertices(glm::mat4& model, unsigned int, glm::vec4 color);
