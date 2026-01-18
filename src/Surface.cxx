@@ -65,7 +65,6 @@ void Surface::SetTexture(std::string texture) {
     this->tex = __KML::Texture::get(texture);
 }
 
-
 void Surface::SetColor_RGB(int R, int G, int B) {
     color = RGBAtoHSV({(float)R, (float)G, (float)B});
 }

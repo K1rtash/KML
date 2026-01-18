@@ -61,7 +61,7 @@ Vec3f KML::RGBAtoHSV(const Vec4f& c) {
     return Vec3f{H, S * 100.0f, V * 100.0f}; // HSV humano
 }
 
-std::string KML::ReadFile(const char* path) {
+std::string KML::ReadFile(std::filesystem::path path) {
     std::ifstream file(path);
     if(file.is_open()) {
         std::string str;

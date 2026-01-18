@@ -13,6 +13,7 @@ namespace KML {
         Vec2f scale{1.0f, 1.0f};
         Vec3f rotation{0.0f, 0.0f, 0.0f};
         Vec3f color{0.0f, 0.0f, 100.0f};
+        Shader* shader = nullptr;
         bool flip_x = false, flip_y = false;
         int transparency = 0;
 
@@ -30,7 +31,6 @@ namespace KML {
         Surface(std::string texture, float xPos, float yPos, float width, float height, float rotationDeg, float rotationAnchorX, float rotationAnchorY);
     private:
         unsigned int tex = 0;
-        Shader* shader = nullptr;
     };
 }
 

@@ -120,31 +120,6 @@ void __KML::draw_rect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader) {
     drawVerticesRect(model, color, actP);
 }
 
-/*void __KML::draw_rect(glm::mat4& model, KML::Vec4f color, unsigned int tex, KML::Shader* shader) {
-    KML::Shader* activeProgram = (shader != nullptr) ? shader : program_noTex;
-
-    if(shader == nullptr)
-        program = (tex > 0) ? program : program_noTex;
-    else program = shader;
-
-    if(program == nullptr) throw std::runtime_error("PROGRAM IS NULLLPTR");
-
-    glUseProgram(__KML::get_program_id(program));
-    glBindVertexArray(VAO);
-    
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
-
-    glm::mat4 projection = glm::ortho(0.0f, LOG_SCREEN_WIDTH, 0.0f, LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
-    
-    glUniform1i(KML::GetShaderUniformL(program, "uTex"), 0);
-    glUniformMatrix4fv(KML::GetShaderUniformL(program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(KML::GetShaderUniformL(program, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
-    glUniform4f(KML::GetShaderUniformL(program, "tint"), color.x, color.y, color.z, color.w);
-
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-}*/
-
 std::vector<KML::Layer*>layers;
 
 KML::Layer::Layer(int maxSurfaces) {

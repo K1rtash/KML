@@ -1,0 +1,37 @@
+    void SetUniform_1f(const char* uniform, Shader* shader, float v0);
+    void SetUniform_1i(const char* uniform, Shader* shader, int v0);
+
+    void SetUniform_2f(const char* uniform, Shader* shader, float v0, float v1);
+    void SetUniform_3f(const char* uniform, Shader* shader, float v0, float v1, float v2);
+    void SetUniform_4f(const char* uniform, Shader* shader, float v0, float v1, float v2, float v3);
+
+    void SetUniform_2fv(const char* uniform, Shader* shader, const Vec2f& __v);
+    void SetUniform_3fv(const char* uniform, Shader* shader, const Vec3f& __v);
+    void SetUniform_4fv(const char* uniform, Shader* shader, const Vec4f& __v);
+
+
+void KML::SetUniform_1f(const char* u, Shader* s, float v0) {
+    glUniform1f(GetShaderUniformL(s, u), v0);
+}
+void KML::SetUniform_1i(const char* u, Shader* s, int v0) {
+    glUniform1i(GetShaderUniformL(s, u), v0);
+}
+void KML::SetUniform_2f(const char* u, Shader* s, float v0, float v1) {
+    glUniform2f(GetShaderUniformL(s, u), v0, v1);
+}
+void KML::SetUniform_3f(const char* u, Shader* s, float v0, float v1, float v2) {
+    glUniform3f(GetShaderUniformL(s, u), v0, v1, v2);
+}
+void KML::SetUniform_4f(const char* u, Shader* s, float v0, float v1, float v2, float v3) {
+    glUniform4f(GetShaderUniformL(s, u), v0, v1, v2, v3);
+}
+void KML::SetUniform_2fv(const char* u, Shader* s, const Vec2f& v) {
+    SetUniform_2f(u, s, v.x, v.y);
+}
+void KML::SetUniform_3fv(const char* u, Shader* s, const Vec3f& v) {
+    SetUniform_3f(u, s, v.x, v.y, v.z);
+
+}
+void KML::SetUniform_4fv(const char* u, Shader* s, const Vec4f& v) {
+    SetUniform_4f(u, s, v.x, v.y, v.z, v.w);
+}

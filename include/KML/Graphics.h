@@ -5,12 +5,31 @@
 #include <filesystem>
 
 namespace KML {
+    struct Vec2f;
+    struct Vec3f;
+    struct Vec4f;
     struct Shader;
-    Shader* CreateShader(std::filesystem::path vertex, std::filesystem::path fragment);
-    unsigned int GetShaderUniformL(Shader* shader, std::string uniform);
-    void DeleteShader(Shader* shader);
 
-    bool LoadTexture(const char* file);
+    typedef unsigned int Texture;
+
+    Shader* CreateShader(std::filesystem::path vertex, std::filesystem::path fragment);
+    int GetShaderUniformL(Shader* shader, const char* uniform);
+    
+    void SetUniform_1f(const char* uniform, Shader* shader, float v0);
+    void SetUniform_1i(const char* uniform, Shader* shader, int v0);
+
+    void SetUniform_2f(const char* uniform, Shader* shader, float v0, float v1);
+    void SetUniform_3f(const char* uniform, Shader* shader, float v0, float v1, float v2);
+    void SetUniform_4f(const char* uniform, Shader* shader, float v0, float v1, float v2, float v3);
+
+    void SetUniform_2fv(const char* uniform, Shader* shader, const Vec2f& __v);
+    void SetUniform_3fv(const char* uniform, Shader* shader, const Vec3f& __v);
+    void SetUniform_4fv(const char* uniform, Shader* shader, const Vec4f& __v);
+
+    void ReloadShader(Shader* shader);
+    void DeleteShader(Shader*& shader);
+
+    Texture LoadTexture(const char* file);
     void UnloadTexture(const char* file);
 }
 

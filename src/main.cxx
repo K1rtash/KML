@@ -11,7 +11,8 @@ bool keyDown(int k) {
 int main(void) {
     KML::CreateWindow(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
 
-    KML::LoadTexture("images.png");
+    KML::Texture tex0 = KML::LoadTexture("images.png");
+
     KML::Surface surface("images.png", {10.0f, 10.0f, 100.0f, 100.0f}, {0.5f, 0.0f, 0.0f});
     KML::Surface srf(KML::Vec2f{30.0f, 50.0f}, KML::Vec2f{70.0f, 1000.0f});
     srf.color = KML::Vec3f(110.0f, 30.0f, 40.0f);
@@ -21,8 +22,8 @@ int main(void) {
     srf2.transparency = 30;
     surface.transparency = 50;
 
-    //KML::Shader* shader = KML::CreateShader("vert.glsl", "frag.glsl"); 
-    //std::cout << std::format("Shader uniform id for model: {}\n", KML::GetShaderUniformL(shader, "model"));
+    KML::Shader* shader = KML::CreateShader("vert.glsl", "frag.glsl"); 
+    surface.shader = shader;
     
     while(KML::ProcessEvents()) {
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
@@ -49,9 +50,14 @@ int main(void) {
             surface.color.x -= 5.0f;
         }
 
-        if(KML::KeyState(KML_KEY_X) == KML::KeyState::PRESS) {
+        if(KML::GetKey(KML_KEY_X) == KML::KeyState::PRESS) {
             surface.SetColor_HSV(0);
             surface.rotation = {0.0f, 0.0f, 0.0f};
+        }
+
+        if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) { 
+            printf("reloading shader!");
+            KML::ReloadShader(shader);
         }
 
         if(KML::GetMouseButton(KML_MOUSE_BUTTON_LEFT) == KML::KeyState::PRESS) 
@@ -60,11 +66,15 @@ int main(void) {
             srf.pos = srf2.pos;
         srf.Draw();
         srf2.Draw();
+        KML::SetUniform_4fv("color", shader, KML::Vec4f{194.0f, 63.0f, 35.0f, 255.0f});
+        KML::SetUniform_1f("radius", shader, 1.0f);
+        KML::SetUniform_1f("softness", shader, 0.5f);
+        //std::cout << std::format("Texid: {} (int={}), location: {}", tex0, (int)tex0, KML::GetShaderUniformL(shader, "uTex"));
         surface.Draw();
         KML::PresentFrame(0.2f, 0.3f, 0.3f, 1.0f);
     }
 
-    //KML::DeleteShader(shader);
+    KML::DeleteShader(shader);
     KML::UnloadTexture("images.png");
     KML::Terminate();
     return 0;

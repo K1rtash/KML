@@ -4,6 +4,7 @@
 #include "Vector.h"
 
 #include <string>
+#include <filesystem>
 
 namespace KML 
 {
@@ -83,6 +84,6 @@ namespace KML
      */
     Vec3f RGBAtoHSV(const Vec4f& c);
 
-    std::string ReadFile(const char* path);
+    std::string ReadFile(std::filesystem::path path);
 }
 #endif

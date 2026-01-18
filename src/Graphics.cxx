@@ -2,8 +2,11 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
+#include <cassert>
 
 #include "KML/Graphics.h"
+#include "KML/Vector.h"
+#include "KML/Utils.h"
 
 #include "__KML/graphics.h"
 
@@ -16,17 +19,23 @@ struct KML::Shader {
 
 GLuint compile_shader_src(GLenum type, const char* src, GLuint program);
 GLuint create_shader_program(std::string v_src, std::string f_src);
-std::unordered_map<std::string, GLuint> map_shader_uniforms(GLuint id);
+void map_shader_uniforms(KML::Shader* shader);
 
 KML::Shader* KML::CreateShader(std::filesystem::path vertex, std::filesystem::path fragment) {
-    Shader* program = (Shader*)malloc(sizeof(Shader));
-    program->id = create_shader_program(vertex.string(), fragment.string());
-    program->uniforms = map_shader_uniforms(program->id);
+    Shader* program = new Shader;
+    program->id = create_shader_program(KML::ReadFile(vertex), KML::ReadFile(fragment));
+    if(program->id == 0) {
+        delete program;
+        return nullptr;
+    }
+    program->vertex = vertex;
+    program->fragment = fragment;
+    map_shader_uniforms(program);
     return program;
 }
 
-unsigned int KML::GetShaderUniformL(Shader* shader, std::string uniform) {
-    if(shader == nullptr) return -1;
+int KML::GetShaderUniformL(Shader* shader, const char* uniform) {
+    if(shader == nullptr || uniform == nullptr) return -1;
     auto i = shader->uniforms.find(uniform);
     if(i == shader->uniforms.end()) {
         shader->uniforms[uniform] = -1;
@@ -36,18 +45,79 @@ unsigned int KML::GetShaderUniformL(Shader* shader, std::string uniform) {
     return i->second;  
 }
 
-void KML::DeleteShader(KML::Shader* shader) {
+void KML::ReloadShader(Shader* shader) {
     glDeleteProgram(shader->id);
-    free(shader);
+    shader->id = create_shader_program(KML::ReadFile(shader->vertex), KML::ReadFile(shader->fragment));
+    if(shader->id == 0) {
+        DeleteShader(shader);
+        return;
+    }
+    map_shader_uniforms(shader);
+}
+
+void KML::DeleteShader(Shader*& shader) {
+    glDeleteProgram(shader->id);
+    delete shader;
     shader = nullptr;
 }
 
 KML::Shader* __KML::create_program_from_src(std::string v_src, std::string f_src) {
-    KML::Shader* program = (KML::Shader*)malloc(sizeof(KML::Shader));
+    KML::Shader* program = new KML::Shader;
     program->id = create_shader_program(v_src, f_src);
     std::cout << "created program id: " << program->id << std::endl;
-    program->uniforms = map_shader_uniforms(program->id);
+    if(program->id == 0) {
+        delete program;
+        return nullptr;
+    }
+    map_shader_uniforms(program);
     return program;
+}
+
+void KML::SetUniform_1f(const char* u, Shader* s, float v0) {
+    int loc = GetShaderUniformL(s, u);
+    if (loc >= 0) { 
+        glUseProgram(s->id);
+        glUniform1f(loc, v0);
+    }
+}
+void KML::SetUniform_1i(const char* u, Shader* s, int v0) {
+    int loc = GetShaderUniformL(s, u);
+    if (loc >= 0) {
+        glUseProgram(s->id);
+        glUniform1i(loc, v0);
+        std::cout << "uniform: " << u << " int: " << v0 << std::endl;
+    }
+}
+void KML::SetUniform_2f(const char* u, Shader* s, float v0, float v1) {
+    int loc = GetShaderUniformL(s, u);
+    if (loc >= 0) {
+        glUseProgram(s->id);
+        glUniform2f(loc, v0, v1);
+    }
+}
+void KML::SetUniform_3f(const char* u, Shader* s, float v0, float v1, float v2) {
+    int loc = GetShaderUniformL(s, u);
+    if (loc >= 0) {
+        glUseProgram(s->id);
+        glUniform3f(loc, v0, v1, v2);
+    }
+}
+void KML::SetUniform_4f(const char* u, Shader* s, float v0, float v1, float v2, float v3) {
+    int loc = GetShaderUniformL(s, u);
+    if (loc >= 0) {
+        glUseProgram(s->id);
+        glUniform4f(loc, v0, v1, v2, v3);
+    }
+}
+void KML::SetUniform_2fv(const char* u, Shader* s, const Vec2f& v) {
+    SetUniform_2f(u, s, v.x, v.y);
+}
+void KML::SetUniform_3fv(const char* u, Shader* s, const Vec3f& v) {
+    SetUniform_3f(u, s, v.x, v.y, v.z);
+
+}
+void KML::SetUniform_4fv(const char* u, Shader* s, const Vec4f& v) {
+    SetUniform_4f(u, s, v.x, v.y, v.z, v.w);
 }
 
 unsigned int __KML::get_program_id(KML::Shader* shader) {
@@ -95,10 +165,11 @@ GLuint compile_shader_src(GLenum type, const char* src, GLuint program) {
     return id;
 }
 
-std::unordered_map<std::string, GLuint> map_shader_uniforms(GLuint id) {
-    std::unordered_map<std::string, GLuint> map;
+void map_shader_uniforms(KML::Shader* shader) {
+    assert(shader && "Shader no puede ser null");
+
     int u_count;
-    glGetProgramiv(id, GL_ACTIVE_UNIFORMS, &u_count);
+    glGetProgramiv(shader->id, GL_ACTIVE_UNIFORMS, &u_count);
 
     for (int i = 0; i < u_count; i++) {
         char name[256];
@@ -106,12 +177,11 @@ std::unordered_map<std::string, GLuint> map_shader_uniforms(GLuint id) {
         GLint size;
         GLenum type;
 
-        glGetActiveUniform(id, i, sizeof(name), &length, &size, &type, name);
+        glGetActiveUniform(shader->id, i, sizeof(name), &length, &size, &type, name);
 
-        GLint location = glGetUniformLocation(id, name);
+        GLint location = glGetUniformLocation(shader->id, name);
 
-        map[std::string(name)] = location;
-        std::cout << "mapped: " << name << " loc: " << location  << "id: " << id << std::endl; 
+        shader->uniforms[std::string(name)] = location;
+        std::cout << "mapped: " << name << " loc: " << location  << "id: " << shader->id << std::endl; 
     }
-    return map;
 }
