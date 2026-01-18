@@ -9,10 +9,11 @@
 #include "KML/Surface.h"
 #include "KML/Layers.h"
 
-KML::Shader* program;
-KML::Shader* program_noTex;
-
-GLuint VAO, VBO, EBO;
+namespace __KML {
+    GLuint VAO;
+    KML::Shader* program0 = nullptr;
+    KML::Shader* program1 = nullptr;
+}
 
 float vertices[] = {
     0.5f,  0.5f, 0.0f,     1.0f, 1.0f,    // top right
@@ -36,9 +37,10 @@ void kml__tempPC() {
         "out vec2 uvCoords;\n"
         "uniform mat4 model;\n"
         "uniform mat4 proj;\n"
+        "uniform mat4 view;\n"
         "void main() {\n"
         "uvCoords = aUV;\n"
-        "gl_Position = proj * model * vec4(aPos, 1.0);\n"
+        "gl_Position = proj * view * model * vec4(aPos, 1.0);\n"
         "}";
 
     const char* fragment_src = 
@@ -64,17 +66,22 @@ void kml__tempPC() {
         "FragColor = tint;\n"
         "}";
 
-    program = __KML::create_program_from_src(vertex_src, fragment_src);
-    program_noTex = __KML::create_program_from_src(vertex_src, fragment_noTex_src);
+    __KML::program0 = __KML::create_program_from_src(vertex_src, fragment_src);
+    __KML::program1 = __KML::create_program_from_src(vertex_src, fragment_noTex_src);
+
+    assert(__KML::program0);
+    assert(__KML::program1);
+
     kml__gen_buffers();
 }
 
 void kml__gen_buffers() {
-    glGenVertexArrays(1, &VAO);
+    GLuint VBO, EBO;
+    glGenVertexArrays(1, &__KML::VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 
-    glBindVertexArray(VAO);
+    glBindVertexArray(__KML::VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -89,7 +96,7 @@ void kml__gen_buffers() {
 
     glBindVertexArray(0);
 }
-
+/*
 void drawVerticesRect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader) {
     glm::mat4 projection = glm::ortho(0.0f, LOG_SCREEN_WIDTH, 0.0f, LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
     glUniformMatrix4fv(KML::GetShaderUniformL(shader, "model"), 1, GL_FALSE, glm::value_ptr(model));
@@ -123,14 +130,19 @@ void __KML::draw_rect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader) {
 void __KML::draw_rect(KML::Shader* shader) {
     if(shader == nullptr) return;
     glUseProgram(__KML::get_program_id(shader));
-    glm::mat4 projection = glm::ortho(0.0f, LOG_SCREEN_WIDTH, 0.0f, LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
-    glUniformMatrix4fv(KML::GetShaderUniformL(shader, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(KML::GetShaderUniformL(shader, "proj"), 1, GL_FALSE, glm::value_ptr(proj_mat4));
+    glUniformMatrix4fv(KML::GetShaderUniformL(shader, "view"), 1, GL_FALSE, glm::value_ptr(view_mat4));
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glUseProgram(0);
     glBindVertexArray(0);
 }
 
+void __KML::default_shader_mat(glm::mat4& view, glm::mat4& proj) {
+    view_mat4 = view;
+    proj_mat4 = proj;
+}
+*/
 std::vector<KML::Layer*>layers;
 
 KML::Layer::Layer(int maxSurfaces) {

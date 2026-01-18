@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
+#include <format>
 
 #include "KML/Contex.h"
 #include "KML/Keycodes.h"
@@ -41,14 +42,19 @@ struct Input {
     KML::KeyState buttons[GLFW_KEY_LAST]{KML::KeyState::UP};
 } input;
 
-int glCtxMajor = 3, glCtxMinor = 3;
+namespace __KML {
+    float LOG_SCREEN_WIDTH = 1080.0f, LOG_SCREEN_HEIGHT = 720.0f, LOG_SCREEN_ASPECT = LOG_SCREEN_WIDTH / LOG_SCREEN_HEIGHT;
+}
 
 /* ---------- Definiciones ---------- */
 bool KML::CreateWindow(int width, int height, const char* title, unsigned int flags) {
-    return CreateWindowP(width, height, title, 1080.0f, 720.0f, 3, 3, flags | GL_CONTEXT_LATEST | RESIZABLE);
+    return CreateWindowP(width, height, title, (float)width, (float)height, 3, 3, flags | GL_CONTEXT_LATEST | RESIZABLE);
 }
 
 bool KML::CreateWindowP(int width, int height, const char* title, float logical_width, float logical_height, int glCtxMajor, int glCtxMinor, unsigned int flags) {
+    __KML::LOG_SCREEN_WIDTH = logical_width;
+    __KML::LOG_SCREEN_HEIGHT = logical_width;
+    __KML::LOG_SCREEN_ASPECT = __KML::LOG_SCREEN_WIDTH / __KML::LOG_SCREEN_HEIGHT;
     glfwSetErrorCallback(error_callback);
     glfwInit();
         
@@ -157,14 +163,14 @@ void setLogicalPresentation(int width, int height) {
     float aspect = (float)width / (float)height;
     int viewportX, viewportY, viewportW, viewportH;
 
-    if (aspect > LOG_SCREEN_ASPECT) {
+    if (aspect > __KML::LOG_SCREEN_ASPECT) {
         viewportH = height;
-        viewportW = (int)(height * LOG_SCREEN_ASPECT);
+        viewportW = (int)(height * __KML::LOG_SCREEN_ASPECT);
         viewportX = (width - viewportW) / 2;
         viewportY = 0;
     } else {
         viewportW = width;
-        viewportH = (int)(width /LOG_SCREEN_ASPECT);
+        viewportH = (int)(width / __KML::LOG_SCREEN_ASPECT);
         viewportX = 0;
         viewportY = (height - viewportH) / 2;
     }
@@ -173,7 +179,7 @@ void setLogicalPresentation(int width, int height) {
 }
 
 void error_callback(int error, const char* description) {
-    std::cerr << "[GLFW] Error ( " << error << " ) " << description << "\n"; 
+    std::cout << std::format("[GLFW] Error: ({}) -> {}\n", error, description);
 }
 
 void resize_callback(GLFWwindow* handle, int width, int height) {
@@ -302,6 +308,10 @@ void setGLcontext(int& major, int& minor, bool useLatestCtx) {
     }
 
     if(major == 0 && minor == 0) throw std::runtime_error("Device drivers cant support minimum required GL version");
+}
+
+void KML::PrintContext() {
+    std::cout << std::format("Screen aspect: {}x{}\nLogical aspect: {}x{}\n", window.width, window.height, __KML::LOG_SCREEN_WIDTH, __KML::LOG_SCREEN_HEIGHT);
 }
 
 void printGLInfo(bool showExt) /// Se debe llamar siempre despues de crear el contexto OpenGL makeContextCurrent

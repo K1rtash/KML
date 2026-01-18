@@ -27,6 +27,8 @@ namespace KML {
     void PresentFrame(float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0f);
     void SetMouseCaptured(bool captured);
 
+    void PrintContext();
+
     KeyState GetKey(int key);
     KeyState GetMouseButton(int button);
 }

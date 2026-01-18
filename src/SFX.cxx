@@ -57,5 +57,5 @@ void KML::DrawParticle(Shader* shader, int count, Particle& p) {
 
     KML::SetUniform_1f("radius", shader, KML::RandFloat(0.2f, 0.8f));
     KML::SetUniform_1f("softness", shader, KML::RandFloat(0.2f, 0.8f));
-    __KML::draw_rect(shader);
+    //__KML::draw_rect(shader);
 }
