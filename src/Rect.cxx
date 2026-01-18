@@ -3,7 +3,7 @@
 #include "KML/Shape.h"
 
 namespace __KML {
-    KML::Shape::Rect* defaultShape;
+    KML::Shape* defaultShape;
     KML::Shader* defaultShader;
 
     void GenerateDefaultMembers() {
@@ -53,7 +53,7 @@ namespace __KML {
             1, 2, 3
         };
 
-        defaultShape = new KML::Shape::Rect(vertices, sizeof(vertices), indices, sizeof(indices));
+        defaultShape = new KML::Shape(vertices, sizeof(vertices), indices, sizeof(indices));
         defaultShader = KML::CreateShader(vertex_src, fragment_src);
     }
 }

@@ -3,17 +3,16 @@
 
 #include "Graphics.h"
 
-namespace KML::Shape {
-    class __shape {
+namespace KML {
+    class Shape {
       private:
         unsigned int vao;
         size_t ind_size;
       public:
-        __shape(float* vertices, size_t vs, unsigned int* indices, size_t is);
-        ~__shape();
+        Shape(float* vertices, size_t vertices_size, unsigned int* indices, size_t indices_size);
+        ~Shape();
         void Use();
     };
-    class 
 }
 
 

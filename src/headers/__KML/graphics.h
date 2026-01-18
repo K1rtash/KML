@@ -11,7 +11,7 @@
 
 namespace __KML {
     extern float LOG_SCREEN_WIDTH, LOG_SCREEN_HEIGHT, LOG_SCREEN_ASPECT;
-    extern KML::Shape::Rect* defaultShape;
+    extern KML::Shape* defaultShape;
     extern KML::Shader* defaultShader;
     void GenerateDefaultMembers();
 }

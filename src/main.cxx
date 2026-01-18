@@ -16,15 +16,28 @@ int gtrnd(int min, int max) {
 int main(void) {
     srand(time(0));
 
-
     KML::CreateWindow(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
     KML::PrintContext();
+
+    float vertices[] = {
+        //  x     y    z     u    v
+        0.0f,  0.5f, 0.0f, 0.5f, 1.0f,   // cima
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,   // izquierda
+        0.5f, -0.5f, 0.0f, 1.0f, 0.0f    // derecha
+    };
+
+    // Índices para un solo triángulo
+    unsigned int indices[] = {
+        0, 1, 2
+    };
+    KML::Shape shape0(vertices, sizeof(vertices), indices, sizeof(indices));
 
     KML::Texture tex0 = KML::LoadTexture("images.png");
     KML::Shader* shader = KML::CreateShader(std::filesystem::path("particulas/vert.glsl"), std::filesystem::path("particulas/frag.glsl")); 
 
-    KML::Surface surface("images.png", {0.0f, 0.0f, 1.0f, 1.0f}, {0.0f, 0.0f}, 0.0f);
+    KML::Surface surface("images.png", {0.0f, 0.0f, 1.0f, 1.0f}, {0.5f, 0.5f}, 0.0f);
     surface.transparency = 20;
+    surface.shape = &shape0;
     
     KML::Surface srf(KML::Vec4f{30.0f, 50.0f, 70.0f, 1000.0f});
     srf.color = KML::Vec3f(110.0f, 30.0f, 40.0f);

@@ -23,24 +23,24 @@ Surface::Surface() {
 }
 
 Surface::Surface(Shader* shader) : shader{shader} {
-    rect = __KML::defaultShape;
+    shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
 Surface::Surface(std::string texture) {
     SetTexture(texture);
-    rect = __KML::defaultShape;
+    shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
 Surface::Surface(Vec4f transform) : pos{transform.x, transform.y}, scale{transform.z, transform.w} {
-    rect = __KML::defaultShape;
+    shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
 Surface::Surface(std::string texture, Vec4f transform) : pos{transform.x, transform.y}, scale{transform.z, transform.w} {
     SetTexture(texture);
-    rect = __KML::defaultShape;
+    shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
@@ -49,7 +49,7 @@ Surface::Surface(std::string texture, Vec4f transform, Vec2f anchor)
 {
     this->anchor = anchor;
     SetTexture(texture);
-    rect = __KML::defaultShape;
+    shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
@@ -59,12 +59,12 @@ Surface::Surface(std::string texture, Vec4f transform, Vec2f anchor, float rotat
     this->anchor = anchor;
     this->rotation = rotation;
     SetTexture(texture);
-    rect = __KML::defaultShape;
+    shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
 void Surface::Draw() {
-    assert(rect);
+    assert(shape);
     assert(shader);
 
     glm::mat4 view = glm::mat4{1.0f}, model = glm::mat4{1.0f}, 
@@ -99,7 +99,7 @@ void Surface::Draw() {
     glUniformMatrix4fv(KML::GetShaderUniformL(shader, "view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniform4f(KML::GetShaderUniformL(shader, "tint"), finalColor.x, finalColor.y, finalColor.z, finalColor.w);
     
-    rect->Use();
+    shape->Use();
 }
 
 void Surface::SetTexture(std::string texture) {

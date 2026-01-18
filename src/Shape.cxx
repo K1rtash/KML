@@ -4,7 +4,7 @@
 
 #include "__KML/graphics.h"
 
-KML::Shape::Rect::Rect(float* vertices, size_t vs, unsigned int* indices, size_t is) {
+KML::Shape::Shape(float* vertices, size_t vs, unsigned int* indices, size_t is) {
     GLuint VBO, EBO;
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &VBO);
@@ -29,11 +29,11 @@ KML::Shape::Rect::Rect(float* vertices, size_t vs, unsigned int* indices, size_t
     assert(vao != 0);
 }
 
-KML::Shape::Rect::~Rect() {
+KML::Shape::~Shape() {
     if(vao) glDeleteVertexArrays(1, &vao);
 }
 
-void KML::Shape::Rect::Use() {
+void KML::Shape::Use() {
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, ind_size/sizeof(unsigned int), GL_UNSIGNED_INT, 0);
     glUseProgram(0);
