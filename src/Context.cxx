@@ -53,7 +53,7 @@ bool KML::CreateWindow(int width, int height, const char* title, unsigned int fl
 
 bool KML::CreateWindowP(int width, int height, const char* title, float logical_width, float logical_height, int glCtxMajor, int glCtxMinor, unsigned int flags) {
     __KML::LOG_SCREEN_WIDTH = logical_width;
-    __KML::LOG_SCREEN_HEIGHT = logical_width;
+    __KML::LOG_SCREEN_HEIGHT = logical_height;
     __KML::LOG_SCREEN_ASPECT = __KML::LOG_SCREEN_WIDTH / __KML::LOG_SCREEN_HEIGHT;
     glfwSetErrorCallback(error_callback);
     glfwInit();

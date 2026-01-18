@@ -27,7 +27,7 @@ Surface::Surface(std::string texture) {
     SetTexture(texture);
 }
 
-Surface::Surface(Vec4f transform) : pos{transform.x, transform.y} {}
+Surface::Surface(Vec4f transform) : pos{transform.x, transform.y}, scale{transform.z, transform.w} {}
 
 Surface::Surface(std::string texture, Vec4f transform) : pos{transform.x, transform.y}, scale{transform.z, transform.w} {
     SetTexture(texture);
@@ -49,28 +49,19 @@ Surface::Surface(std::string texture, Vec4f transform, Vec2f anchor, float rotat
 }
 
 void Surface::Draw() {
-    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 view = glm::mat4{1.0f}, model = glm::mat4{1.0f}, 
+        proj = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
 
-    // 1. Trasladar al punto donde quieres dibujar
-    model = glm::translate(model, glm::vec3(pos.x, pos.y, 0.0f));
+    model = glm::translate(model, glm::vec3{pos.x, pos.y, 0});
+    model = glm::rotate(model, glm::radians(rotation), glm::vec3(0,0,1));
 
-    // 2. Trasladar al anchor point
-    model = glm::translate(model, glm::vec3(anchor.x * scale.x, anchor.y * scale.y, 0.0f));
+    //anchor
+    model = glm::translate(model, glm::vec3((0.5f - anchor.x) * scale.x, (0.5f - anchor.y) * scale.y, 0));
 
-    // 3. Rotar alrededor del eje Z (rotación 2D)
-    model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
-
-    // 4. Volver desde el anchor point
-    model = glm::translate(model, glm::vec3(-anchor.x * scale.x, -anchor.y * scale.y, 0.0f));
-
-    // 5. Escalar (siempre después de rotar)
-    model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
+    model = glm::scale(model, glm::vec3(scale.x, scale.y, 1));
 
     Vec4f finalColor = HSVtoRGBA(color);
     finalColor.w = (float)(100 - Clamp<int>(transparency, 0, 100)) / 100.0f;
-
-
-    glm::mat4 view = glm::mat4(1.0f), proj = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
 
     Shader* program;
     if(!shader) {

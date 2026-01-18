@@ -24,7 +24,7 @@ int main(void) {
     KML::Shader* shader = KML::CreateShader("particulas/vert.glsl", "particulas/frag.glsl"); 
 
     KML::Surface surface("images.png", {0.0f, 0.0f, 1.0f, 1.0f}, {0.0f, 0.0f}, 0.0f);
-    surface.transparency = 50;
+    surface.transparency = 20;
     
     KML::Surface srf(KML::Vec4f{30.0f, 50.0f, 70.0f, 1000.0f});
     srf.color = KML::Vec3f(110.0f, 30.0f, 40.0f);
@@ -45,7 +45,7 @@ int main(void) {
 
     KML::Surface background(KML::Vec4f{0.0f, 0.0f, 800.0f, 600.0f});
     background.SetColor_RGB(166, 125, 118);
-    std::cout << std::format("pos: {}, {} scale: {}, {} rot: {}, anchor: {}, {})\n", background.pos.x, background.pos.y, background.scale.x, background.scale.y, background.rotation, background.anchor.x, background.anchor.y); 
+    std::cout << std::format("BACKGROUNDDDDDD pos: {}, {} scale: {}, {} rot: {}, anchor: {}, {})\n", background.pos.x, background.pos.y, background.scale.x, background.scale.y, background.rotation, background.anchor.x, background.anchor.y); 
     
     while(KML::ProcessEvents()) {
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
