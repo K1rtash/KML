@@ -120,6 +120,17 @@ void __KML::draw_rect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader) {
     drawVerticesRect(model, color, actP);
 }
 
+void __KML::draw_rect(KML::Shader* shader) {
+    if(shader == nullptr) return;
+    glUseProgram(__KML::get_program_id(shader));
+    glm::mat4 projection = glm::ortho(0.0f, LOG_SCREEN_WIDTH, 0.0f, LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
+    glUniformMatrix4fv(KML::GetShaderUniformL(shader, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
+    glBindVertexArray(VAO);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glUseProgram(0);
+    glBindVertexArray(0);
+}
+
 std::vector<KML::Layer*>layers;
 
 KML::Layer::Layer(int maxSurfaces) {

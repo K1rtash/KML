@@ -15,6 +15,7 @@ namespace __KML {
     unsigned int get_program_id(KML::Shader* shader);
     void draw_rect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader);
     void draw_rect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader, unsigned int tex);
+    void draw_rect(KML::Shader* shader);
 }
 
 namespace __KML::Texture {
