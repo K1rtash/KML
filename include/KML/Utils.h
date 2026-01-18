@@ -84,6 +84,16 @@ namespace KML
      */
     Vec3f RGBAtoHSV(const Vec4f& c);
 
+    /**
+     * @brief Reads a file from disc
+     * @param path Relative or absolute path
+     * @returns String containing all file contents
+     */
     std::string ReadFile(std::filesystem::path path);
+
+    /**
+     * @brief Generates a random number
+     */
+    float RandFloat(float min, float max);
 }
 #endif

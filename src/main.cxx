@@ -8,7 +8,14 @@ bool keyDown(int k) {
     return false;
 }
 
+int gtrnd(int min, int max) {
+    return rand () % (max - min + 1) + min;
+}
+
 int main(void) {
+    srand(time(0));
+
+
     KML::CreateWindow(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
 
     KML::Texture tex0 = KML::LoadTexture("images.png");
@@ -22,8 +29,15 @@ int main(void) {
     srf2.transparency = 30;
     surface.transparency = 50;
 
-    KML::Shader* shader = KML::CreateShader("vert.glsl", "frag.glsl"); 
-    surface.shader = shader;
+    KML::Shader* shader = KML::CreateShader("vert.glsl", "particles.glsl"); 
+
+    KML::Surface particle{shader};
+
+    KML::Layer layer0;
+    layer0.Add(srf);
+    layer0.Add(srf2);
+    KML::Layer layer1;
+    layer1.Add(surface);
     
     while(KML::ProcessEvents()) {
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
@@ -63,14 +77,19 @@ int main(void) {
         if(KML::GetMouseButton(KML_MOUSE_BUTTON_LEFT) == KML::KeyState::PRESS) 
             KML::SetMouseCaptured(true);
 
-            srf.pos = srf2.pos;
-        srf.Draw();
-        srf2.Draw();
-        KML::SetUniform_4fv("color", shader, KML::Vec4f{194.0f, 63.0f, 35.0f, 255.0f});
-        KML::SetUniform_1f("radius", shader, 1.0f);
-        KML::SetUniform_1f("softness", shader, 0.5f);
-        //std::cout << std::format("Texid: {} (int={}), location: {}", tex0, (int)tex0, KML::GetShaderUniformL(shader, "uTex"));
-        surface.Draw();
+        srf.pos = srf2.pos;
+        KML::DrawLayers();
+        
+        int max_p = 50;
+        for(int i = 0; i < max_p; i++) {
+            KML::SetUniform_4fv("color", shader, KML::Vec4f{KML::RandFloat(0, 255), KML::RandFloat(0, 255), KML::RandFloat(0, 255), 255.0f});
+            KML::SetUniform_1f("radius", shader, KML::RandFloat(0.0f, 1.0f));
+            KML::SetUniform_1f("softness", shader, KML::RandFloat(0.0f, 1.0f));
+            particle.pos = KML::Vec2f{KML::RandFloat(10.0f, 100.0f), KML::RandFloat(10.0f, 100.0f)};
+            particle.scale = KML::Vec2f{KML::RandFloat(100.0f, 1000.0f), KML::RandFloat(100.0f, 1000.0f)};
+            particle.Draw();
+        }
+
         KML::PresentFrame(0.2f, 0.3f, 0.3f, 1.0f);
     }
 

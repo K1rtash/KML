@@ -23,6 +23,7 @@ namespace KML {
         void SetColor_RGB(int R, int G, int B);
 
         Surface();
+        Surface(Shader* shader);
         Surface(Vec2f pos, Vec2f scale); // Solo forma
         Surface(std::string texture);   // Solo textura
         Surface(std::string texture, Vec2f pos); // Textura y posicion

@@ -14,6 +14,8 @@ using namespace KML;
 
 Surface::Surface() {}
 
+Surface::Surface(Shader* shader) : shader{shader} {}
+
 Surface::Surface(Vec2f pos, Vec2f scale) : pos{pos}, scale{scale}, rotation{scale.x / 2, scale.y / 2, 0.0f}  {}
 
 Surface::Surface(std::string texture) {
