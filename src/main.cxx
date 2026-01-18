@@ -21,7 +21,7 @@ int main(void) {
     KML::PrintContext();
 
     KML::Texture tex0 = KML::LoadTexture("images.png");
-    KML::Shader* shader = KML::CreateShader("particulas/vert.glsl", "particulas/frag.glsl"); 
+    KML::Shader* shader = KML::CreateShader(std::filesystem::path("particulas/vert.glsl"), std::filesystem::path("particulas/frag.glsl")); 
 
     KML::Surface surface("images.png", {0.0f, 0.0f, 1.0f, 1.0f}, {0.0f, 0.0f}, 0.0f);
     surface.transparency = 20;

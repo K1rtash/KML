@@ -13,7 +13,9 @@ namespace KML {
     typedef unsigned int Texture;
 
     Shader* CreateShader(std::filesystem::path vertex, std::filesystem::path fragment);
+    Shader* CreateShader(const char* vertex, const char* fragment);
     int GetShaderUniformL(Shader* shader, const char* uniform);
+    unsigned int GetShaderID(Shader* shader);
     
     void SetUniform_1f(const char* uniform, Shader* shader, float v0);
     void SetUniform_1i(const char* uniform, Shader* shader, int v0);

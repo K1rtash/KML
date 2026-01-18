@@ -3,6 +3,7 @@
 
 #include "Vector.h"
 #include "Graphics.h"
+#include "Shape.h"
 
 #include <string>
 
@@ -23,6 +24,7 @@ namespace KML {
         Vec3f color{0.0f, 0.0f, 100.0f};
 
         Shader* shader = nullptr;
+        Shape::Rect* rect = nullptr;
         Camera* camera = nullptr;
 
         int transparency = 0;

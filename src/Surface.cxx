@@ -10,6 +10,7 @@
 #include "KML/Surface.h"
 #include "KML/Vector.h"
 #include "KML/Utils.h"
+#include "KML/Graphics.h"
 
 using namespace KML;
 
@@ -21,16 +22,26 @@ Surface::Surface() {
     rotation = 0.0f;
 }
 
-Surface::Surface(Shader* shader) : shader{shader} {}
+Surface::Surface(Shader* shader) : shader{shader} {
+    rect = __KML::defaultShape;
+    shader = __KML::defaultShader;
+}
 
 Surface::Surface(std::string texture) {
     SetTexture(texture);
+    rect = __KML::defaultShape;
+    shader = __KML::defaultShader;
 }
 
-Surface::Surface(Vec4f transform) : pos{transform.x, transform.y}, scale{transform.z, transform.w} {}
+Surface::Surface(Vec4f transform) : pos{transform.x, transform.y}, scale{transform.z, transform.w} {
+    rect = __KML::defaultShape;
+    shader = __KML::defaultShader;
+}
 
 Surface::Surface(std::string texture, Vec4f transform) : pos{transform.x, transform.y}, scale{transform.z, transform.w} {
     SetTexture(texture);
+    rect = __KML::defaultShape;
+    shader = __KML::defaultShader;
 }
 
 Surface::Surface(std::string texture, Vec4f transform, Vec2f anchor) 
@@ -38,6 +49,8 @@ Surface::Surface(std::string texture, Vec4f transform, Vec2f anchor)
 {
     this->anchor = anchor;
     SetTexture(texture);
+    rect = __KML::defaultShape;
+    shader = __KML::defaultShader;
 }
 
 Surface::Surface(std::string texture, Vec4f transform, Vec2f anchor, float rotation) 
@@ -46,9 +59,14 @@ Surface::Surface(std::string texture, Vec4f transform, Vec2f anchor, float rotat
     this->anchor = anchor;
     this->rotation = rotation;
     SetTexture(texture);
+    rect = __KML::defaultShape;
+    shader = __KML::defaultShader;
 }
 
 void Surface::Draw() {
+    assert(rect);
+    assert(shader);
+
     glm::mat4 view = glm::mat4{1.0f}, model = glm::mat4{1.0f}, 
         proj = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
 
@@ -63,12 +81,7 @@ void Surface::Draw() {
     Vec4f finalColor = HSVtoRGBA(color);
     finalColor.w = (float)(100 - Clamp<int>(transparency, 0, 100)) / 100.0f;
 
-    Shader* program;
-    if(!shader) {
-        program = (tex > 0) ? __KML::program0 : __KML::program1;
-    } else program = shader;
-
-    glUseProgram(__KML::get_program_id(program));
+    glUseProgram(KML::GetShaderID(shader));
 
     if(camera != nullptr) {
         view = glm::translate(glm::mat4(1.0f), glm::vec3(-camera->pos.x, -camera->pos.y, 0.0f));
@@ -79,17 +92,14 @@ void Surface::Draw() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
 
-    glUniform1i(KML::GetShaderUniformL(program, "uTex"), 0);
-
-    glUniformMatrix4fv(KML::GetShaderUniformL(program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(KML::GetShaderUniformL(program, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
-    glUniformMatrix4fv(KML::GetShaderUniformL(program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    glUniform4f(KML::GetShaderUniformL(program, "tint"), finalColor.x, finalColor.y, finalColor.z, finalColor.w);
+    glUniform1i(KML::GetShaderUniformL(shader, "uTex"), 0);
+    glUniform1i(KML::GetShaderUniformL(shader, "useTex"), tex > 0 ? 1 : 0);
+    glUniformMatrix4fv(KML::GetShaderUniformL(shader, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(KML::GetShaderUniformL(shader, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
+    glUniformMatrix4fv(KML::GetShaderUniformL(shader, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    glUniform4f(KML::GetShaderUniformL(shader, "tint"), finalColor.x, finalColor.y, finalColor.z, finalColor.w);
     
-    glBindVertexArray(__KML::VAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-    glUseProgram(0);
-    glBindVertexArray(0);
+    rect->Use();
 }
 
 void Surface::SetTexture(std::string texture) {
