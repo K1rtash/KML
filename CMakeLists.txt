@@ -29,6 +29,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${PROJECT_SOURCE_DIR}/third-party/glad/include 
     ${PROJECT_SOURCE_DIR}/third-party/glm/include 
     ${PROJECT_SOURCE_DIR}/third-party/stb/include 
+    ${PROJECT_SOURCE_DIR}/third-party/ksl/include 
     ${GLFW_DIR}/include
     ${PROJECT_SOURCE_DIR}/src/headers
 )

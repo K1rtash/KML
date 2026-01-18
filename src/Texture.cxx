@@ -9,6 +9,7 @@ std::unordered_map<std::string, unsigned int>textures;
 KML::Texture KML::LoadTexture(const char* file) {
     if(textures.find(file) != textures.end()) return true;
     unsigned int id = __KML::Texture::load(file);
+    assert(id != 0);
     textures.insert({file, id});
     return id;
 }
@@ -24,6 +25,7 @@ unsigned int __KML::Texture::load(const char* file) {
 
     int w, h, cc;
     unsigned char* bytes = stbi_load(file, &w, &h, &cc, 0);
+    assert(bytes);
     if (!bytes) return 0;
 
     GLuint id = 0;

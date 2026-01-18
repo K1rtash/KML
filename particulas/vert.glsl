@@ -26,6 +26,6 @@ void main()
     // Escala el quad
     vec3 pos = particlePos + displacement + aPos * size;
 
-    gl_Position = proj * vec4(pos, 1.0);
+    gl_Position = vec4(pos, 1.0);
     uvCoords = aUV;
 }
