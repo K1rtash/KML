@@ -6,23 +6,15 @@
 #include <unordered_map>
 
 #include "KML/Vector.h"
+#include "KML/Graphics.h"
 
 static float LOG_SCREEN_WIDTH = 1080.0f, LOG_SCREEN_HEIGHT = 720.0f, LOG_SCREEN_ASPECT = LOG_SCREEN_WIDTH/LOG_SCREEN_HEIGHT;
 
-namespace __KML::Shader {
-    struct Shader {
-        unsigned int id;
-        std::unordered_map<std::string, unsigned int> uniforms;
-    };
-
-    GLuint compile_src(GLenum type, const char* src, GLuint program);
-    Shader create_program(const char* v_src, const char* f_src);
-    void map_shader_uniforms(Shader* shader);
-    GLuint get_uniform_loc(Shader* shader, std::string name);
-}
-
-namespace __KML::Rect {
-    void draw(glm::mat4& model, KML::Vec4f color, unsigned int tex);
+namespace __KML {
+    KML::Shader* create_program_from_src(std::string v_src, std::string f_src);
+    unsigned int get_program_id(KML::Shader* shader);
+    void draw_rect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader);
+    void draw_rect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader, unsigned int tex);
 }
 
 namespace __KML::Texture {

@@ -2,6 +2,7 @@
 #define KML_SURFACE_H
 
 #include "Vector.h"
+#include "Graphics.h"
 
 #include <string>
 
@@ -19,7 +20,6 @@ namespace KML {
         void SetTexture(std::string texture);
         void SetColor_HSV(int H, int S = 100, int V = 100);
         void SetColor_RGB(int R, int G, int B);
-        void SetTransparency(int alpha);
 
         Surface();
         Surface(Vec2f pos, Vec2f scale); // Solo forma
@@ -30,6 +30,7 @@ namespace KML {
         Surface(std::string texture, float xPos, float yPos, float width, float height, float rotationDeg, float rotationAnchorX, float rotationAnchorY);
     private:
         unsigned int tex = 0;
+        Shader* shader = nullptr;
     };
 }
 

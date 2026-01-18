@@ -5,5 +5,6 @@
 #include "Keycodes.h"
 #include "Graphics.h"
 #include "Surface.h"
+#include "KML/Utils.h"
 
 #endif

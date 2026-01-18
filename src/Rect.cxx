@@ -9,8 +9,8 @@
 #include "KML/Surface.h"
 #include "KML/Layers.h"
 
-__KML::Shader::Shader program;
-__KML::Shader::Shader program_noTex;
+KML::Shader* program;
+KML::Shader* program_noTex;
 
 GLuint VAO, VBO, EBO;
 
@@ -64,8 +64,8 @@ void kml__tempPC() {
         "FragColor = tint;\n"
         "}";
 
-    program = __KML::Shader::create_program(vertex_src, fragment_src);
-    program_noTex = __KML::Shader::create_program(vertex_src, fragment_noTex_src);
+    program = __KML::create_program_from_src(vertex_src, fragment_src);
+    program_noTex = __KML::create_program_from_src(vertex_src, fragment_noTex_src);
     kml__gen_buffers();
 }
 
@@ -90,10 +90,46 @@ void kml__gen_buffers() {
     glBindVertexArray(0);
 }
 
-void __KML::Rect::draw(glm::mat4& model, KML::Vec4f color, unsigned int tex) {
-    __KML::Shader::Shader* activeProgram = (tex > 0) ? &program : &program_noTex;
+void drawVerticesRect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader) {
+    glm::mat4 projection = glm::ortho(0.0f, LOG_SCREEN_WIDTH, 0.0f, LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
+    glUniformMatrix4fv(KML::GetShaderUniformL(shader, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(KML::GetShaderUniformL(shader, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniform4f(KML::GetShaderUniformL(shader, "tint"), color.x, color.y, color.z, color.w);
+    glBindVertexArray(VAO);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glUseProgram(0);
+    glBindVertexArray(0);
+}
 
-    glUseProgram(activeProgram->id);
+void __KML::draw_rect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader, unsigned int tex) {
+    KML::Shader* actP = (shader == nullptr) ? program : shader;
+
+    glUseProgram(__KML::get_program_id(actP));
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glUniform1i(KML::GetShaderUniformL(actP, "uTex"), 0);
+
+    drawVerticesRect(model, color, actP);
+}
+
+void __KML::draw_rect(glm::mat4& model, KML::Vec4f color, KML::Shader* shader) {
+    KML::Shader* actP = (shader == nullptr) ? program_noTex : shader;
+    glUseProgram(__KML::get_program_id(actP));
+    drawVerticesRect(model, color, actP);
+}
+
+/*void __KML::draw_rect(glm::mat4& model, KML::Vec4f color, unsigned int tex, KML::Shader* shader) {
+    KML::Shader* activeProgram = (shader != nullptr) ? shader : program_noTex;
+
+    if(shader == nullptr)
+        program = (tex > 0) ? program : program_noTex;
+    else program = shader;
+
+    if(program == nullptr) throw std::runtime_error("PROGRAM IS NULLLPTR");
+
+    glUseProgram(__KML::get_program_id(program));
     glBindVertexArray(VAO);
     
     glActiveTexture(GL_TEXTURE0);
@@ -101,13 +137,13 @@ void __KML::Rect::draw(glm::mat4& model, KML::Vec4f color, unsigned int tex) {
 
     glm::mat4 projection = glm::ortho(0.0f, LOG_SCREEN_WIDTH, 0.0f, LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
     
-    glUniform1i(get_uniform_loc(activeProgram, "uTex"), 0);
-    glUniformMatrix4fv(get_uniform_loc(activeProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(get_uniform_loc(activeProgram, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
-    glUniform4f(get_uniform_loc(activeProgram, "tint"), color.x, color.y, color.z, color.w);
+    glUniform1i(KML::GetShaderUniformL(program, "uTex"), 0);
+    glUniformMatrix4fv(KML::GetShaderUniformL(program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(KML::GetShaderUniformL(program, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniform4f(KML::GetShaderUniformL(program, "tint"), color.x, color.y, color.z, color.w);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-}
+}*/
 
 std::vector<KML::Layer*>layers;
 

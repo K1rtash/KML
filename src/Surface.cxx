@@ -57,7 +57,8 @@ void Surface::Draw() {
 
     Vec4f finalColor = HSVtoRGBA(color);
     finalColor.w = (float)(100 - Clamp<int>(transparency, 0, 100)) / 100.0f;
-    __KML::Rect::draw(model, finalColor, tex);
+    if(tex > 0) __KML::draw_rect(model, finalColor, shader, tex);
+    else __KML::draw_rect(model, finalColor, shader);
 }
 
 void Surface::SetTexture(std::string texture) {

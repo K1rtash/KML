@@ -1,8 +1,11 @@
 #include "KML/Utils.h"
 
 #include <algorithm>
+#include <iostream>
+#include <fstream>
 
 using namespace KML;
+using fs = std::fstream;
 
 Vec4f KML::HSVtoRGBA(const Vec3f& __v) {
     float H = Clamp<float>(__v.x, 0.0f, 360.0f) / 360.0f;
@@ -56,4 +59,17 @@ Vec3f KML::RGBAtoHSV(const Vec4f& c) {
     }
 
     return Vec3f{H, S * 100.0f, V * 100.0f}; // HSV humano
+}
+
+std::string KML::ReadFile(const char* path) {
+    std::ifstream file(path);
+    if(file.is_open()) {
+        std::string str;
+        std::string out;
+        while(std::getline(file, str)) {
+            out += str + '\n';
+        }
+        return out;
+    }
+    return {0};
 }

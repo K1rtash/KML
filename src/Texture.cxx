@@ -13,6 +13,12 @@ bool KML::LoadTexture(const char* file) {
     return (id > 0) ? true : false;
 }
 
+void KML::UnloadTexture(const char* file) {
+    GLuint id = __KML::Texture::get(file);
+    glDeleteTextures(1, &id);
+    textures.erase(file);
+}
+
 unsigned int __KML::Texture::load(const char* file) {
     stbi_set_flip_vertically_on_load(true);
 

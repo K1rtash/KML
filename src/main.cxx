@@ -1,6 +1,6 @@
 #include "KML/kml.h"
-#include "KML/Utils.h"
 #include "KML/Layers.h"
+
 #include <iostream>
 
 bool keyDown(int k) {
@@ -21,11 +21,8 @@ int main(void) {
     srf2.transparency = 30;
     surface.transparency = 50;
 
-    KML::Layer layer0;
-    layer0.Add(srf);
-    layer0.Add(srf2);
-    KML::Layer layer1;
-    layer1.Add(surface);
+    //KML::Shader* shader = KML::CreateShader("vert.glsl", "frag.glsl"); 
+    //std::cout << std::format("Shader uniform id for model: {}\n", KML::GetShaderUniformL(shader, "model"));
     
     while(KML::ProcessEvents()) {
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
@@ -61,10 +58,14 @@ int main(void) {
             KML::SetMouseCaptured(true);
 
             srf.pos = srf2.pos;
-        KML::DrawLayers();
+        srf.Draw();
+        srf2.Draw();
+        surface.Draw();
         KML::PresentFrame(0.2f, 0.3f, 0.3f, 1.0f);
     }
 
+    //KML::DeleteShader(shader);
+    KML::UnloadTexture("images.png");
     KML::Terminate();
     return 0;
 }

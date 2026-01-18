@@ -3,6 +3,8 @@
 
 #include "Vector.h"
 
+#include <string>
+
 namespace KML 
 {
     template<typename T>
@@ -80,5 +82,7 @@ namespace KML
      * @returns HSV @ref Vec3f
      */
     Vec3f RGBAtoHSV(const Vec4f& c);
+
+    std::string ReadFile(const char* path);
 }
 #endif
