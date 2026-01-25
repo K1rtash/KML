@@ -1,6 +1,6 @@
 #include "KML/Time.h"
 #define KSL_CLOCK_IMPLEMENTATION
-#include "ksl/ksl_clock.h"
+#include "KSL/ksl_clock.h"
 
 using namespace KML;
 

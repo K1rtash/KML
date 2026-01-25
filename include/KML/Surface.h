@@ -1,6 +1,11 @@
 #ifndef KML_SURFACE_H
 #define KML_SURFACE_H
 
+/**
+ * @file    Surface.h
+ * @brief   Abstracts GL rendering as a @ref Shape, a @ref Texture, and a @ref Shader 
+ */
+
 #include "Vector.h"
 #include "Graphics.h"
 #include "Shape.h"

@@ -29,9 +29,14 @@ KML::Shape::Shape(float* vertices, size_t vs, unsigned int* indices, size_t is) 
     assert(vao != 0);
 }
 
-KML::Shape::~Shape() {
+void KML::Shape::Delete() {
     if(vao) glDeleteVertexArrays(1, &vao);
 }
+
+KML::Shape::~Shape() {
+    if(__KML::contextActive) Delete();
+}
+
 
 void KML::Shape::Use() {
     glBindVertexArray(vao);

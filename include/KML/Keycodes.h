@@ -1,6 +1,11 @@
 #ifndef KML_KEY_DEFINITIONS
 #define KML_KEY_DEFINITIONS
 
+/**
+ * @file        Keycodes.h
+ * @brief       Keys and mouse buttons 
+ */ 
+
 #define KML_MOUSE_BUTTON_1 0
 #define KML_MOUSE_BUTTON_2 1
 #define KML_MOUSE_BUTTON_3 2

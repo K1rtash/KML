@@ -1,48 +1,65 @@
 {
   "version": 3,
-  "configurePresets": [
+  "configurePresets": 
+  [
     {
-        "name": "base",
-        "hidden": true,
+        "name": "linux",
+        "hidden": false,
+        "generator": "Unix Makefiles",
+        "inherits": ["debug"],
+        "cacheVariables": 
+        {
+            "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+            "CMAKE_C_COMPILER": "/usr/bin/gcc"
+        }
+    },
+    {
+
+        "name": "windows",
+        "hidden": false,
         "generator": "Ninja",
-        "binaryDir": "build",
-        "cacheVariables": {
-            "CMAKE_CXX_COMPILER": "C:/DEV/mingw64/bin/g++.exe"
+        "inherits": ["debug"],
+        "cacheVariables": 
+        {
+            "CMAKE_CXX_COMPILER": "C:/DEV/mingw/bin/g++",
+            "CMAKE_C_COMPILER": "C:/DEV/mingw/bin/gcc"
         }
     },
 
     {
         "name": "release",
         "displayName": "Release",
-        "hidden": true,
+        "hidden": false,
+        "binaryDir": "build",
         "description": "Para versiones finales, trata warnings como errores y optimiza",
-        "inherits": ["base"],
-        "binaryDir": "build/release",
-        "cacheVariables": {
+        "cacheVariables": 
+        {
             "CMAKE_BUILD_TYPE": "Release",
-            "CMAKE_CXX_FLAGS": "-O3",
-            "KML_COPY_ASSETS": true
+            "CMAKE_CXX_FLAGS": "-03, -Wfatal-errors, -Wall"
         }
     },
 
     {
         "name": "debug",
         "displayName": "Debug",
-        "hidden": true,
+        "hidden": false,
+        "binaryDir": "build",
         "description": "Debug optimizado con todos los warnings",
-        "inherits": ["base"],
-        "cacheVariables": {
+        "cacheVariables": 
+        {
             "CMAKE_BUILD_TYPE": "Debug",
             "CMAKE_CXX_FLAGS": "-Wall -g -Wextra -Wfatal-errors -Wshadow -pedantic -Wconversion -Wsign-conversion -O2 -fmax-errors=1 -g -O0"
         }
     }
   ],
 
-  "buildPresets": [
+  "buildPresets": 
+  [
     {
         "name": "release",
         "configurePreset": "release"
     },
+
     {
         "name": "debug",
         "configurePreset": "debug"

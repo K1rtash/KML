@@ -1,6 +1,11 @@
 #ifndef KML_UTILS_H
 #define KML_UTILS_H
 
+/**
+ * @file        Utils.h
+ * @brief       Abstracts usefull methods
+ */
+
 #include "Vector.h"
 
 #include <string>
@@ -92,7 +97,12 @@ namespace KML
     std::string ReadFile(std::filesystem::path path);
 
     /**
-     * @brief Generates a random number
+     * @brief      Generates a random float
+     *
+     * @param[in]  min   Min value
+     * @param[in]  max   Max value
+     *
+     * @return     Random float
      */
     float RandFloat(float min, float max);
 }

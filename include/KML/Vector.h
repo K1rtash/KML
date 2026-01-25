@@ -1,6 +1,11 @@
 #ifndef KML_VECTOR_H
 #define KML_VECTOR_H
 
+/**
+ * @file        Vector.h
+ * @brief       Basic linear algebra abstractions 
+ */
+
 namespace KML {
     struct Vec2f {
             float x, y;

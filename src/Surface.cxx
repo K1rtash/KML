@@ -1,6 +1,4 @@
 #include <string>
-#include <iostream>
-#include <format>
 #include <cassert>
 
 #include <glm/gtc/type_ptr.hpp>

@@ -1,4 +1,5 @@
 #include <glad/glad.h>
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
 #include "KML/Graphics.h"
@@ -7,7 +8,7 @@
 std::unordered_map<std::string, unsigned int>textures;
 
 KML::Texture KML::LoadTexture(const char* file) {
-    if(textures.find(file) != textures.end()) return true;
+    if(textures.find(file) != textures.end()) return __KML::Texture::get(file);
     unsigned int id = __KML::Texture::load(file);
     assert(id != 0);
     textures.insert({file, id});

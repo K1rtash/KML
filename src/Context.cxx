@@ -1,11 +1,13 @@
 #define GLFW_INCLUDE_NONE
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <fmt/core.h>
+#include <stb/stb_image.h>
 
 #include <iostream>
-#include <format>
+#include <cassert>
 
-#include "KML/Contex.h"
+#include "KML/Context.h"
 #include "KML/Keycodes.h"
 
 #include "__KML/graphics.h"
@@ -19,6 +21,7 @@ void cursor_callback(GLFWwindow*, double, double);
 void window_focus_callback(GLFWwindow*, int);
 void key_callback(GLFWwindow*, int, int, int, int);
 void mouse_button_callback(GLFWwindow*, int, int, int);
+void iconify_callback(GLFWwindow* window, int iconified);
 
 /* ---------- Declaraciones propias ---------- */
 
@@ -44,6 +47,7 @@ struct Input {
 
 namespace __KML {
     float LOG_SCREEN_WIDTH = 1080.0f, LOG_SCREEN_HEIGHT = 720.0f, LOG_SCREEN_ASPECT = LOG_SCREEN_WIDTH / LOG_SCREEN_HEIGHT;
+    int contextActive = 0;
 }
 
 /* ---------- Definiciones ---------- */
@@ -65,7 +69,7 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, glCtxMajor);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, glCtxMinor);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_REFRESH_RATE, video->refreshRate);
+    if(flags & KML::ENABLE_VSYNC) glfwWindowHint(GLFW_REFRESH_RATE, video->refreshRate);
     #ifdef __APPLE__
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
@@ -118,9 +122,10 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
     glfwSetWindowFocusCallback(window.handle, window_focus_callback);
     glfwSetKeyCallback(window.handle, key_callback);
     glfwSetMouseButtonCallback(window.handle, mouse_button_callback);
+    glfwSetWindowIconifyCallback(window.handle, iconify_callback);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) return false;
-    glfwSwapInterval(flags & KML::ENABLE_VSYNC);
+    if(flags & KML::ENABLE_VSYNC) glfwSwapInterval(1);
 
     setLogicalPresentation(window.width, window.height);
     printGLInfo(false);
@@ -136,17 +141,39 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     __KML::GenerateDefaultMembers();
+    __KML::InitAudioDevice();
 
+    __KML::contextActive = 1;
     return window.handle;
 }
 
 void KML::Terminate() {
+    if(!__KML::contextActive) return;
     glfwDestroyWindow(window.handle);
     glfwTerminate();
+    __KML::CloseAudioDevice();
+    __KML::contextActive = 0;
 }
 
-void KML::Close() {
-    glfwSetWindowShouldClose(window.handle, true);
+void KML::Event(WindowEvent event, int value) {
+    switch(event) {
+    case WindowEvent::EXIT: 
+        glfwSetWindowShouldClose(window.handle, value);
+        break;
+    case WindowEvent::ICONIFY:
+        if(value) glfwIconifyWindow(window.handle);        
+        else glfwRestoreWindow(window.handle);
+        break;
+    case WindowEvent::MOUSE_CAPTURED:
+        if(value) glfwSetInputMode(window.handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        else glfwSetInputMode(window.handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        input.mouseCaptured = value;
+        break;
+    case WindowEvent::HIDE:
+        if(value) glfwHideWindow(window.handle);        
+        else glfwShowWindow(window.handle);
+        break;
+    }
 }
 
 bool KML::ProcessEvents() {
@@ -179,7 +206,7 @@ void setLogicalPresentation(int width, int height) {
 }
 
 void error_callback(int error, const char* description) {
-    std::cout << std::format("[GLFW] Error: ({}) -> {}\n", error, description);
+    fmt::print("GLFW error: {} -> {}\n", error, description);
 }
 
 void resize_callback(GLFWwindow* handle, int width, int height) {
@@ -238,13 +265,25 @@ void mouse_button_callback(GLFWwindow* handle, int button, int action, int mods)
     input.rawButtons[button] = action;
 }
 
+void iconify_callback(GLFWwindow* window, int iconified)
+{
+    if (iconified)
+    {
+        std::cout << "[DEBUG] Window iconified!\n";
+    }
+    else
+    {
+        std::cout << "[DEBUG] Window NOT iconified!\n";
+    }
+}
+
 KML::KeyState KML::GetKey(int key) {
-    if(key < GLFW_KEY_SPACE || key > GLFW_KEY_LAST) throw std::invalid_argument("in KML::KeyState KML::GetKey(int key) -> value out of bounds");
+    assert(key >= GLFW_KEY_SPACE && key <= GLFW_KEY_LAST);
     return input.buttons[key];
 }
 
 KML::KeyState KML::GetMouseButton(int button) {
-    if(button < 0 || button > GLFW_MOUSE_BUTTON_LAST) throw std::invalid_argument("in KML::KeyState KML::GetMouseButton(int button) -> value out of bounds");
+    assert(button >= 0 && button <= GLFW_MOUSE_BUTTON_LAST);
     return input.buttons[button];
 }
 
@@ -265,19 +304,13 @@ void updateKeyboard() {
         input.buttons[i] = setButtonState(i, input.rawButtons[i]);
 }
 
-void KML::SetMouseCaptured(bool captured) {
-    if(captured) glfwSetInputMode(window.handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    else glfwSetInputMode(window.handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    input.mouseCaptured = captured;
-}
-
 bool KML::GetMouseCaptureState() {
     return input.mouseCaptured;
 }
 
-void KML::PresentFrame(float r, float g, float b, float a) {
+void KML::PresentFrame(float r, float g, float b) {
     glfwSwapBuffers(window.handle);
-    glClearColor(r, g, b, a);
+    glClearColor(r, g, b, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
@@ -311,7 +344,22 @@ void setGLcontext(int& major, int& minor, bool useLatestCtx) {
 }
 
 void KML::PrintContext() {
-    std::cout << std::format("Screen aspect: {}x{}\nLogical aspect: {}x{}\n", window.width, window.height, __KML::LOG_SCREEN_WIDTH, __KML::LOG_SCREEN_HEIGHT);
+    fmt::print("Screen aspect: {}x{}\nLogical aspect: {}x{}\n", window.width, window.height, __KML::LOG_SCREEN_WIDTH, __KML::LOG_SCREEN_HEIGHT);
+}
+
+void KML::SetWindowTitle(const char* t) {
+    assert(t);
+    glfwSetWindowTitle(window.handle, t);
+}
+
+void KML::SetWindowIcon(const char* file) {
+    GLFWimage img;
+    int cc;
+    img.pixels = stbi_load(file, &img.width, &img.height, &cc, 0);
+
+    const GLFWimage* iptr = &img;
+    assert(iptr->pixels);
+    glfwSetWindowIcon(window.handle, 1, iptr);    
 }
 
 void printGLInfo(bool showExt) /// Se debe llamar siempre despues de crear el contexto OpenGL makeContextCurrent

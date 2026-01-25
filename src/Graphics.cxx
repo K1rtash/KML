@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
+#include <fmt/core.h>
 
 #include <iostream>
 #include <cassert>
@@ -55,7 +56,7 @@ int KML::GetShaderUniformL(Shader* shader, const char* uniform) {
     auto i = shader->uniforms.find(uniform);
     if(i == shader->uniforms.end()) {
         shader->uniforms[uniform] = -1;
-        std::cout << std::format("[WARNING] Accesed unmaped uniform on shader id {}: {}\n", shader->id, uniform);
+        fmt::print("[WARNING] Accesed unmaped uniform on shader id {}: {}\n", shader->id, uniform);
         return -1;
     }
     return i->second;  
@@ -78,18 +79,6 @@ void KML::DeleteShader(Shader*& shader) {
     shader = nullptr;
 }
 
-/*KML::Shader* __KML::create_program_from_src(std::string v_src, std::string f_src) {
-    KML::Shader* program = new KML::Shader;
-    program->id = create_shader_program(v_src, f_src);
-    std::cout << "created program id: " << program->id << std::endl;
-    if(program->id == 0) {
-        delete program;
-        return nullptr;
-    }
-    map_shader_uniforms(program);
-    return program;
-}*/
-
 void KML::SetUniform_1f(const char* u, Shader* s, float v0) {
     int loc = GetShaderUniformL(s, u);
     if (loc >= 0) { 
@@ -102,7 +91,6 @@ void KML::SetUniform_1i(const char* u, Shader* s, int v0) {
     if (loc >= 0) {
         glUseProgram(s->id);
         glUniform1i(loc, v0);
-        std::cout << "uniform: " << u << " int: " << v0 << std::endl;
     }
 }
 void KML::SetUniform_2f(const char* u, Shader* s, float v0, float v1) {
