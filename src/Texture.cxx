@@ -21,13 +21,8 @@ void KML::UnloadTexture(const char* file) {
     textures.erase(file);
 }
 
-unsigned int __KML::Texture::load(const char* file) {
-    stbi_set_flip_vertically_on_load(true);
-
-    int w, h, cc;
-    unsigned char* bytes = stbi_load(file, &w, &h, &cc, 0);
-    assert(bytes);
-    if (!bytes) return 0;
+unsigned int __KML::Texture::loadTexToGL(unsigned char* bytes, int w, int h, int cc) {
+    assert(bytes && w && h && cc);
 
     GLuint id = 0;
     glGenTextures(1, &id);
@@ -51,9 +46,19 @@ unsigned int __KML::Texture::load(const char* file) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, format, GL_UNSIGNED_BYTE, bytes);
     glGenerateMipmap(GL_TEXTURE_2D);
 
-    stbi_image_free(bytes);
     glBindTexture(GL_TEXTURE_2D, 0);
 
+    return id;
+}
+
+unsigned int __KML::Texture::load(const char* file) {
+    int w, h, cc;
+    stbi_set_flip_vertically_on_load(true);
+    unsigned char* bytes = stbi_load(file, &w, &h, &cc, 0);
+    
+    GLuint id = loadTexToGL(bytes, w, h, cc);
+
+    stbi_image_free(bytes);
     return id;
 }
 

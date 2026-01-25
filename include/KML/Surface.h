@@ -48,7 +48,7 @@ namespace KML {
         Surface(std::string texture, Vec4f transform);
         Surface(std::string texture, Vec4f transform, Vec2f anchor);
         Surface(std::string texture, Vec4f transform, Vec2f anchor, float rotation);
-      protected:
+      //protected:
         unsigned int tex = 0;
     };
 }

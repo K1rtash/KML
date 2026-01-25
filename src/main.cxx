@@ -45,6 +45,8 @@ int main(void) {
     KML::LoadSound("assets/voice.wav", false, false);
     KML::LoadSound("assets/test.wav", true, false);
 
+    KML::LoadFont("assets/arial.ttf");
+
     KML::Surface background(KML::Vec4f{0.0f, 0.0f, 800.0f, 600.0f});
     background.SetColor_RGB(118, 144, 166);
 
@@ -78,6 +80,8 @@ int main(void) {
 
     KML::SoundPool soundP;
     KML::PlayMusic("assets/voice.wav");
+
+    surface.tex = KML::GetBitmap("assets/arial.ttf", "Hola, KML!");
 
     clock.Tick();
     while(KML::ProcessEvents()) {

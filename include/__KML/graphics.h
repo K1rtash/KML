@@ -3,7 +3,10 @@
 
 #include <glm/glm.hpp>
 #include <glad/glad.h>
+
 #include <unordered_map>
+#include <vector>
+#include <string>
 
 #include "KML/Vector.h"
 #include "KML/Graphics.h"
@@ -17,9 +20,11 @@ namespace __KML {
     void InitAudioDevice();
     void CloseAudioDevice();
     extern int contextActive;
+    std::vector<unsigned char> getTTF(std::string name);
 }
 
 namespace __KML::Texture {
+    unsigned int loadTexToGL(unsigned char* bytes, int w, int h, int cc);
     unsigned int load(const char* file);
     unsigned int get(std::string name);
 }
