@@ -71,7 +71,8 @@ void KML::PlayMusic(const char* file, float volume, float pitch) {
     ma_sound* s = getSound(file);
     if(!s) return;
     ma_sound_start(s);
-    ma_sound_set_pitch(s, g_pitch_mod);
+    ma_sound_set_pitch(s, KML::Clamp<float>(g_pitch_mod * pitch, 0.0f, 2.0f));
+    ma_sound_set_volume(s, KML::Clamp<float>(volume, 0.0f, 1.0f));
 }
 
 void KML::StopMusic(const char* file) {
@@ -101,7 +102,7 @@ struct KML::Sound::IMP {
     ma_sound instance;
 };
 
-KML::Sound::Sound(const char* file) {
+KML::Sound::Sound(const char* file, float v, float p) : volume{v}, pitch{p} {
     imp = new IMP{};
     ma_sound_init_copy(&engine, getSound(file), 0, nullptr, &imp->instance);
 }
