@@ -73,8 +73,11 @@ int main(void) {
 
     double accum = 0;
     int fps = 0;
-    KML::PlaySound("assets/test.wav");
-    KML::PlaySound("assets/test_clean.ogg");
+    float sound_p = 1.0f;
+    float sound_v = 1.0f;
+
+    KML::SoundPool soundP;
+    KML::PlayMusic("assets/test_clean.ogg");
 
     clock.Tick();
     while(KML::ProcessEvents()) {
@@ -124,12 +127,35 @@ int main(void) {
         }
 
         if(KML::GetKey(KML_KEY_SPACE) == KML::KeyState::PRESS) {
-            KML::StopAllSounds();
+            soundP.Stop();
         }
 
+        if(keyDown(KML_KEY_6)) {
+            sound_v -= 0.05;
+            KML::SetGlobalVolume(sound_v);
+        }
+
+        if(keyDown(KML_KEY_7)) {
+            sound_v += 0.05;
+            KML::SetGlobalVolume(sound_v);
+        }
+
+        if(keyDown(KML_KEY_8)) {
+            sound_p -= 0.1;
+            KML::SetGlobalPitch(sound_p);
+        }
+
+        if(keyDown(KML_KEY_9)) {
+            sound_p += 0.1;
+            KML::SetGlobalPitch(sound_p);
+        }
 
         if(KML::GetKey(KML_KEY_0) == KML::KeyState::PRESS) {
-            KML::PlaySound("assets/voice.wav");
+            soundP.Add(KML::Sound{"assets/voice.wav"});
+        }
+
+        if(KML::GetKey(KML_KEY_1) == KML::KeyState::PRESS) {
+            soundP.Add(KML::Sound{"assets/test.wav"});
         }
 
         if(KML::GetMouseButton(KML_MOUSE_BUTTON_LEFT) == KML::KeyState::PRESS) 
@@ -141,6 +167,8 @@ int main(void) {
 
         background.Draw();
         KML::DrawLayers();
+        soundP.Play();
+        soundP.Update();
 
         KML::PresentFrame();
 
