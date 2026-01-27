@@ -1,6 +1,5 @@
 #define STB_TRUETYPE_IMPLEMENTATION
 #include <stb/stb_truetype.h>
-#include <stb/stb_image.h>
 
 #include <vector>
 #include <unordered_map>
@@ -10,159 +9,154 @@
 #include <iostream>
 #include <cassert>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <fmt/core.h>
+
 #include "__KML/graphics.h"
 #include "KML/TTF.h"
 
-std::unordered_map<std::string, std::vector<unsigned char>> fonts;
+std::unordered_map<std::string, unsigned char*> fonts;
 
 struct FontBitmap {
-    unsigned char* pixels = nullptr; // apunta al buffer generado
-    int width = 0;
-    int height = 0;
-    int channels = 0;
+    unsigned char* data; // apunta al buffer generado
+    int width;
+    int height;
+    int channels;
 };
 
-// Devuelve un FontBitmap con los datos del texto renderizado
-FontBitmap RenderTextFromTTF(const unsigned char* ttf_data, size_t ttf_size,
-                             const std::string& text, float pixel_height,
-                             int channels = 1)
-{
-    FontBitmap result;
+// Generate a texture from a string using a TTF buffer
+// font_buffer: pointer to loaded TTF data
+// font_size: desired font size in pixels
+// text: the string to render
+// channels: 1 (grayscale) or 4 (RGBA)
+FontBitmap generateTextTexture(const unsigned char* font_buffer, float font_size, const char* text, int channels) {
+    FontBitmap tex = {0};
 
     stbtt_fontinfo font;
-    if (!stbtt_InitFont(&font, ttf_data, 0)) {
-        std::cerr << "[DEBUG] Failed to init font\n";
-        return result;
+    if (!stbtt_InitFont(&font, font_buffer, 0)) {
+        fprintf(stderr, "Failed to initialize font!\n");
+        return tex;
     }
 
-    // Obtenemos métricas de altura
+    float scale = stbtt_ScaleForPixelHeight(&font, font_size);
+
     int ascent, descent, lineGap;
     stbtt_GetFontVMetrics(&font, &ascent, &descent, &lineGap);
-    float scale = stbtt_ScaleForPixelHeight(&font, pixel_height);
+    int baseline = (int)(ascent * scale);
 
-
-    // altura real del bitmap
-    int height_top = int(ascent * scale);
-    int height_bottom = int(-descent * scale);
-    int bitmap_height = height_top + height_bottom;
-    int baseline = height_top;
-
-    // Calculamos el ancho total necesario
-    int pen_x = 0;
-    int c_prev = 0;
-    int bitmap_width = 0;
-
-    for (char c : text) {
+    // First pass: compute total width
+    int width = 0;
+    for (int i = 0; i < strlen(text); i++) {
         int advance, lsb;
-        stbtt_GetCodepointHMetrics(&font, c, &advance, &lsb);
-        if (c_prev) pen_x += stbtt_GetCodepointKernAdvance(&font, c_prev, c) * scale;
-        c_prev = c;
+        stbtt_GetCodepointHMetrics(&font, text[i], &advance, &lsb);
+        width += (int)(advance * scale);
 
-        int x0, y0, x1, y1;
-        stbtt_GetCodepointBitmapBox(&font, c, scale, scale, &x0, &y0, &x1, &y1);
-
-        int w = x1 - x0;
-        int h = y1 - y0;
-
-        std::vector<unsigned char> glyph(w * h);
-        stbtt_MakeCodepointBitmap(&font, glyph.data(), w, h, w, scale, scale, c);
-
-        // ahora pegamos el glifo
-        int dst_y = baseline - y1; // baseline - top of glyph
+        // kerning
+        if (i < strlen(text) - 1) {
+            width += (int)(stbtt_GetCodepointKernAdvance(&font, text[i], text[i+1]) * scale);
+        }
     }
 
-    // Guardamos dimensiones
-    result.width = bitmap_width;
-    result.height = bitmap_height;
-    result.channels = channels;
+    int height = baseline - (int)(descent * scale);
+    tex.width = width;
+    tex.height = height;
+    tex.channels = channels;
+    tex.data = (unsigned char*)calloc(width * height * channels, 1);
+    if (!tex.data) {
+        fprintf(stderr, "Failed to allocate texture memory!\n");
+        return tex;
+    }
 
-    result.pixels = new unsigned char[bitmap_width * bitmap_height * channels];
-    std::memset(result.pixels, 0, bitmap_width * bitmap_height * channels);
+    // Second pass: render each character
+    int cursor_x = 0;
+    for (int i = 0; i < strlen(text); i++) {
+        int glyph_w, glyph_h, xoff, yoff;
+        unsigned char* glyph_bitmap = stbtt_GetCodepointBitmap(&font, 0, scale, text[i], &glyph_w, &glyph_h, &xoff, &yoff);
 
-    // Ahora dibujamos los caracteres
-    pen_x = 0;
-    c_prev = 0;
-    for (char c : text) {
-        int advance, lsb;
-        stbtt_GetCodepointHMetrics(&font, c, &advance, &lsb);
-        if (c_prev) pen_x += stbtt_GetCodepointKernAdvance(&font, c_prev, c) * scale;
-        c_prev = c;
+        for (int y = 0; y < glyph_h; y++) {
+            for (int x = 0; x < glyph_w; x++) {
+                int dst_x = cursor_x + x + xoff;
+                int dst_y = tex.height - (baseline + yoff + y) - 1; // align baseline
 
-        int x0, y0, x1, y1;
-        stbtt_GetCodepointBitmapBox(&font, c, scale, scale, &x0, &y0, &x1, &y1);
+                if (dst_x < 0 || dst_x >= width || dst_y < 0 || dst_y >= height) continue;
 
-        int w = x1 - x0;
-        int h = y1 - y0;
-        if (w <= 0 || h <= 0) continue;
-
-        std::vector<unsigned char> glyph(w * h);
-        stbtt_MakeCodepointBitmap(&font, glyph.data(), w, h, w, scale, scale, c);
-
-        for (int gy = 0; gy < h; ++gy) {
-            for (int gx = 0; gx < w; ++gx) {
-                int src = gx + gy * w;
-                int dst_x = pen_x + gx + x0;
-                int dst_y = bitmap_height - (baseline + gy + y0); // flip vertical
-                int dst = (dst_x + dst_y * bitmap_width) * channels;
-
-                if (dst + channels > bitmap_width * bitmap_height * channels) continue;
-
-                if (channels == 1) result.pixels[dst] = glyph[src];
-                else if (channels == 4) {
-                    result.pixels[dst + 0] = 255;
-                    result.pixels[dst + 1] = 255;
-                    result.pixels[dst + 2] = 255;
-                    result.pixels[dst + 3] = glyph[src];
+                unsigned char pixel = glyph_bitmap[y * glyph_w + x];
+                if (channels == 1) {
+                    tex.data[dst_y * width + dst_x] = pixel;
+                } else if (channels == 4) {
+                    int idx = (dst_y * width + dst_x) * 4;
+                    tex.data[idx + 0] = 255;    // R
+                    tex.data[idx + 1] = 255;    // G
+                    tex.data[idx + 2] = 255;    // B
+                    tex.data[idx + 3] = pixel;  // A
                 }
             }
         }
 
-        pen_x += int(advance * scale);
+        int advance, lsb;
+        stbtt_GetCodepointHMetrics(&font, text[i], &advance, &lsb);
+        cursor_x += (int)(advance * scale);
+        if (i < strlen(text) - 1) {
+            cursor_x += (int)(stbtt_GetCodepointKernAdvance(&font, text[i], text[i+1]) * scale);
+        }
+
+        stbtt_FreeBitmap(glyph_bitmap, NULL);
     }
 
-    return result;
+    return tex;
 }
+
+// Example usage:
+// 1. Load TTF into memory
+// 2. Call generateTextTexture()
+// 3. Use tex.data with width, height, channels
+
 
 
 // obtener los bytes de la TTF cargada
-std::vector<unsigned char> __KML::getTTF(std::string name) {
-    if (fonts.find(name) == fonts.end()) return std::vector<unsigned char>();
+unsigned char* __KML::getTTF(std::string name) {
+    if (fonts.find(name) == fonts.end()) return NULL;
     return fonts.at(name);
 }
 
 // crea textura OpenGL a partir de un texto
 unsigned int KML::GetBitmap(const char* file, const char* text) { 
-    std::vector<unsigned char> buffer = __KML::getTTF(file);
-    if (buffer.empty()) {
-        std::cerr << "[DEBUG] Set text: no entry: " << file << "\n";
+    unsigned char* buffer = __KML::getTTF(file);
+
+    if (!buffer) {
+        fmt::print("[DEBUG] Set text: no entry: {}\n", file);
         return 0;
     }
 
-    std::string txt = text;
-    FontBitmap bmp = RenderTextFromTTF(buffer.data(), buffer.size(), txt, 48.0f, 4);
+    FontBitmap bmp = generateTextTexture(buffer, 48.0f, text, 4);
 
-    // bmp.pixels ahora contiene los bytes del bitmap RGBA
-    stbi_set_flip_vertically_on_load(true);
-    unsigned int texid = __KML::Texture::loadTexToGL(bmp.pixels, bmp.width, bmp.height, bmp.channels);
-
-    delete[] bmp.pixels;
+    unsigned int texid = __KML::Texture::loadTexToGL(bmp.data, bmp.width, bmp.height, bmp.channels);
+    free(bmp.data);
     return texid;
 }
 
 // carga el TTF en memoria
 void KML::LoadFont(const char* __f) {
-    std::ifstream file(__f, std::ios::binary | std::ios::ate);
-    size_t size = file.tellg();
-    std::vector<unsigned char> buffer(size);
-    file.seekg(0);
-    file.read((char*)buffer.data(), size);
-    file.close();
-
     if (fonts.find(__f) != fonts.end()) return;
-    fonts[__f] = buffer;
+
+    FILE* file = fopen(__f, "rb");
+    fseek(file, 0, SEEK_END);
+    size_t size = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    unsigned char* font_buffer = (unsigned char*)malloc(size);
+    fread(font_buffer, 1, size, file);
+    fclose(file);
+
+    fonts[__f] = font_buffer;
 }
 
 // elimina font cargada
 void KML::UnloadFont(const char* __f) {
+    if (fonts.find(__f) == fonts.end()) return;
+
+    free(fonts[__f]);
     fonts.erase(__f);
 }

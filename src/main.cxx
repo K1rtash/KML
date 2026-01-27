@@ -16,6 +16,7 @@ bool keyDown(int k) {
 }
 
 int main(void) {
+    std::cout << "cwd: " << std::filesystem::current_path() << "\n";
     KML::Clock clock;
     KML::Stopwatch stopwatch(clock);
     double time_start = clock.Now();
@@ -82,6 +83,7 @@ int main(void) {
     KML::PlayMusic("assets/voice.wav");
 
     surface.tex = KML::GetBitmap("assets/arial.ttf", "Hola, KML!");
+    fmt::println("TEXTURE DE TTF: {}", surface.tex);
 
     clock.Tick();
     while(KML::ProcessEvents()) {

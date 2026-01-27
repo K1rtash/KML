@@ -20,7 +20,7 @@ namespace __KML {
     void InitAudioDevice();
     void CloseAudioDevice();
     extern int contextActive;
-    std::vector<unsigned char> getTTF(std::string name);
+    unsigned char* getTTF(std::string name);
 }
 
 namespace __KML::Texture {

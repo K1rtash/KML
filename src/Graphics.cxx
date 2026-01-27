@@ -187,6 +187,8 @@ void map_shader_uniforms(KML::Shader* shader) {
         GLint location = glGetUniformLocation(shader->id, name);
 
         shader->uniforms[std::string(name)] = location;
-        std::cout << "mapped: " << name << " loc: " << location  << "id: " << shader->id << std::endl; 
+        #ifdef KML_PRINT_SHADER_MAPPINGS 
+            std::cout << "mapped: " << name << " loc: " << location  << "id: " << shader->id << std::endl; 
+        #endif
     }
 }
