@@ -13,6 +13,7 @@ endif()
 
 option(KML_COPY_ASSETS "Copia la carpeta assets dentro de build" OFF)
 option(KML_BUILD_SHARED "Build KML as shared library" OFF)
+option(KML_STATIC_RUNTIME "Static runtime for KML" OFF)
 
 # GLFW
 set(GLFW_BUILD_EXAMPLES "OFF")
@@ -47,26 +48,22 @@ find_package(OpenGL REQUIRED)
 # --- Archivos fuente ---
 file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cxx)
 
-add_executable(${PROJECT_NAME}
+add_library(${PROJECT_NAME}
     ${SRC_FILES}
     ${CMAKE_SOURCE_DIR}/ext/glad/glad.c
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC
-    ${PROJECT_SOURCE_DIR}/include
-)
+add_library(KML::KML ALIAS KML)
 
-# --- Include directories ---
-target_include_directories(${PROJECT_NAME} PRIVATE    
-    ${CMAKE_SOURCE_DIR}/ext
-    ${glfw_SOURCE_DIR}/include
-    ${fmt_SOURCE_DIR}/include
-    ${glm_SOURCE_DIR}
-)
-
-target_link_options(${PROJECT_NAME} PRIVATE
-    -static-libstdc++
-    -static-libgcc
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+    PRIVATE
+        ${PROJECT_SOURCE_DIR}/ext
+        ${glfw_SOURCE_DIR}/include
+        ${fmt_SOURCE_DIR}/include
+        ${glm_SOURCE_DIR}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -77,10 +74,17 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 # --- Copiar assets ---
 if(KML_COPY_ASSETS)
-    add_custom_command(
-        TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-                ${CMAKE_SOURCE_DIR}/assets
-                $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
+add_custom_command(
+    TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/assets
+            $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
+)
+endif()
+
+if(KML_STATIC_RUNTIME)
+target_link_options(${PROJECT_NAME} PRIVATE
+    -static-libstdc++
+    -static-libgcc
 )
 endif()

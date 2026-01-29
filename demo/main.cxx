@@ -1,13 +1,10 @@
 #include "KML/kml.h"
-#include "KML/Layers.h"
-#include "KML/SFX.h"
 
 #include <iostream>
 #include <string>
 
 #include <fmt/core.h>
 #include <fmt/format.h>
-#include <miniaudio/miniaudio.h>
 
 
 bool keyDown(int k) {
