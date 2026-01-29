@@ -15,15 +15,16 @@ include(FetchContent)
 #                       OPTS
 # ---------------------      ---------------------
 option(KML_SHARED_LIBS "Build KML as shared library" OFF)
+option(KML_BUILD_DEMO "Build a demo" OFF)
 
+if(KML_SHARED_LIBS)
+    set(BUILD_SHARED_LIBS ON)
+endif()
 # ---------------------      ---------------------
 #                       DEPS
 # ---------------------      ---------------------
 
 # --------------------- GLFW ---------------------
-set(GLFW_BUILD_EXAMPLES "OFF")
-set(GLFW_BUILD_TESTS "OFF")
-set(GLFW_BUILD_DOCS "OFF")
 FetchContent_Declare(
     glfw
     GIT_REPOSITORY https://github.com/glfw/glfw.git
@@ -56,10 +57,6 @@ find_package(OpenGL REQUIRED)
 # ---------------------      --------------------
 file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx)
 
-if(KML_SHARED_LIBS)
-    set(BUILD_SHARED_LIBS ON)
-endif()
-
 add_library(${PROJECT_NAME}
     ${SRC_FILES}
     ${CMAKE_CURRENT_SOURCE_DIR}/ext/glad/glad.c
@@ -86,11 +83,23 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     OpenGL::GL
 )
 
+# ---------------------      ---------------------
+#                    DLL EXPORT
+# ---------------------      ---------------------
 if(KML_SHARED_LIBS)
     # Cuando compilamos KML, definimos KML_BUILD_DLL
     target_compile_definitions(${PROJECT_NAME} PRIVATE KML_SHARED_LIBS KML_BUILD_DLL)
     # Para consumidores externos solo KML_SHARED_LIBS
     target_compile_definitions(${PROJECT_NAME} INTERFACE KML_SHARED_LIBS)
+endif()
+
+# ---------------------      ---------------------
+#                       DEMO
+# ---------------------      ---------------------
+if(KML_BUILD_DEMO)
+    add_executable(${PROJECT_NAME}demo demo/Main.cxx)
+    target_link_libraries(${PROJECT_NAME}demo PRIVATE KML::KML)
+    target_include_directories(${PROJECT_NAME}demo PRIVATE include)
 endif()
 
 # --- Copiar assets ---
