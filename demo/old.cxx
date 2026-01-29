@@ -1,4 +1,4 @@
-#include "KML/kml.h"
+#include "KML/KML.h"
 
 #include <iostream>
 #include <string>
