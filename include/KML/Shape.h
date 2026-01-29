@@ -7,6 +7,7 @@
  */ 
 
 #include "Graphics.h"
+#include "ABI.h"
 
 namespace KML {
 
@@ -14,7 +15,7 @@ namespace KML {
      * @class      Shape Shape.h Shape
      * @brief      Used to set diferent shapes to render surfaces
      */
-    class Shape {
+    class KML_API Shape {
       private:
         unsigned int vao;
         size_t ind_size;

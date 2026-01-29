@@ -7,6 +7,7 @@
  */
 
 #include "Vector.h"
+#include "ABI.h"
 
 #include <string>
 #include <filesystem>
@@ -77,7 +78,7 @@ namespace KML
      * @param __v @ref HSV Vec3f
      * @returns RGBA @ref Vec4f
      */
-    Vec4f HSVtoRGBA(const Vec3f& __v);
+    KML_API Vec4f HSVtoRGBA(const Vec3f& __v);
 
     /**
      * @brief Changes RGBA color to HSV
@@ -87,14 +88,14 @@ namespace KML
      * @param c RGBA @ref Vec4f
      * @returns HSV @ref Vec3f
      */
-    Vec3f RGBAtoHSV(const Vec4f& c);
+    KML_API Vec3f RGBAtoHSV(const Vec4f& c);
 
     /**
      * @brief Reads a file from disc
      * @param path Relative or absolute path
      * @returns String containing all file contents
      */
-    std::string ReadFile(std::filesystem::path path);
+    KML_API std::string ReadFile(std::filesystem::path path);
 
     /**
      * @brief      Generates a random float
@@ -104,6 +105,6 @@ namespace KML
      *
      * @return     Random float
      */
-    float RandFloat(float min, float max);
+    KML_API float RandFloat(float min, float max);
 }
 #endif

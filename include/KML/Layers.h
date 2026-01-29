@@ -1,6 +1,8 @@
 #ifndef KML_LAYERS_H
 #define KML_LAYERS_H
 
+#include "ABI.h"
+
 /**
  * @file        Layers.h
  * @brief       Allows instanced surface drawing in depth layers 
@@ -15,7 +17,7 @@ namespace KML {
      * @class       Layer
      * @brief       Surface objects in this layer will be rendered in bulk and in the depth order they were added
      */
-    class Layer {
+    class KML_API Layer {
         std::vector<Surface*> srf;
         int max;
       public:
@@ -25,7 +27,7 @@ namespace KML {
         void Add(Surface& __s);
     };
 
-    void DrawLayers(int maxLayers = 0);
+    KML_API void DrawLayers(int maxLayers = 0);
 
 }
 

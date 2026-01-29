@@ -6,12 +6,14 @@
  * @brief      Precise time management 
  */
 
+#include "ABI.h"
+
 namespace KML {
     /**
      * @class      Clock
      * @brief      High-precission clock
      */
-    class Clock {
+    class KML_API Clock {
       public:
         Clock();
         ~Clock();
@@ -42,7 +44,7 @@ namespace KML {
      * @class      Stopwatch
      * @brief      Precise timing using a @ref Clock object
      */
-    class Stopwatch {
+    class KML_API Stopwatch {
       public:
         Stopwatch(Clock& __c);
 

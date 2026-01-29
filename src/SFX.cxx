@@ -1,4 +1,4 @@
-#include "KML/SFX.h"
+#include "KML/Particle.h"
 #include "KML/Utils.h"
 
 #include "__KML/graphics.h"

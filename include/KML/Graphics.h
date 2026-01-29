@@ -1,6 +1,8 @@
 #ifndef KML_GRAPHICS_H
 #define KML_GRAPHICS_H
 
+#include "ABI.h"
+
 #include <string>
 #include <filesystem>
 
@@ -25,7 +27,7 @@ namespace KML {
      *
      * @return     @ref Shader
      */
-    Shader* CreateShader(std::filesystem::path vertex, std::filesystem::path fragment);
+    KML_API Shader* CreateShader(std::filesystem::path vertex, std::filesystem::path fragment);
 
     /**
      * @brief      Creates a custom shader program from raw source
@@ -35,7 +37,7 @@ namespace KML {
      *
      * @return     @ref Shader
      */
-    Shader* CreateShader(const char* vertex, const char* fragment);
+    KML_API Shader* CreateShader(const char* vertex, const char* fragment);
     
     /**
      * @brief      Retrieves the location of a uniform in a shader program
@@ -45,7 +47,7 @@ namespace KML {
      *
      * @return     The uniforms location
      */
-    int GetShaderUniformL(Shader* shader, const char* uniform);
+    KML_API int GetShaderUniformL(Shader* shader, const char* uniform);
 
     /**
      * @brief      Gets the shader id.
@@ -54,18 +56,18 @@ namespace KML {
      *
      * @return     Shader id
      */
-    unsigned int GetShaderID(Shader* shader);
+    KML_API unsigned int GetShaderID(Shader* shader);
     
-    void SetUniform_1f(const char* uniform, Shader* shader, float v0);
-    void SetUniform_1i(const char* uniform, Shader* shader, int v0);
+    KML_API void SetUniform_1f(const char* uniform, Shader* shader, float v0);
+    KML_API void SetUniform_1i(const char* uniform, Shader* shader, int v0);
 
-    void SetUniform_2f(const char* uniform, Shader* shader, float v0, float v1);
-    void SetUniform_3f(const char* uniform, Shader* shader, float v0, float v1, float v2);
-    void SetUniform_4f(const char* uniform, Shader* shader, float v0, float v1, float v2, float v3);
+    KML_API void SetUniform_2f(const char* uniform, Shader* shader, float v0, float v1);
+    KML_API void SetUniform_3f(const char* uniform, Shader* shader, float v0, float v1, float v2);
+    KML_API void SetUniform_4f(const char* uniform, Shader* shader, float v0, float v1, float v2, float v3);
 
-    void SetUniform_2fv(const char* uniform, Shader* shader, const Vec2f& __v);
-    void SetUniform_3fv(const char* uniform, Shader* shader, const Vec3f& __v);
-    void SetUniform_4fv(const char* uniform, Shader* shader, const Vec4f& __v);
+    KML_API void SetUniform_2fv(const char* uniform, Shader* shader, const Vec2f& __v);
+    KML_API void SetUniform_3fv(const char* uniform, Shader* shader, const Vec3f& __v);
+    KML_API void SetUniform_4fv(const char* uniform, Shader* shader, const Vec4f& __v);
 
     /**
      * @brief      Compiles the shader's source files and maps uniform locations
@@ -74,14 +76,14 @@ namespace KML {
      * 
      * @warning    The shader's source must have been retrieved from disc 
      */
-    void ReloadShader(Shader* shader);
+    KML_API void ReloadShader(Shader* shader);
 
     /**
      * @brief      Frees all allocated resources in a shader program
      *
      * @param      shader  @ref Shader
      */
-    void DeleteShader(Shader*& shader);
+    KML_API void DeleteShader(Shader*& shader);
 
     /**
      * @brief      Loads a texture from file, will be saved as the char* you provided
@@ -90,14 +92,14 @@ namespace KML {
      *
      * @return     Unique id
      */
-    Texture LoadTexture(const char* file);
+    KML_API Texture LoadTexture(const char* file);
 
     /**
      * @brief      Frees all allocated resources in a texture
      *
      * @param[in]  file  Disc file
      */
-    void UnloadTexture(const char* file);
+    KML_API void UnloadTexture(const char* file);
 }
 
 #endif

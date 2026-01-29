@@ -1,6 +1,8 @@
 #ifndef KML_CONTEXT_H
 #define KML_CONTEXT_H
 
+#include "ABI.h"
+
 /**
  * @file       Context.h 
  * @brief      Window creation and event processing
@@ -47,7 +49,7 @@ namespace KML {
      *
      * @return     True on success, false on failure
      */
-    bool CreateWindow(int width, int height, const char* title, unsigned int flags = NONE);
+    KML_API bool CreateWindow(int width, int height, const char* title, unsigned int flags = NONE);
 
     /**
      * @brief      Creates a unique graphical context for this library with additional parameters
@@ -63,7 +65,7 @@ namespace KML {
      *
      * @return     True on success, false on failure
      */
-    bool CreateWindowP(int width, int height, const char* title, float logical_width, float logical_height, int glCtxMajor, int glCtxMinor, unsigned int flags);
+    KML_API bool CreateWindowP(int width, int height, const char* title, float logical_width, float logical_height, int glCtxMajor, int glCtxMinor, unsigned int flags);
 
     /**
      * @brief      Process keystrokes, mouse input, and user events
@@ -72,27 +74,27 @@ namespace KML {
      *
      * @return     Will return false on close event
      */
-    bool ProcessEvents();
+    KML_API bool ProcessEvents();
 
     /**
      * @brief      Gets the mouse capture state.
      *
      * @return     True if the mouse is captured, false if the mouse is free
      */
-    bool GetMouseCaptureState();
+    KML_API bool GetMouseCaptureState();
 
     /**
      * @brief      Frees all resources used in the library
      *             You must not use any method aftern calling this
      */
-    void Terminate();
+    KML_API void Terminate();
 
     /**
      * @brief          Controls the window state using events
      * @param event    Flag
      * @param value    Value
      */
-    void Event(WindowEvent event, int value);
+    KML_API void Event(WindowEvent event, int value);
     
     /**
      * @brief      Clears the screen with the given color and draws the current frame
@@ -101,12 +103,12 @@ namespace KML {
      * @param[in]  g     Green color
      * @param[in]  b     Blue color
      */
-    void PresentFrame(float r = 0.0f, float g = 0.0f, float b = 0.0f);
+    KML_API void PresentFrame(float r = 0.0f, float g = 0.0f, float b = 0.0f);
 
     /**
      * @brief      Prints the current OpenGL context to stdout
      */
-    void PrintContext();
+    KML_API void PrintContext();
 
     /**
      * @brief            Gets the key's state as enum
@@ -117,7 +119,7 @@ namespace KML {
      *
      * @return           @see KeyState
      */
-    KeyState GetKey(int key);
+    KML_API KeyState GetKey(int key);
 
     /**
      * @brief            Gets the mouse button state as enum
@@ -128,14 +130,14 @@ namespace KML {
      *
      * @return           @see KeyState
      */
-    KeyState GetMouseButton(int button);
+    KML_API KeyState GetMouseButton(int button);
 
     /**
      * @brief      Sets the window title
      *
      * @param[in]  title  Title string
      */
-    void SetWindowTitle(const char* title);
+    KML_API void SetWindowTitle(const char* title);
 
     /**
      * @brief      Sets the window icon.
@@ -145,6 +147,6 @@ namespace KML {
      *
      * @param[in]  file  Image file in disc
      */
-    void SetWindowIcon(const char* file);
+    KML_API void SetWindowIcon(const char* file);
 }
 #endif

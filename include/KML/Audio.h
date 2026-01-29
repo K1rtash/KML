@@ -1,6 +1,7 @@
 #ifndef KML_AUDIO_H
 #define KML_AUDIO_H
 
+#include "ABI.h"
 #include <vector>
 
 /**
@@ -16,14 +17,14 @@ namespace KML {
      * @param[in]  streaming  For sounds that are to big
      * @param[in]  loop       Should the sound loop
      */
-    void LoadSound(const char* file, bool streaming = false, bool loop = false);
+    KML_API void LoadSound(const char* file, bool streaming = false, bool loop = false);
 
     /**
      * @brief      Unloads a sound from memory
      *
      * @param[in]  file  Sound file
      */
-    void UnloadSound(const char* file);
+    KML_API void UnloadSound(const char* file);
 
     /**
      * @brief      Plays a unique sound
@@ -32,42 +33,42 @@ namespace KML {
      * @param[in]  volume  Volume
      * @param[in]  pitch   Pitch
      */
-    void PlayMusic(const char* file, float volume = 1.0f, float pitch = 1.0f);
+    KML_API void PlayMusic(const char* file, float volume = 1.0f, float pitch = 1.0f);
 
     /**
      * @brief      Stops the music
      *
      * @param[in]  file  Sound file
      */
-    void StopMusic(const char* file); 
+    KML_API void StopMusic(const char* file); 
 
     /**
      * @brief      Resets the song 
      *
      * @param[in]  file  Sound file
      */
-    void ResetMusic(const char* file);
+    KML_API void ResetMusic(const char* file);
 
     /**
      * @brief      Sets the global pitch multiplier
      *
      * @param[in]  pitch  Pitch (0..2)
      */
-    void SetGlobalPitch(float pitch = 1.0f);
+    KML_API void SetGlobalPitch(float pitch = 1.0f);
 
     /**
      * @brief      Sets the global volume.
      *
      * @param[in]  volume  Volume
      */
-    void SetGlobalVolume(float volume = 1.0f);
+    KML_API void SetGlobalVolume(float volume = 1.0f);
 
 
     /**
      * @class      Sound
      * @brief      A sound with its own pitch and volume
      */
-    class Sound {
+    class KML_API Sound {
       public:
         float volume = 1.0f;
         float pitch = 1.0f;
@@ -116,7 +117,7 @@ namespace KML {
      * @class      SoundPool
      * @brief      Manages sounds lifetime
      */
-    class SoundPool {
+    class KML_API SoundPool {
       public:
         SoundPool();
         /**

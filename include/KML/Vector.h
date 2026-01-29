@@ -6,8 +6,10 @@
  * @brief       Basic linear algebra abstractions 
  */
 
+#include "ABI.h"
+
 namespace KML {
-    struct Vec2f {
+    struct KML_API Vec2f {
             float x, y;
 
             Vec2f operator+(const Vec2f& __v) const { return {x + __v.x, y + __v.y }; }
@@ -27,7 +29,7 @@ namespace KML {
             void normalize();
         };
 
-        struct Vec3f {
+        struct KML_API Vec3f {
             float x, y, z;
 
             Vec3f operator+(const Vec3f& __v) const { return {x + __v.x, y + __v.y, z + __v.z }; }
@@ -46,7 +48,7 @@ namespace KML {
             void normalize();
         };
 
-        struct Vec4f {
+        struct KML_API Vec4f {
             float x, y, z, w;
 
             Vec4f operator+(const Vec4f& __v) const { return {x + __v.x, y + __v.y, z + __v.z, w + __v.w }; }

@@ -9,11 +9,12 @@
 #include "Vector.h"
 #include "Graphics.h"
 #include "Shape.h"
+#include "ABI.h"
 
 #include <string>
 
 namespace KML {
-    class Camera {
+    class KML_API Camera {
       public:
         Vec2f pos;
         Vec2f size;
@@ -21,7 +22,7 @@ namespace KML {
         Camera();
         Camera(Vec2f pos, Vec2f scale, float rotation);
     };
-    class Surface {
+    class KML_API Surface {
       public:
         Vec2f pos{0.0f, 0.0f};
         Vec2f scale{1.0f, 1.0f};

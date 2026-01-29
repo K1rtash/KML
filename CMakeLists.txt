@@ -1,3 +1,8 @@
+# ---------------------      ---------------------
+#                       KML
+#           Kirtash's Multimedia Library
+#               (c) David Sánchez 2026
+# ---------------------      ---------------------
 cmake_minimum_required(VERSION 3.28)
 project(KML VERSION 0.0.1 LANGUAGES C CXX)
 
@@ -6,11 +11,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
 
-option(KML_COPY_ASSETS "Copia la carpeta assets dentro de build" OFF)
-option(KML_BUILD_SHARED "Build KML as shared library" OFF)
-option(KML_STATIC_RUNTIME "Static runtime for KML" OFF)
+# ---------------------      ---------------------
+#                       OPTS
+# ---------------------      ---------------------
+option(KML_SHARED_LIBS "Build KML as shared library" OFF)
 
-# GLFW
+# ---------------------      ---------------------
+#                       DEPS
+# ---------------------      ---------------------
+
+# --------------------- GLFW ---------------------
 set(GLFW_BUILD_EXAMPLES "OFF")
 set(GLFW_BUILD_TESTS "OFF")
 set(GLFW_BUILD_DOCS "OFF")
@@ -20,28 +30,35 @@ FetchContent_Declare(
     GIT_TAG 3.4
 )
 FetchContent_MakeAvailable(glfw)
-
-# GLM
+# ------------------------------------------------
+# --------------------- GLM  ---------------------
 FetchContent_Declare(
     glm
     GIT_REPOSITORY https://github.com/g-truc/glm.git
     GIT_TAG        1.0
 )
 FetchContent_MakeAvailable(glm)
-
-#FMT
+# -----------------------------------------------
+# --------------------- FMT  --------------------
 FetchContent_Declare(
   fmt
   GIT_REPOSITORY https://github.com/fmtlib/fmt
   GIT_TAG        e69e5f977d458f2650bb346dadf2ad30c5320281
 ) # 10.2.1
 FetchContent_MakeAvailable(fmt)
-
-#OPENGL
+# -----------------------------------------------
+# ------------------- OPENGL --------------------
 find_package(OpenGL REQUIRED)
+# -----------------------------------------------
 
-# --- Archivos fuente ---
+# ---------------------      --------------------
+#                       SRC
+# ---------------------      --------------------
 file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx)
+
+if(KML_SHARED_LIBS)
+    set(BUILD_SHARED_LIBS ON)
+endif()
 
 add_library(${PROJECT_NAME}
     ${SRC_FILES}
@@ -50,6 +67,10 @@ add_library(${PROJECT_NAME}
 
 add_library(KML::KML ALIAS KML)
 
+
+# ---------------------      ---------------------
+#                       ABI
+# ---------------------      ---------------------
 target_include_directories(${PROJECT_NAME}
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -65,19 +86,26 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     OpenGL::GL
 )
 
-# --- Copiar assets ---
-if(KML_COPY_ASSETS)
-add_custom_command(
-    TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_CURRENT_SOURCE_DIR}/assets
-            $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
-)
+if(KML_SHARED_LIBS)
+    # Cuando compilamos KML, definimos KML_BUILD_DLL
+    target_compile_definitions(${PROJECT_NAME} PRIVATE KML_SHARED_LIBS KML_BUILD_DLL)
+    # Para consumidores externos solo KML_SHARED_LIBS
+    target_compile_definitions(${PROJECT_NAME} INTERFACE KML_SHARED_LIBS)
 endif()
 
-if(KML_STATIC_RUNTIME)
-target_link_options(${PROJECT_NAME} PRIVATE
-    -static-libstdc++
-    -static-libgcc
-)
-endif()
+# --- Copiar assets ---
+#if(KML_COPY_ASSETS)
+#add_custom_command(
+#    TARGET ${PROJECT_NAME} POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E copy_directory
+#            ${CMAKE_CURRENT_SOURCE_DIR}/assets
+#            $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
+#)
+#endif()
+
+#if(KML_STATIC_RUNTIME)
+#target_link_options(${PROJECT_NAME} PRIVATE
+#    -static-libstdc++
+#    -static-libgcc
+#)
+#endif()

@@ -9,6 +9,6 @@
 #include "Shape.h"
 #include "Time.h"
 #include "Audio.h"
-#include "TTF.h"
+#include "Font.h"
 
 #endif
