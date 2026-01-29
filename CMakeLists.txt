@@ -6,11 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
 
-# --- Build type por defecto ---
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
-endif()
-
 option(KML_COPY_ASSETS "Copia la carpeta assets dentro de build" OFF)
 option(KML_BUILD_SHARED "Build KML as shared library" OFF)
 option(KML_STATIC_RUNTIME "Static runtime for KML" OFF)
@@ -46,24 +41,21 @@ FetchContent_MakeAvailable(fmt)
 find_package(OpenGL REQUIRED)
 
 # --- Archivos fuente ---
-file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cxx)
+file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx)
 
 add_library(${PROJECT_NAME}
     ${SRC_FILES}
-    ${CMAKE_SOURCE_DIR}/ext/glad/glad.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/ext/glad/glad.c
 )
 
 add_library(KML::KML ALIAS KML)
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
     PRIVATE
-        ${PROJECT_SOURCE_DIR}/ext
-        ${glfw_SOURCE_DIR}/include
-        ${fmt_SOURCE_DIR}/include
-        ${glm_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/ext
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -77,7 +69,7 @@ if(KML_COPY_ASSETS)
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/assets
+            ${CMAKE_CURRENT_SOURCE_DIR}/assets
             $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
 )
 endif()
