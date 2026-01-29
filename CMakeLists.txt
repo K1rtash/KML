@@ -12,7 +12,12 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 option(KML_COPY_ASSETS "Copia la carpeta assets dentro de build" OFF)
+option(KML_BUILD_SHARED "Build KML as shared library" OFF)
 
+# GLFW
+set(GLFW_BUILD_EXAMPLES "OFF")
+set(GLFW_BUILD_TESTS "OFF")
+set(GLFW_BUILD_DOCS "OFF")
 FetchContent_Declare(
     glfw
     GIT_REPOSITORY https://github.com/glfw/glfw.git
@@ -20,6 +25,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(glfw)
 
+# GLM
 FetchContent_Declare(
     glm
     GIT_REPOSITORY https://github.com/g-truc/glm.git
@@ -27,13 +33,16 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(glm)
 
+#FMT
 FetchContent_Declare(
   fmt
   GIT_REPOSITORY https://github.com/fmtlib/fmt
   GIT_TAG        e69e5f977d458f2650bb346dadf2ad30c5320281
-  ) # 10.2.1
+) # 10.2.1
 FetchContent_MakeAvailable(fmt)
 
+#OPENGL
+find_package(OpenGL REQUIRED)
 
 # --- Archivos fuente ---
 file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cxx)
@@ -55,8 +64,10 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${glm_SOURCE_DIR}
 )
 
-# --- OpenGL ---
-find_package(OpenGL REQUIRED)
+target_link_options(${PROJECT_NAME} PRIVATE
+    -static-libstdc++
+    -static-libgcc
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     glfw
@@ -71,5 +82,5 @@ if(KML_COPY_ASSETS)
         COMMAND ${CMAKE_COMMAND} -E copy_directory
                 ${CMAKE_SOURCE_DIR}/assets
                 $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
-    )
+)
 endif()

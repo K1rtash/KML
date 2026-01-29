@@ -6,11 +6,14 @@
         "name": "linux",
         "hidden": false,
         "generator": "Unix Makefiles",
-        "inherits": ["debug"],
+        "binaryDir": "build",
         "cacheVariables": 
         {
             "CMAKE_CXX_COMPILER": "/usr/bin/g++",
-            "CMAKE_C_COMPILER": "/usr/bin/gcc"
+            "CMAKE_C_COMPILER": "/usr/bin/gcc",
+            "FETCHCONTENT_BASE_DIR": "$env{HOME}/.cmake_deps",
+            "FETCHCONTENT_UPDATES_DISCONNECTED": "ON",
+            "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wfatal-errors"
         }
     },
     {
@@ -18,37 +21,12 @@
         "name": "windows",
         "hidden": false,
         "generator": "Ninja",
-        "inherits": ["debug"],
+        "binaryDir": "build",
         "cacheVariables": 
         {
             "CMAKE_CXX_COMPILER": "C:/DEV/mingw/bin/g++",
-            "CMAKE_C_COMPILER": "C:/DEV/mingw/bin/gcc"
-        }
-    },
-
-    {
-        "name": "release",
-        "displayName": "Release",
-        "hidden": false,
-        "binaryDir": "build",
-        "description": "Para versiones finales, trata warnings como errores y optimiza",
-        "cacheVariables": 
-        {
-            "CMAKE_BUILD_TYPE": "Release",
-            "CMAKE_CXX_FLAGS": "-03, -Wfatal-errors, -Wall"
-        }
-    },
-
-    {
-        "name": "debug",
-        "displayName": "Debug",
-        "hidden": false,
-        "binaryDir": "build",
-        "description": "Debug optimizado con todos los warnings",
-        "cacheVariables": 
-        {
-            "CMAKE_BUILD_TYPE": "Debug",
-            "CMAKE_CXX_FLAGS": "-Wall -g -Wextra -Wfatal-errors -Wshadow -pedantic -Wconversion -Wsign-conversion -O2 -fmax-errors=1 -g -O0"
+            "CMAKE_C_COMPILER": "C:/DEV/mingw/bin/gcc",
+            "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wfatal-errors"
         }
     }
   ],
@@ -56,13 +34,13 @@
   "buildPresets": 
   [
     {
-        "name": "release",
-        "configurePreset": "release"
+        "name": "linux",
+        "configurePreset": "linux"
     },
 
     {
-        "name": "debug",
-        "configurePreset": "debug"
+        "name": "windows",
+        "configurePreset": "windows"
     }
   ]
 }

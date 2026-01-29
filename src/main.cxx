@@ -83,7 +83,6 @@ int main(void) {
     KML::PlayMusic("assets/voice.wav");
 
     surface.tex = KML::GetBitmap("assets/arial.ttf", "Hola, KML!");
-    fmt::println("TEXTURE DE TTF: {}", surface.tex);
 
     clock.Tick();
     while(KML::ProcessEvents()) {
