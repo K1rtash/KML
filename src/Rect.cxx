@@ -55,5 +55,5 @@ void __KML::GenerateDefaultMembers() {
     };
 
     defaultShape = new KML::Shape(vertices, sizeof(vertices), indices, sizeof(indices));
-    defaultShader = KML::CreateShader(vertex_src, fragment_src);
+    defaultShader = KML::CreateShaderFS(vertex_src, fragment_src);
 }

@@ -21,6 +21,7 @@ namespace __KML {
     void CloseAudioDevice();
     extern int contextActive;
     unsigned char* getTTF(std::string name);
+    void InitFreeType();
 }
 
 namespace __KML::Texture {

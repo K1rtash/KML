@@ -26,8 +26,8 @@ cd KML
 cmake -S . -B build 
 cmake --build build
 ```
-The following CMake options are used in this proyect
-`KML_BUILD_DEMO` OFF
-`KML_SHARED_LIBS` OFF
+The following CMake options are used in this proyect:
+- `KML_BUILD_DEMO` OFF
+- `KML_SHARED_LIBS` OFF
 
 You may also use CMake presets

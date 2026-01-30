@@ -38,7 +38,7 @@ KML::Shader* KML::CreateShader(std::filesystem::path vertex, std::filesystem::pa
     return program;
 }
 
-KML::Shader* KML::CreateShader(const char* vertex, const char* fragment) {
+KML::Shader* KML::CreateShaderFS(const char* vertex, const char* fragment) {
     Shader* program = new Shader;
     program->id = create_shader_program(vertex, fragment);
     assert(program);

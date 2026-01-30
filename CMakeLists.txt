@@ -31,7 +31,6 @@ FetchContent_Declare(
     GIT_TAG 3.4
 )
 FetchContent_MakeAvailable(glfw)
-# ------------------------------------------------
 # --------------------- GLM  ---------------------
 FetchContent_Declare(
     glm
@@ -39,7 +38,6 @@ FetchContent_Declare(
     GIT_TAG        1.0
 )
 FetchContent_MakeAvailable(glm)
-# -----------------------------------------------
 # --------------------- FMT  --------------------
 FetchContent_Declare(
   fmt
@@ -47,9 +45,18 @@ FetchContent_Declare(
   GIT_TAG        e69e5f977d458f2650bb346dadf2ad30c5320281
 ) # 10.2.1
 FetchContent_MakeAvailable(fmt)
-# -----------------------------------------------
 # ------------------- OPENGL --------------------
 find_package(OpenGL REQUIRED)
+# ------------------ FREETYPE -------------------
+set(FT_DISABLE_BZIP2 ON CACHE BOOL "" FORCE)
+set(FT_DISABLE_PNG   ON CACHE BOOL "" FORCE)
+set(FT_DISABLE_BROTLI ON CACHE BOOL "" FORCE)
+FetchContent_Declare(
+  freeType
+  GIT_REPOSITORY https://github.com/freetype/freetype/
+  GIT_TAG        VER-2-13-2
+)
+FetchContent_MakeAvailable(freeType)
 # -----------------------------------------------
 
 # ---------------------      --------------------
@@ -81,6 +88,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     fmt::fmt
     glm::glm
     OpenGL::GL
+    freetype
 )
 
 # ---------------------      ---------------------
@@ -101,6 +109,16 @@ if(KML_BUILD_DEMO)
     target_link_libraries(${PROJECT_NAME}demo PRIVATE KML::KML)
     target_include_directories(${PROJECT_NAME}demo PRIVATE include)
 endif()
+
+add_executable(${PROJECT_NAME}test demo/Test.cxx)
+target_link_libraries(${PROJECT_NAME}test PRIVATE 
+    KML::KML
+    fmt::fmt
+    glm::glm
+    OpenGL::GL
+    freetype
+)
+target_include_directories(${PROJECT_NAME}test PRIVATE include)
 
 # --- Copiar assets ---
 #if(KML_COPY_ASSETS)

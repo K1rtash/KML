@@ -142,6 +142,7 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
 
     __KML::GenerateDefaultMembers();
     __KML::InitAudioDevice();
+    __KML::InitFreeType();
 
     __KML::contextActive = 1;
     return window.handle;
