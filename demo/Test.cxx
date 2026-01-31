@@ -23,7 +23,9 @@ int main(void) {
     surface.color = KML::HSV_v3f(293, 83, 93);
     surface.anchor = KML::Vec2f(0.5f, 0.5f);
 
-    KML::LoadFont("assets/arial.ttf");
+    KML::LoadFont("assets/arial.ttf", 48);
+    KML::LoadFont("assets/arial.ttf", 12);
+
     KML::Shader* shader0 = KML::CreateShader("assets/textv.glsl", "assets/textf.glsl");
 
     while(KML::ProcessEvents()) {
@@ -57,6 +59,11 @@ int main(void) {
             surface.pos = {0.0f, 0.0f};
             surface.scale = {1.0f, 1.0f};
             surface.rotation = 0.0f;
+            KML::UnloadFont("assets/arial.ttf:48");
+        }
+
+        if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
+            KML::ReloadShader(shader0);
         }
 
         if(KML::GetKey(KML_KEY_P) == KML::KeyState::PRESS) fmt::print("pos: {}, {} scale: {}, {} rot: {}, anchor: {}, {})\n", surface.pos.x, surface.pos.y, surface.scale.x, surface.scale.y, surface.rotation, surface.anchor.x, surface.anchor.y); 
@@ -66,10 +73,10 @@ int main(void) {
 
 
         //surface.Draw();
-        KML::RenderText(shader0, "Hola KML!", 25, 300, 1.0f, {1,.5,1});
+        KML::RenderText("assets/arial.ttf:48", nullptr, "Hola KML!", 25, 300, 1.0f, {1,.5,1});
+        KML::RenderText("assets/arial.ttf:12", nullptr, "Hola KML!", 40, 200, 1.0f, {.4,.2,1});
         KML::PresentFrame();
     }
-
-    KML::Terminate();
+    KML::Quit();
     return 0;
 }

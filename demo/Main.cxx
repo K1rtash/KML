@@ -91,6 +91,6 @@ int main(void) {
     }
 
     std::cout << "This program took " << stopwatch.Stop() << " seconds" << std::endl;
-    KML::Terminate();
+    KML::Quit();
     return 0;
 }

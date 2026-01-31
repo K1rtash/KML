@@ -148,11 +148,12 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
     return window.handle;
 }
 
-void KML::Terminate() {
+void KML::Quit() {
     if(!__KML::contextActive) return;
     glfwDestroyWindow(window.handle);
     glfwTerminate();
     __KML::CloseAudioDevice();
+    __KML::QuitFreeType(); 
     __KML::contextActive = 0;
 }
 
