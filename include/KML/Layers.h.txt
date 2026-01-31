@@ -1,4 +1,4 @@
-#ifndef KML_LAYERS_H
+/*#ifndef KML_LAYERS_H
 #define KML_LAYERS_H
 
 #include "ABI.h"
@@ -31,4 +31,4 @@ namespace KML {
 
 }
 
-#endif
+#endif*/

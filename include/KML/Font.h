@@ -4,6 +4,7 @@
 #include "ABI.h"
 #include "Vector.h"
 #include "Graphics.h"
+#include "Surface.h"
 
 #include <string>
 
@@ -29,7 +30,16 @@ namespace KML {
      * @param[in]  key  Font key name formatted "<file>:<resolution>"
      */
     KML_API void UnloadFont(std::string key);
-    KML_API void RenderText(std::string font, Shader* shader, std::string text, float x, float y, float scale, Vec3f color);
+
+    class KML_API Text : public Surface {
+      public:
+        std::string text;
+        std::string font;
+        Shader* shader = nullptr;
+        Camera* camera = nullptr;
+        Text(std::string key);
+        void Draw();
+    };
 }
 
 #endif

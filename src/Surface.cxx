@@ -12,7 +12,7 @@
 
 using namespace KML;
 
-Surface::Surface() {
+Sprite::Sprite() {
     pos = Vec2f{0, 0};
     scale = Vec2f{1, 1};
     anchor = Vec2f{0.0f, 0.0f}; //x y para anchor, z para angulo
@@ -20,48 +20,29 @@ Surface::Surface() {
     rotation = 0.0f;
 }
 
-Surface::Surface(Shader* shader) : shader{shader} {
+Sprite::Sprite(Shader* shader) : shader{shader} {
     shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
-Surface::Surface(std::string texture) {
+Sprite::Sprite(std::string texture) {
     SetTexture(texture);
     shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
-Surface::Surface(Vec4f transform) : pos{transform.x, transform.y}, scale{transform.z, transform.w} {
+Sprite::Sprite(Vec4f transform) : Surface{transform.x, transform.y, transform.z, transform.w} {
     shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
-Surface::Surface(std::string texture, Vec4f transform) : pos{transform.x, transform.y}, scale{transform.z, transform.w} {
+Sprite::Sprite(std::string texture, Vec4f transform) : Surface{transform.x, transform.y, transform.z, transform.w} {
     SetTexture(texture);
     shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
 
-Surface::Surface(std::string texture, Vec4f transform, Vec2f anchor) 
-: pos{transform.x, transform.y}, scale{transform.z, transform.w} 
-{
-    this->anchor = anchor;
-    SetTexture(texture);
-    shape = __KML::defaultShape;
-    shader = __KML::defaultShader;
-}
-
-Surface::Surface(std::string texture, Vec4f transform, Vec2f anchor, float rotation) 
-: pos{transform.x, transform.y}, scale{transform.z, transform.w}
-{
-    this->anchor = anchor;
-    this->rotation = rotation;
-    SetTexture(texture);
-    shape = __KML::defaultShape;
-    shader = __KML::defaultShader;
-}
-
-void Surface::Draw() {
+void Sprite::Draw() {
     assert(shape);
     assert(shader);
 
@@ -100,15 +81,15 @@ void Surface::Draw() {
     shape->Use();
 }
 
-void Surface::SetTexture(std::string texture) {
+void Sprite::SetTexture(std::string texture) {
     this->tex = __KML::Texture::get(texture);
 }
 
-void Surface::SetColor_RGB(int R, int G, int B) {
+void Sprite::SetColor_RGB(int R, int G, int B) {
     color = RGBAtoHSV({(float)R, (float)G, (float)B});
 }
 
-void Surface::SetColor_HSV(int H, int S, int V) {
+void Sprite::SetColor_HSV(int H, int S, int V) {
     color = HSV_v3f(H, S, V);
 }
 

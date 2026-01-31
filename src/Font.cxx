@@ -14,6 +14,7 @@
 
 
 #include "KML/Font.h"
+#include "KML/Utils.h"
 #include "__KML/graphics.h"
 
 
@@ -110,62 +111,6 @@ void KML::UnloadFont(std::string key) {
     g_fonts.erase(it);
 }
 
-void KML::RenderText(std::string font_name, Shader* shader, std::string text, float x, float y, float scale, Vec3f color) {
-	auto it = g_fonts.find(font_name);
-	if(it == g_fonts.end()) assert(1 == 0 && "font not loaded");
-
-	glm::mat4 proj = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
-
-	Shader* program = shader ? shader : text_shader; 
-	assert(program);
-
-    glUseProgram(GetShaderID(program));
-    SetUniform_3fv("textColor", program, color);
-    SetUniform_1i("text", program, 0);
-	glUniformMatrix4fv(GetShaderUniformL(program, "projection"), 1, GL_FALSE, glm::value_ptr(proj));
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindVertexArray(VAO);
-
-    const auto& chars = it->second.glyphs;
-
-    // iterate through all characters
-    std::string::const_iterator c;
-    for (c = text.begin(); c != text.end(); c++) 
-    {
-        Character ch = chars.at(*c);
-
-        float xpos = x + ch.Bearing.x * scale;
-        float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
-
-        float w = ch.Size.x * scale;
-        float h = ch.Size.y * scale;
-        // update VBO for each character
-        float vertices[6][4] = {
-            { xpos,     ypos + h,   0.0f, 0.0f },            
-            { xpos,     ypos,       0.0f, 1.0f },
-            { xpos + w, ypos,       1.0f, 1.0f },
-
-            { xpos,     ypos + h,   0.0f, 0.0f },
-            { xpos + w, ypos,       1.0f, 1.0f },
-            { xpos + w, ypos + h,   1.0f, 0.0f }           
-        };
-        // render glyph texture over quad
-        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-        // update content of VBO memory
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // be sure to use glBufferSubData and not glBufferData
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        // render quad
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-        x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
-    }
-    glBindVertexArray(0);
-    glBindTexture(GL_TEXTURE_2D, 0);
-}
-
 void __KML::InitFreeType() {
     if (FT_Init_FreeType(&ft))
     {
@@ -176,10 +121,10 @@ void __KML::InitFreeType() {
 	    "#version 330 core\n"
 		"layout (location = 0) in vec4 vertex;\n"
 		"out vec2 TexCoords;\n"
-		"uniform mat4 projection;\n"
+		"uniform mat4 MVP;\n"
 		"void main()\n"
 		"{\n"
-	    "gl_Position = projection * vec4(vertex.xy, 0.0, 1.0);\n"
+	    "gl_Position = MVP * vec4(vertex.xy, 0.0, 1.0);\n"
 	    "TexCoords = vertex.zw;\n"
 		"}";
 
@@ -217,4 +162,88 @@ void __KML::QuitFreeType() {
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	FT_Done_FreeType(ft);
+}
+
+void renderText(auto it, std::string text, float scale) {
+    glActiveTexture(GL_TEXTURE0);
+    glBindVertexArray(VAO);
+
+    const auto& chars = it->second.glyphs;
+    float cursorX = 0.0f; // posición relativa dentro del texto
+
+    for(char c : text) {
+        const Character& ch = chars.at(c);
+
+        // Local coordinates (0,0) = start of text
+        float xpos = cursorX + ch.Bearing.x * scale;
+        float ypos = -(ch.Size.y - ch.Bearing.y) * scale;
+
+        float w = ch.Size.x * scale;
+        float h = ch.Size.y * scale;
+
+        float vertices[6][4] = {
+            { xpos,     ypos + h,   0, 0 },
+            { xpos,     ypos,       0, 1 },
+            { xpos + w, ypos,       1, 1 },
+            { xpos,     ypos + h,   0, 0 },
+            { xpos + w, ypos,       1, 1 },
+            { xpos + w, ypos + h,   1, 0 }
+        };
+
+        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+
+        cursorX += (ch.Advance >> 6) * scale;
+    }
+
+    glBindVertexArray(0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+
+KML::Text::Text(std::string key) {
+	shader = text_shader;
+	font = key;
+}
+
+void KML::Text::Draw() {
+        assert(shader);
+    auto it = g_fonts.find(font);
+    if(it == g_fonts.end()) return;
+
+    glm::mat4 model = glm::mat4{1.0f};
+    glm::mat4 proj  = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
+
+    // Calculamos ancho y alto total del texto
+    float textWidth = 0.0f;
+    float textHeight = 0.0f;
+    const auto& chars = it->second.glyphs;
+    for(char c : text) {
+        const Character& ch = chars.at(c);
+        textWidth += (ch.Advance >> 6);
+        textHeight = std::max(textHeight, (float)ch.Size.y);
+    }
+
+    // Ajuste por anchor
+    float anchorOffsetX = -textWidth * anchor.x;
+    float anchorOffsetY = -textHeight * anchor.y;
+
+    // Posición + rotación + escala + anchor
+    model = glm::translate(model, glm::vec3(pos.x, pos.y, 0.0f));
+    model = glm::rotate(model, glm::radians(rotation), glm::vec3(0,0,1));
+    model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
+    model = glm::translate(model, glm::vec3(anchorOffsetX, anchorOffsetY, 0.0f));
+
+    Vec4f finalColor = HSVtoRGBA(color);
+    finalColor.w = (float)(100 - Clamp<int>(transparency, 0, 100)) / 100.0f;
+
+    glUseProgram(KML::GetShaderID(shader));
+    SetUniform_3f("textColor", shader, finalColor.x, finalColor.y, finalColor.z);
+    SetUniform_1i("text", shader, 0);
+    glUniformMatrix4fv(GetShaderUniformL(shader, "MVP"), 1, GL_FALSE, glm::value_ptr(proj * model));
+
+    // Dibujamos en coordenadas locales (0,0) y dejamos que la matriz MVP haga la posición + rotación + escala
+    renderText(it, text, 1.0f);
 }
