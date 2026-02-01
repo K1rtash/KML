@@ -148,5 +148,7 @@ namespace KML {
      * @param[in]  file  Image file in disc
      */
     KML_API void SetWindowIcon(const char* file);
+
+    KML_API void UseFramebuffer(unsigned int framebuffer);
 }
 #endif

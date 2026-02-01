@@ -6,6 +6,8 @@
 #include <fmt/core.h>
 #include <fmt/format.h>
 
+#include <glad/glad.h>
+
 void myFunc(void* numero) {
     int* n = (int*)numero;
     printf("Function pointer numero: %d\n", *n);
@@ -89,8 +91,12 @@ int main(void) {
     particle0.tex = tex0;
 
     KML::Camera cam0{KML::Vec2f(0, 0), KML::Vec2f(1, 1), 0.0};
+    cam0.size = KML::Vec2f(2.0f, 3.0f);
+    cam0.pivot = KML::Vec2f(0.5, 0.5);
+    cam0.zoom = 1.0f;
     surface.camera = &cam0;
     text0.camera = &cam0;
+    particle0.camera = &cam0;
 
     g_clock.Tick();
     while(KML::ProcessEvents()) {
@@ -151,15 +157,18 @@ int main(void) {
         if(keyDown(KML_KEY_G)) cam0.rotation += 5.0f;
         if(keyDown(KML_KEY_B)) cam0.rotation -= 5.0f;
 
+        if(keyDown(KML_KEY_Y)) cam0.zoom += 0.1f;
+        if(keyDown(KML_KEY_T)) cam0.zoom -= 0.1f;
+
         surface.pos = text0.pos;
         surface.rotation = text0.rotation;
         surface.anchor = text0.anchor;
 
         timer0.Query();
-
         surface.Draw();
         text0.Draw();
         particle0.Draw(deltaTime);
+
         KML::PresentFrame();
     }
     KML::Quit();

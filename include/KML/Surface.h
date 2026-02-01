@@ -18,7 +18,9 @@ namespace KML {
       public:
         Vec2f pos;
         Vec2f size;
+        Vec2f pivot;
         float rotation;
+        float zoom = 1.0f;
         Camera();
         Camera(Vec2f pos, Vec2f scale, float rotation);
     };

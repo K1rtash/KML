@@ -310,10 +310,17 @@ bool KML::GetMouseCaptureState() {
     return input.mouseCaptured;
 }
 
+void KML::UseFramebuffer(unsigned int framebuffer) {
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    glEnable(GL_DEPTH_TEST);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 void KML::PresentFrame(float r, float g, float b) {
     glfwSwapBuffers(window.handle);
     glClearColor(r, g, b, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 bool tryGLcontext(int major, int minor) {

@@ -236,8 +236,15 @@ void KML::Text::Draw() {
     model = glm::translate(model, glm::vec3(anchorOffsetX, anchorOffsetY, 0.0f));
 
     if(camera) {
-	    view = glm::translate(glm::mat4(1.0f), glm::vec3(-camera->pos.x, -camera->pos.y, 0.0f));
-        if(camera->rotation != 0.0f) view = glm::rotate(view, glm::radians(camera->rotation), glm::vec3(0,0,1));
+        view = glm::translate(glm::mat4(1.0f), glm::vec3(-camera->pos.x, -camera->pos.y, 0.0f));
+
+        view = glm::translate(view, glm::vec3(camera->pivot.x, camera->pivot.y, 0));
+        view = glm::rotate(view, glm::radians(camera->rotation), glm::vec3(0,0,1));
+
+        if(camera->zoom != 1.0f)
+            view = glm::scale(view, glm::vec3(camera->zoom, camera->zoom, 1));
+
+        view = glm::translate(view, glm::vec3(-camera->pivot.x, -camera->pivot.y, 0));
     }
 
     Vec4f finalColor = HSVtoRGBA(color);

@@ -118,7 +118,7 @@ target_link_libraries(${PROJECT_NAME}test PRIVATE
     OpenGL::GL
     freetype
 )
-target_include_directories(${PROJECT_NAME}test PRIVATE include)
+target_include_directories(${PROJECT_NAME}test PRIVATE include ext)
 
 # --- Copiar assets ---
 #if(KML_COPY_ASSETS)
