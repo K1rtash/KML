@@ -21,33 +21,6 @@ void KML::ParticleGroup::Generate(int count, void* ptr) {
     }
 }
 
-void KML::ParticleGroup::CustomGenerator(Particle& p, void* ptr) {
-    // Posición inicial dentro de un área de emisión
-    KML::Vec2f o{400.0f, 300.0f}, s{100.0f, 200.0f};
-    float minT = 6.0, maxT = 12.0;
-    p.pos = o + Vec2f{
-        KML::RandFloat(0.0f, s.x),
-        KML::RandFloat(0.0f, s.y)
-    };
-
-    // Velocidad inicial moderada
-    p.vel = KML::Vec2f{
-        KML::RandFloat(-5.0f, 5.0f),   // permite moverse a la izquierda o derecha
-        KML::RandFloat(-5.0f, 5.0f)   // dirección hacia arriba (como humo/partículas flotantes)
-    };
-
-    // Aceleración pequeña para suavizar el movimiento
-    p.acc = KML::Vec2f{
-        KML::RandFloat(-1.0f, 1.0f),
-        KML::RandFloat(-1.0f, 1.0f)    // ligera gravedad hacia abajo
-    };
-
-    p.size = KML::RandFloat(10.0f, 20.0f);   // tamaño moderado
-    p.maxTime = KML::RandFloat((float)minT, (float)maxT);    // vida inicial más larga     
-    p.color = KML::Vec3f {KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f)};    
-    p.time = p.maxTime;  
-}
-
 void KML::ParticleGroup::Draw(double dt) {
     assert(shader);
     assert(shape);
@@ -78,14 +51,4 @@ void KML::ParticleGroup::Draw(double dt) {
 
         shape->Use();
     }    
-}
-
-void KML::ParticleGroup::CustomRenderer(Particle& p) {
-    p.vel += p.acc * _deltaTime;
-    p.pos += p.vel * _deltaTime;
-    p.time -= _deltaTime;
-
-    glUniform4f(KML::GetShaderUniformL(shader, "tint"), p.color.x, p.color.y, p.color.z, 1.0f);
-    glUniform1i(KML::GetShaderUniformL(shader, "uTex"), 0);
-    glUniform1i(KML::GetShaderUniformL(shader, "useTex"), tex > 0 ? 1 : 0);
 }

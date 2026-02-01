@@ -5,14 +5,55 @@
 
 #include <fmt/core.h>
 #include <fmt/format.h>
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 void myFunc(void* numero) {
     int* n = (int*)numero;
     printf("Function pointer numero: %d\n", *n);
 }
 
+class ParticulaFuego : public KML::ParticleGroup {
+public:
+    ParticulaFuego(KML::Shader* s) : KML::ParticleGroup{s} {}
+
+    void CustomGenerator(KML::Particle& p, void* ptr) {
+        float* size_ptr = (float*)(ptr);
+        float size = *size_ptr;
+
+        KML::Vec2f o{400.0f, 300.0f}, s{100.0f, 200.0f};
+        float minT = 6.0, maxT = 12.0;
+        p.pos = o + KML::Vec2f{
+            KML::RandFloat(0.0f, s.x),
+            KML::RandFloat(0.0f, s.y)
+        };
+
+        // Velocidad inicial moderada
+        p.vel = KML::Vec2f{
+            KML::RandFloat(-5.0f, 5.0f),   // permite moverse a la izquierda o derecha
+            KML::RandFloat(-5.0f, 5.0f)   // dirección hacia arriba (como humo/partículas flotantes)
+        };
+
+        // Aceleración pequeña para suavizar el movimiento
+        p.acc = KML::Vec2f{
+            KML::RandFloat(-1.0f, 1.0f),
+            KML::RandFloat(-1.0f, 1.0f)    // ligera gravedad hacia abajo
+        };
+
+        p.size = KML::RandFloat(1.0f, size);   // tamaño moderado
+        p.maxTime = KML::RandFloat((float)minT, (float)maxT);    // vida inicial más larga     
+        p.color = KML::Vec3f {KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f)};    
+        p.time = p.maxTime;  
+    }
+
+    void CustomRenderer(KML::Particle& p) {
+        p.vel += p.acc * _deltaTime;
+        p.pos += p.vel * _deltaTime;
+        p.time -= _deltaTime;
+
+        KML::SetUniform_4f("tint", shader, p.color.x, p.color.y, p.color.z, 1.0f);
+        KML::SetUniform_1i("uTex", shader, 0);
+        KML::SetUniform_1i("useTex", shader, tex > 0 ? 1 : 0);
+    }
+};
 
 bool keyDown(int k) {
     if(KML::GetKey(k) == KML::KeyState::PRESS || KML::GetKey(k) == KML::KeyState::HOLD) return true;
@@ -42,7 +83,10 @@ int main(void) {
     KML::Timer timer0{g_clock, 10.0, myFunc, (void*)numPtr};
     timer0.Start();
 
-    KML::ParticleGroup particle0{nullptr};
+    KML::Texture tex0 = KML::LoadTexture("assets/images.png");
+
+    ParticulaFuego particle0{nullptr};
+    particle0.tex = tex0;
 
     g_clock.Tick();
     while(KML::ProcessEvents()) {
@@ -82,11 +126,9 @@ int main(void) {
         }
 
         if(KML::GetKey(KML_KEY_SPACE) == KML::KeyState::PRESS) {
-            struct udata {
-                KML::Vec2f o{400.0f, 300.0f}, s{100.0f, 200.0f};
-            } udata0;
+            float size = 30.0f;
 
-            particle0.Generate(30, (void*)(&udata0));
+            particle0.Generate(30, (void*)(&size));
         }
 
         if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
