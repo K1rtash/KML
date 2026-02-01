@@ -42,6 +42,7 @@ namespace KML {
       public:
         Shader* shader = nullptr;
         Shape* shape = nullptr;
+        Camera* camera = nullptr;
         Texture tex = 0;
 
         ParticleGroup(Shader* shader);

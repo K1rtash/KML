@@ -213,8 +213,7 @@ void KML::Text::Draw() {
     auto it = g_fonts.find(font);
     if(it == g_fonts.end()) return;
 
-    glm::mat4 model = glm::mat4{1.0f};
-    glm::mat4 proj  = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
+    glm::mat4 model = glm::mat4(1.0f), view = glm::mat4(1.0f), proj  = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
 
     // Calculamos ancho y alto total del texto
     float textWidth = 0.0f;
@@ -236,13 +235,18 @@ void KML::Text::Draw() {
     model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
     model = glm::translate(model, glm::vec3(anchorOffsetX, anchorOffsetY, 0.0f));
 
+    if(camera) {
+	    view = glm::translate(glm::mat4(1.0f), glm::vec3(-camera->pos.x, -camera->pos.y, 0.0f));
+        if(camera->rotation != 0.0f) view = glm::rotate(view, glm::radians(camera->rotation), glm::vec3(0,0,1));
+    }
+
     Vec4f finalColor = HSVtoRGBA(color);
     finalColor.w = (float)(100 - Clamp<int>(transparency, 0, 100)) / 100.0f;
 
     glUseProgram(KML::GetShaderID(shader));
     SetUniform_3f("textColor", shader, finalColor.x, finalColor.y, finalColor.z);
     SetUniform_1i("text", shader, 0);
-    glUniformMatrix4fv(GetShaderUniformL(shader, "MVP"), 1, GL_FALSE, glm::value_ptr(proj * model));
+    glUniformMatrix4fv(GetShaderUniformL(shader, "MVP"), 1, GL_FALSE, glm::value_ptr(proj * view * model));
 
     // Dibujamos en coordenadas locales (0,0) y dejamos que la matriz MVP haga la posición + rotación + escala
     renderText(it, text, 1.0f);

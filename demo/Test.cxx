@@ -88,6 +88,10 @@ int main(void) {
     ParticulaFuego particle0{nullptr};
     particle0.tex = tex0;
 
+    KML::Camera cam0{KML::Vec2f(0, 0), KML::Vec2f(1, 1), 0.0};
+    surface.camera = &cam0;
+    text0.camera = &cam0;
+
     g_clock.Tick();
     while(KML::ProcessEvents()) {
         double deltaTime = g_clock.Tick();
@@ -135,10 +139,17 @@ int main(void) {
             KML::ReloadShader(shaderParticles);
         }
 
-        if(KML::GetKey(KML_KEY_P) == KML::KeyState::PRESS) fmt::print("pos: {}, {} scale: {}, {} rot: {}, anchor: {}, {})\n", text0.pos.x, text0.pos.y, text0.scale.x, text0.scale.y, text0.rotation, text0.anchor.x, text0.anchor.y); 
+        if(KML::GetKey(KML_KEY_P) == KML::KeyState::PRESS) fmt::print("pos: {}, {} scale: {}, {} rot: {})\n", cam0.pos.x, cam0.pos.y, cam0.size.x, cam0.size.y, cam0.rotation); 
 
         if(KML::GetMouseButton(KML_MOUSE_BUTTON_LEFT) == KML::KeyState::PRESS) 
             KML::Event(KML::WindowEvent::MOUSE_CAPTURED, 1);
+
+        if(keyDown(KML_KEY_U)) cam0.pos += KML::Vec2f{0.0f, 1.0f};
+        if(keyDown(KML_KEY_J)) cam0.pos += KML::Vec2f{0.0f, -1.0f};
+        if(keyDown(KML_KEY_H)) cam0.pos += KML::Vec2f{-1.0f, 0.0f};
+        if(keyDown(KML_KEY_K)) cam0.pos += KML::Vec2f{1.0f, 0.0f};
+        if(keyDown(KML_KEY_G)) cam0.rotation += 5.0f;
+        if(keyDown(KML_KEY_B)) cam0.rotation -= 5.0f;
 
         surface.pos = text0.pos;
         surface.rotation = text0.rotation;

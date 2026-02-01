@@ -45,6 +45,12 @@ void KML::ParticleGroup::Draw(double dt) {
         model = glm::translate(model, glm::vec3{p.pos.x, p.pos.y, 0});
         model = glm::scale(model, glm::vec3(p.size, p.size, 1));
 
+        if(camera != nullptr) {
+            view = glm::translate(glm::mat4(1.0f), glm::vec3(-camera->pos.x, -camera->pos.y, 0.0f));
+
+            if(camera->rotation != 0.0f) view = glm::rotate(view, glm::radians(camera->rotation), glm::vec3(0,0,1));
+        }
+
         glUniformMatrix4fv(KML::GetShaderUniformL(shader, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
         glUniformMatrix4fv(KML::GetShaderUniformL(shader, "view"), 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(KML::GetShaderUniformL(shader, "model"), 1, GL_FALSE, glm::value_ptr(model));

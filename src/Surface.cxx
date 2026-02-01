@@ -62,7 +62,7 @@ void Sprite::Draw() {
 
     glUseProgram(KML::GetShaderID(shader));
 
-    if(camera != nullptr) {
+    if(camera) {
         view = glm::translate(glm::mat4(1.0f), glm::vec3(-camera->pos.x, -camera->pos.y, 0.0f));
 
         if(camera->rotation != 0.0f) view = glm::rotate(view, glm::radians(camera->rotation), glm::vec3(0,0,1));
