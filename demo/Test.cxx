@@ -44,7 +44,6 @@ int main(void) {
 
     KML::ParticleGroup particle0{nullptr};
 
-    int dibujaParticulas = 0;
     g_clock.Tick();
     while(KML::ProcessEvents()) {
         double deltaTime = g_clock.Tick();
@@ -83,8 +82,7 @@ int main(void) {
         }
 
         if(KML::GetKey(KML_KEY_SPACE) == KML::KeyState::PRESS) {
-            particle0.Generate(10, 2.0, 6.0, KML::Vec2f{400.0f, 300.0f}, KML::Vec2f{5.0f, 2.0f});
-            dibujaParticulas = 1;
+            particle0.Generate(30, 2.0, 10.0, KML::Vec2f{400.0f, 300.0f}, KML::Vec2f{100.0f, 200.0f});
         }
 
         if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
@@ -104,7 +102,7 @@ int main(void) {
 
         surface.Draw();
         text0.Draw();
-        if(dibujaParticulas) particle0.Draw(deltaTime);
+        particle0.Draw(deltaTime);
         KML::PresentFrame();
     }
     KML::Quit();
