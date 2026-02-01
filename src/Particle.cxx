@@ -13,56 +13,58 @@ KML::ParticleGroup::ParticleGroup(Shader* s) {
     shape = __KML::defaultShape;
 }
 
-void KML::ParticleGroup::Generate(int count, double minT, double maxT, Vec2f o, Vec2f s) {
+void KML::ParticleGroup::Generate(int count, void* ptr) {
     for(int i = 0; i < count; i++) {
         Particle p;
-        // Posición inicial dentro de un área de emisión
-        p.pos = o + Vec2f{
-            KML::RandFloat(0.0f, s.x),
-            KML::RandFloat(0.0f, s.y)
-        };
-
-        // Velocidad inicial moderada
-        p.vel = KML::Vec2f{
-            KML::RandFloat(-5.0f, 5.0f),   // permite moverse a la izquierda o derecha
-            KML::RandFloat(-5.0f, 5.0f)   // dirección hacia arriba (como humo/partículas flotantes)
-        };
-
-        // Aceleración pequeña para suavizar el movimiento
-        p.acc = KML::Vec2f{
-            KML::RandFloat(-1.0f, 1.0f),
-            KML::RandFloat(-1.0f, 1.0f)    // ligera gravedad hacia abajo
-        };
-
-        p.size = KML::RandFloat(10.0f, 20.0f);   // tamaño moderado
-        p.maxTime = KML::RandFloat((float)minT, (float)maxT);    // vida inicial más larga     
-        p.color = KML::Vec3f {KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f)};    
-        p.time = p.maxTime;  
-
-        particles.push_back(p);
+        CustomGenerator(p, ptr);
+        _particles.push_back(p);
     }
 }
 
-void KML::ParticleGroup::CustomGenerator(Particle& particle) {
+void KML::ParticleGroup::CustomGenerator(Particle& p, void* ptr) {
+    // Posición inicial dentro de un área de emisión
+    KML::Vec2f o{400.0f, 300.0f}, s{100.0f, 200.0f};
+    float minT = 6.0, maxT = 12.0;
+    p.pos = o + Vec2f{
+        KML::RandFloat(0.0f, s.x),
+        KML::RandFloat(0.0f, s.y)
+    };
 
+    // Velocidad inicial moderada
+    p.vel = KML::Vec2f{
+        KML::RandFloat(-5.0f, 5.0f),   // permite moverse a la izquierda o derecha
+        KML::RandFloat(-5.0f, 5.0f)   // dirección hacia arriba (como humo/partículas flotantes)
+    };
+
+    // Aceleración pequeña para suavizar el movimiento
+    p.acc = KML::Vec2f{
+        KML::RandFloat(-1.0f, 1.0f),
+        KML::RandFloat(-1.0f, 1.0f)    // ligera gravedad hacia abajo
+    };
+
+    p.size = KML::RandFloat(10.0f, 20.0f);   // tamaño moderado
+    p.maxTime = KML::RandFloat((float)minT, (float)maxT);    // vida inicial más larga     
+    p.color = KML::Vec3f {KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f)};    
+    p.time = p.maxTime;  
 }
 
 void KML::ParticleGroup::Draw(double dt) {
     assert(shader);
     assert(shape);
 
-    particles.erase(
-        std::remove_if(particles.begin(), particles.end(),
-        [](const Particle& p){ return p.time <= 0.0f; }), particles.end()
+    _deltaTime = (float)dt;
+
+    _particles.erase(
+        std::remove_if(_particles.begin(), _particles.end(),
+        [](const Particle& p){ return p.time <= 0.0f; }), _particles.end()
     );
 
-    for(Particle& p : particles) {
+    for(Particle& p : _particles) {
         glUseProgram(KML::GetShaderID(shader));
-
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex);
 
-        CustomRenderer(p, (float)dt);
+        CustomRenderer(p);
 
         glm::mat4 view = glm::mat4{1.0f}, model = glm::mat4{1.0f}, 
         proj = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
@@ -78,10 +80,10 @@ void KML::ParticleGroup::Draw(double dt) {
     }    
 }
 
-void KML::ParticleGroup::CustomRenderer(Particle& p, float dt) {
-    p.vel += p.acc * (float)dt;
-    p.pos += p.vel * (float)dt;
-    p.time -= (float)dt;
+void KML::ParticleGroup::CustomRenderer(Particle& p) {
+    p.vel += p.acc * _deltaTime;
+    p.pos += p.vel * _deltaTime;
+    p.time -= _deltaTime;
 
     glUniform4f(KML::GetShaderUniformL(shader, "tint"), p.color.x, p.color.y, p.color.z, 1.0f);
     glUniform1i(KML::GetShaderUniformL(shader, "uTex"), 0);

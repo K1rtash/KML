@@ -33,13 +33,14 @@ namespace KML {
         Texture tex = 0;
 
         ParticleGroup(Shader* shader);
-        void Generate(int count, double minTime, double maxTime, Vec2f origin, Vec2f spread);
+        void Generate(int count, void* userData);
         void Draw(double deltaTime);
 
-        virtual void CustomGenerator(Particle& particle);
-        virtual void CustomRenderer(Particle& particle, float deltaTime);
-      private:
-        std::vector<Particle> particles;
+        virtual void CustomGenerator(Particle& particle, void* userData);
+        virtual void CustomRenderer(Particle& particle);
+      protected:
+        std::vector<Particle> _particles;
+        float _deltaTime;
     };
 
     KML_API Particle GenRandParticle(double minTime, double maxTime, Vec2f origin, Vec2f spread);

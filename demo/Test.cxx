@@ -82,7 +82,11 @@ int main(void) {
         }
 
         if(KML::GetKey(KML_KEY_SPACE) == KML::KeyState::PRESS) {
-            particle0.Generate(30, 2.0, 10.0, KML::Vec2f{400.0f, 300.0f}, KML::Vec2f{100.0f, 200.0f});
+            struct udata {
+                KML::Vec2f o{400.0f, 300.0f}, s{100.0f, 200.0f};
+            } udata0;
+
+            particle0.Generate(30, (void*)(&udata0));
         }
 
         if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
