@@ -85,53 +85,80 @@ $(document).ready(function() { init_codefold(0); });
 <a href="Time_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef KML_TIME_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define KML_TIME_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceKML.html">KML</a> {</div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classKML_1_1Clock.html">   14</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classKML_1_1Clock.html">Clock</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>      <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>();</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <a class="code hl_class" href="classKML_1_1Clock.html">~Clock</a>();</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classKML_1_1Clock.html#a494e59c306843aea6b4659dd7f1eed4b">   23</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Clock.html#a494e59c306843aea6b4659dd7f1eed4b">Tick</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classKML_1_1Clock.html#a09070512bfad0c48d5a51834652f9b24">   30</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Clock.html#a09070512bfad0c48d5a51834652f9b24">Now</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>(<span class="keyword">const</span> <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>(<a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; operator=(<a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>      <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">struct </span>IMP;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        IMP* imp;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    };</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;ABI.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceKML.html">KML</a> {</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classKML_1_1Clock.html">   16</a></span>    <span class="keyword">class </span>KML_API <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>      <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <a class="code hl_class" href="classKML_1_1Clock.html">~Clock</a>();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classKML_1_1Clock.html#a494e59c306843aea6b4659dd7f1eed4b">   25</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Clock.html#a494e59c306843aea6b4659dd7f1eed4b">Tick</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classKML_1_1Clock.html#a09070512bfad0c48d5a51834652f9b24">   32</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Clock.html#a09070512bfad0c48d5a51834652f9b24">Now</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>(<span class="keyword">const</span> <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>(<a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; operator=(<a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>      <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">struct </span>IMP;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        IMP* imp;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    };</div>
 </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classKML_1_1Stopwatch.html">   45</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classKML_1_1Stopwatch.html">Stopwatch</a> {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_class" href="classKML_1_1Stopwatch.html">Stopwatch</a>(<a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; __c);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classKML_1_1Stopwatch.html#a8a7fd184c76c46c9389e602c94f5a499">   52</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classKML_1_1Stopwatch.html#a8a7fd184c76c46c9389e602c94f5a499">Start</a>();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classKML_1_1Stopwatch.html#a51ffefbc7d7484d3cd331729be8cedd9">   61</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Stopwatch.html#a51ffefbc7d7484d3cd331729be8cedd9">Stop</a>();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classKML_1_1Stopwatch.html#ad5e76f22354b91a753621a7e949c3b1e">   70</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Stopwatch.html#ad5e76f22354b91a753621a7e949c3b1e">Query</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; _clock;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">double</span> _start;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">bool</span> _running;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    };</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="};">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classKML_1_1Stopwatch.html">   47</a></span>    <span class="keyword">class </span>KML_API <a class="code hl_class" href="classKML_1_1Stopwatch.html">Stopwatch</a> {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_class" href="classKML_1_1Stopwatch.html">Stopwatch</a>(<a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; __c);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classKML_1_1Stopwatch.html#a8a7fd184c76c46c9389e602c94f5a499">   54</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classKML_1_1Stopwatch.html#a8a7fd184c76c46c9389e602c94f5a499">Start</a>();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classKML_1_1Stopwatch.html#a51ffefbc7d7484d3cd331729be8cedd9">   63</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Stopwatch.html#a51ffefbc7d7484d3cd331729be8cedd9">Stop</a>();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classKML_1_1Stopwatch.html#ad5e76f22354b91a753621a7e949c3b1e">   72</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Stopwatch.html#ad5e76f22354b91a753621a7e949c3b1e">Query</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>      <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; _clock;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">double</span> _start;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordtype">bool</span> _running;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    };</div>
 </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassKML_1_1Clock_html"><div class="ttname"><a href="classKML_1_1Clock.html">KML::Clock</a></div><div class="ttdoc">High-precission clock.</div><div class="ttdef"><b>Definition</b> Time.h:14</div></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="};">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classKML_1_1Timer.html">   79</a></span>    <span class="keyword">class </span>KML_API <a class="code hl_class" href="classKML_1_1Timer.html">Timer</a> {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classKML_1_1Timer.html#a7fb647719327f5e31eb4c3813f6e9795">   89</a></span>        <a class="code hl_function" href="classKML_1_1Timer.html#a7fb647719327f5e31eb4c3813f6e9795">Timer</a>(<a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; clock, <span class="keywordtype">double</span> countdown, <span class="keywordtype">void</span>* user_pointer, <span class="keywordtype">void</span> (*cb)(<span class="keywordtype">void</span>*));</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classKML_1_1Timer.html#acba06a458c199d892cc4148e219ae67b">   94</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classKML_1_1Timer.html#acba06a458c199d892cc4148e219ae67b">Start</a>();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classKML_1_1Timer.html#ab615d097a790fca2f57b6c9a26ff301d">  101</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Timer.html#ab615d097a790fca2f57b6c9a26ff301d">Stop</a>();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classKML_1_1Timer.html#a1d3e09920528dda35f9a17c3d52ed8b4">  108</a></span>        <span class="keywordtype">double</span> <a class="code hl_function" href="classKML_1_1Timer.html#a1d3e09920528dda35f9a17c3d52ed8b4">Query</a>();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <a class="code hl_class" href="classKML_1_1Clock.html">Clock</a>&amp; _clock;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordtype">double</span> _timeTarget;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordtype">bool</span> _running;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        void (*callback)(<span class="keywordtype">void</span>*);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordtype">void</span>* usr_ptr; </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordtype">void</span> end();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    };</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassKML_1_1Clock_html"><div class="ttname"><a href="classKML_1_1Clock.html">KML::Clock</a></div><div class="ttdoc">High-precission clock.</div><div class="ttdef"><b>Definition</b> Time.h:16</div></div>
 <div class="ttc" id="aclassKML_1_1Clock_html_a09070512bfad0c48d5a51834652f9b24"><div class="ttname"><a href="classKML_1_1Clock.html#a09070512bfad0c48d5a51834652f9b24">KML::Clock::Now</a></div><div class="ttdeci">double Now() const</div><div class="ttdoc">Elapsed time since this instance was created.</div></div>
 <div class="ttc" id="aclassKML_1_1Clock_html_a494e59c306843aea6b4659dd7f1eed4b"><div class="ttname"><a href="classKML_1_1Clock.html#a494e59c306843aea6b4659dd7f1eed4b">KML::Clock::Tick</a></div><div class="ttdeci">double Tick() const</div><div class="ttdoc">Elapsed time since the last call to this method.</div></div>
-<div class="ttc" id="aclassKML_1_1Stopwatch_html"><div class="ttname"><a href="classKML_1_1Stopwatch.html">KML::Stopwatch</a></div><div class="ttdoc">Precise timing using a Clock object.</div><div class="ttdef"><b>Definition</b> Time.h:45</div></div>
+<div class="ttc" id="aclassKML_1_1Stopwatch_html"><div class="ttname"><a href="classKML_1_1Stopwatch.html">KML::Stopwatch</a></div><div class="ttdoc">Precise timing using a Clock object.</div><div class="ttdef"><b>Definition</b> Time.h:47</div></div>
 <div class="ttc" id="aclassKML_1_1Stopwatch_html_a51ffefbc7d7484d3cd331729be8cedd9"><div class="ttname"><a href="classKML_1_1Stopwatch.html#a51ffefbc7d7484d3cd331729be8cedd9">KML::Stopwatch::Stop</a></div><div class="ttdeci">double Stop()</div><div class="ttdoc">Gets the elapsed time since Start() was called and halts the stopwatch.</div></div>
 <div class="ttc" id="aclassKML_1_1Stopwatch_html_a8a7fd184c76c46c9389e602c94f5a499"><div class="ttname"><a href="classKML_1_1Stopwatch.html#a8a7fd184c76c46c9389e602c94f5a499">KML::Stopwatch::Start</a></div><div class="ttdeci">void Start()</div><div class="ttdoc">Starts the stopwatch.</div></div>
 <div class="ttc" id="aclassKML_1_1Stopwatch_html_ad5e76f22354b91a753621a7e949c3b1e"><div class="ttname"><a href="classKML_1_1Stopwatch.html#ad5e76f22354b91a753621a7e949c3b1e">KML::Stopwatch::Query</a></div><div class="ttdeci">double Query() const</div><div class="ttdoc">Elapsed time since Start() was called.</div></div>
-<div class="ttc" id="anamespaceKML_html"><div class="ttname"><a href="namespaceKML.html">KML</a></div><div class="ttdoc">Contains all public methods, classes, enums, and structs of the library.</div><div class="ttdef"><b>Definition</b> Audio.h:11</div></div>
+<div class="ttc" id="aclassKML_1_1Timer_html"><div class="ttname"><a href="classKML_1_1Timer.html">KML::Timer</a></div><div class="ttdef"><b>Definition</b> Time.h:79</div></div>
+<div class="ttc" id="aclassKML_1_1Timer_html_a1d3e09920528dda35f9a17c3d52ed8b4"><div class="ttname"><a href="classKML_1_1Timer.html#a1d3e09920528dda35f9a17c3d52ed8b4">KML::Timer::Query</a></div><div class="ttdeci">double Query()</div><div class="ttdoc">Updates the timer, in case the time is up, halts it and calls the function callback.</div></div>
+<div class="ttc" id="aclassKML_1_1Timer_html_a7fb647719327f5e31eb4c3813f6e9795"><div class="ttname"><a href="classKML_1_1Timer.html#a7fb647719327f5e31eb4c3813f6e9795">KML::Timer::Timer</a></div><div class="ttdeci">Timer(Clock &amp;clock, double countdown, void *user_pointer, void(*cb)(void *))</div><div class="ttdoc">Creates a new instance of a timer.</div></div>
+<div class="ttc" id="aclassKML_1_1Timer_html_ab615d097a790fca2f57b6c9a26ff301d"><div class="ttname"><a href="classKML_1_1Timer.html#ab615d097a790fca2f57b6c9a26ff301d">KML::Timer::Stop</a></div><div class="ttdeci">double Stop()</div><div class="ttdoc">Prematurely halts the timer and calls the function callback.</div></div>
+<div class="ttc" id="aclassKML_1_1Timer_html_acba06a458c199d892cc4148e219ae67b"><div class="ttname"><a href="classKML_1_1Timer.html#acba06a458c199d892cc4148e219ae67b">KML::Timer::Start</a></div><div class="ttdeci">void Start()</div><div class="ttdoc">Starts the countdown.</div></div>
+<div class="ttc" id="anamespaceKML_html"><div class="ttname"><a href="namespaceKML.html">KML</a></div><div class="ttdoc">Contains all public methods, classes, enums, and structs of the library.</div><div class="ttdef"><b>Definition</b> Audio.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -8,6 +8,11 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+void myFunc(void* numero) {
+    int* n = (int*)numero;
+    printf("Function pointer numero: %d\n", *n);
+}
+
 
 bool keyDown(int k) {
     if(KML::GetKey(k) == KML::KeyState::PRESS || KML::GetKey(k) == KML::KeyState::HOLD) return true;
@@ -16,6 +21,7 @@ bool keyDown(int k) {
 
 int main(void) {
     std::cout << "cwd: " << std::filesystem::current_path() << "\n";
+    KML::Clock g_clock;
     
     KML::CreateWindow(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
 
@@ -23,13 +29,18 @@ int main(void) {
     surface.color = KML::HSV_v3f(293, 83, 93);
     surface.anchor = KML::Vec2f(0.5f, 0.5f);
 
-    KML::LoadFont("assets/arial.ttf", 48);
     std::string font0 = KML::LoadFont("assets/arial.ttf", 48);
 
-    KML::Shader* shader0 = KML::CreateShader("assets/textv.glsl", "assets/textf.glsl");
+    KML::Shader* shaderParticles = KML::CreateShader("assets/particulas/vert.glsl", "assets/particulas/frag.glsl");
+
     KML::Text text0{font0};
     text0.text = "Hola, KML!";
     //text0.anchor = KML::Vec2f(0.5, 0.5);
+
+    int numerito = 998899;
+    int* numPtr = &numerito;
+    KML::Timer timer0{g_clock, 10.0, myFunc, (void*)numPtr};
+    timer0.Start();
 
     while(KML::ProcessEvents()) {
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
@@ -66,7 +77,7 @@ int main(void) {
         }
 
         if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
-            KML::ReloadShader(shader0);
+            KML::ReloadShader(shaderParticles);
         }
 
         if(KML::GetKey(KML_KEY_P) == KML::KeyState::PRESS) fmt::print("pos: {}, {} scale: {}, {} rot: {}, anchor: {}, {})\n", text0.pos.x, text0.pos.y, text0.scale.x, text0.scale.y, text0.rotation, text0.anchor.x, text0.anchor.y); 
@@ -78,10 +89,10 @@ int main(void) {
         surface.rotation = text0.rotation;
         surface.anchor = text0.anchor;
 
+        timer0.Query();
+
         surface.Draw();
         text0.Draw();
-        //KML::RenderText("assets/arial.ttf:48", nullptr, "Hola KML!", 25, 300, 1.0f, {1,.5,1});
-        //KML::RenderText("assets/arial.ttf:12", nullptr, "Hola KML!", 40, 200, 1.0f, {.4,.2,1});
         KML::PresentFrame();
     }
     KML::Quit();

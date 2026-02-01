@@ -5,19 +5,27 @@
 
 #include "Vector.h"
 #include "Graphics.h"
+#include "Time.h"
+#include "Surface.h"
 
 namespace KML {
-    struct KML_API Particle {
-        KML::Vec3f pos;
-        KML::Vec3f vel;
-        KML::Vec3f accel;
+    class KML_API Particle : public Surface {
+        Vec2f vel;
+        Vec2f acc;
         float size;
-        float life;
-        float maxLife;
+        double maxLife;
+        int count;
+        Shader* shader;
+        Shape* shape;
+        Texture tex;
+        Particle(Clock& clock, double life);
+        void Draw(double deltaTime);
+      private:
+        Timer timer;
+        bool started = false;
     };
 
-    KML_API void DrawParticle(Shader* shader, int count, Particle& p);
-    KML_API Particle GenRandParticle();
+    //KML_API Particle GenRandParticle(double deltaTime);
 }
 
 #endif

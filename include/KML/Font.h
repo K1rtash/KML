@@ -31,12 +31,16 @@ namespace KML {
      */
     KML_API void UnloadFont(std::string key);
 
+    /**
+     * @class      Text Font.h Font
+     * @brief      Renders text as a @ref Surface
+     */
     class KML_API Text : public Surface {
       public:
-        std::string text;
-        std::string font;
-        Shader* shader = nullptr;
-        Camera* camera = nullptr;
+        std::string text; // String of text
+        std::string font; // Keyname of the font
+        Shader* shader = nullptr; // Optional custom @ref Shader
+        Camera* camera = nullptr; // Optional @ref Camera for projection
         Text(std::string key);
         void Draw();
     };

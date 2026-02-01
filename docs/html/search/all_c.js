@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['randfloat_0',['RandFloat',['../namespaceKML.html#a5a5e2ceedaf7d5890e727d52a5f2468b',1,'KML']]],
-  ['readfile_1',['ReadFile',['../namespaceKML.html#a55396d31f3d565ca9304e24f9c3a44c6',1,'KML']]],
-  ['reloadshader_2',['ReloadShader',['../namespaceKML.html#a94d20057d75337dacaeafa8ab9600d8c',1,'KML']]],
-  ['reset_3',['Reset',['../classKML_1_1Sound.html#aee9209b78ee294288d0e36639cc067fc',1,'KML::Sound']]],
-  ['resetmusic_4',['ResetMusic',['../namespaceKML.html#afd70b1d312697ce5ffa77bc2fe39648c',1,'KML']]],
-  ['rgba_5fv4f_5',['RGBA_v4f',['../namespaceKML.html#a035f9eff36476d33878715a443aa94a4',1,'KML']]],
-  ['rgbatohsv_6',['RGBAtoHSV',['../namespaceKML.html#abe4d744072d863497f378f2b2e1e35c6',1,'KML']]]
+  ['query_0',['query',['../classKML_1_1Stopwatch.html#ad5e76f22354b91a753621a7e949c3b1e',1,'KML::Stopwatch::Query()'],['../classKML_1_1Timer.html#a1d3e09920528dda35f9a17c3d52ed8b4',1,'KML::Timer::Query()']]],
+  ['quit_1',['Quit',['../namespaceKML.html#ae0337ef27d27a58c1288ae83ea3a66b1',1,'KML']]]
 ];

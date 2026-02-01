@@ -3,7 +3,7 @@
 
 #include "__KML/graphics.h"
 
-KML::Particle KML::GenRandParticle() {
+/*KML::Particle KML::GenRandParticle() {
     Particle p;
     // Posición inicial dentro de un área de emisión
     p.pos = KML::Vec3f{
@@ -58,4 +58,38 @@ void KML::DrawParticle(Shader* shader, int count, Particle& p) {
     KML::SetUniform_1f("radius", shader, KML::RandFloat(0.2f, 0.8f));
     KML::SetUniform_1f("softness", shader, KML::RandFloat(0.2f, 0.8f));
     //__KML::draw_rect(shader);
+}*/
+
+KML::Particle::Particle(Clock& c, double l) : timer{c, l, nullptr, nullptr}, Surface(0, 0, 0, 0) {
+    if (l > 0) maxLife = l;
+    vel = Vec2f(0, 0);
+    acc = Vec2f(0, 0);
+    shape = __KML::defaultShape;
+}
+
+void KML::Particle::Draw(double dt) {
+    assert(shader);
+    assert(shape);
+
+    if(!started) {
+        started = true;
+        timer.Start();
+    }
+
+    float t = (float)dt;
+
+    Vec2f finalp = pos + vel * t + 0.5f * acc * t * t;
+    float timeLeft = (float)timer.Query();
+
+    SetUniform_3f("particlePos", shader, finalp.x, finalp.y, 0.0f);
+    SetUniform_1f("size", shader, size);
+    SetUniform_1f("timeLeft", shader, timeLeft);
+
+    SetUniform_4f("startColor", shader, 1, 0.5, 0, 1);
+    SetUniform_4f("endColor", shader, 0.2, 0.2, 0.2, 0);
+
+    KML::SetUniform_1f("radius", shader, KML::RandFloat(0.2f, 0.8f));
+    KML::SetUniform_1f("softness", shader, KML::RandFloat(0.2f, 0.8f));
+
+    shape->Use();
 }

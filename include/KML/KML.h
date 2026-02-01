@@ -10,5 +10,6 @@
 #include "Time.h"
 #include "Audio.h"
 #include "Font.h"
+#include "Particle.h"
 
 #endif
