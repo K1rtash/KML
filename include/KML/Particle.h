@@ -32,12 +32,10 @@ namespace KML {
         Shape* shape = nullptr;
         Texture tex = 0;
         Vec2f origin;
-        ParticleGroup(Shader* shader, int count);
-        void Generate(double minTime, double maxTime, Vec2f origin, Vec2f spread);
+        ParticleGroup(Shader* shader);
+        void Generate(int count, double minTime, double maxTime, Vec2f origin, Vec2f spread);
         void Draw(double deltaTime);
       private:
-        //Particle* particles;
-        int count = 10;
         std::vector<Particle> particles;
 
     };

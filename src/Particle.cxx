@@ -38,59 +38,27 @@ KML::Particle KML::GenRandParticle(double minT, double maxT, Vec2f origin, Vec2f
 }
 
 
-KML::ParticleGroup::ParticleGroup(Shader* s, int n) {
-    shader = s;
+KML::ParticleGroup::ParticleGroup(Shader* s) {
+    shader = (s ? s : __KML::defaultShader);
     shape = __KML::defaultShape;
-    //particles = new Particle[n];
-    count = n;
 }
 
-void KML::ParticleGroup::Generate(double minT, double maxT, Vec2f o, Vec2f s) {
-    origin = o;
+void KML::ParticleGroup::Generate(int count, double minT, double maxT, Vec2f o, Vec2f s) {
     for(int i = 0; i < count; i++) {
         particles.push_back(GenRandParticle(2.0, 6.0, o, s));
     }
 }
 
-/*void KML::ParticleGroup::Draw(double dt) {
-    shader = __KML::defaultShader;
-    assert(shader);
-    assert(shape);
-
-    glUseProgram(GetShaderID(shader));
-
-    for(Particle& p : particles) {
-
-        //if(it->time <= 0.0f) continue;
-        p.vel += p.acc * (float)dt;
-        p.pos += p.vel * (float)dt;
-        p.time -= (float)dt;
-
-        float timeLeft = p.time / p.maxTime;
-
-        glm::mat4 view = glm::mat4{1.0f}, model = glm::mat4{1.0f}, 
-        proj = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
-
-        model = glm::translate(model, glm::vec3{p.pos.x, p.pos.y, 0});
-        model = glm::scale(model, glm::vec3(p.size, p.size, 1));
-
-        glm::mat4 PVM = proj * view * model;
-
-        glUniformMatrix4fv(KML::GetShaderUniformL(shader, "MVP"), 1, GL_FALSE, glm::value_ptr(PVM));
-        glUniform4f(KML::GetShaderUniformL(shader, "color"), p.color.x, p.color.y, p.color.z, 1.0f);
-
-        shape->Use();
-    }    
-}*/
-
 void KML::ParticleGroup::Draw(double dt) {
-    shader = __KML::defaultShader;
     assert(shader);
     assert(shape);
 
-    for(Particle& p : particles) {
+    particles.erase(
+        std::remove_if(particles.begin(), particles.end(),
+        [](const Particle& p){ return p.time <= 0.0f; }), particles.end()
+    );
 
-        //if(it->time <= 0.0f) continue;
+    for(Particle& p : particles) {
         p.vel += p.acc * (float)dt;
         p.pos += p.vel * (float)dt;
         p.time -= (float)dt;

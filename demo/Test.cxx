@@ -42,7 +42,7 @@ int main(void) {
     KML::Timer timer0{g_clock, 10.0, myFunc, (void*)numPtr};
     timer0.Start();
 
-    KML::ParticleGroup particle0{shaderParticles, 15};
+    KML::ParticleGroup particle0{nullptr};
 
     int dibujaParticulas = 0;
     g_clock.Tick();
@@ -83,7 +83,7 @@ int main(void) {
         }
 
         if(KML::GetKey(KML_KEY_SPACE) == KML::KeyState::PRESS) {
-            particle0.Generate(2.0, 6.0, KML::Vec2f{400.0f, 300.0f}, KML::Vec2f{5.0f, 2.0f});
+            particle0.Generate(10, 2.0, 6.0, KML::Vec2f{400.0f, 300.0f}, KML::Vec2f{5.0f, 2.0f});
             dibujaParticulas = 1;
         }
 
