@@ -18,23 +18,32 @@ namespace KML {
       public:
         Vec2f pos;
         Vec2f size;
+        Vec2f pivot;
         float rotation;
+        float zoom = 1.0f;
         Camera();
         Camera(Vec2f pos, Vec2f scale, float rotation);
     };
-    class KML_API Surface {
-      public:
-        Vec2f pos{0.0f, 0.0f};
-        Vec2f scale{1.0f, 1.0f};
-        Vec2f anchor{0.0f, 0.0f}; //0,0 es el centro
-        Vec3f color{0.0f, 0.0f, 100.0f};
 
+    struct KML_API Surface {
+      Vec2f pos{0.0f, 0.0f};
+      Vec2f scale{1.0f, 1.0f};
+      Vec2f anchor{0.0f, 0.0f}; //0,0 es el centro
+      Vec3f color{0.0f, 0.0f, 100.0f};
+      int transparency = 0;
+      float rotation = 0.0f;
+
+      Surface() = default;
+
+      Surface(float x, float y, float w, float h) : pos(x, y), scale(w, h) {}
+    };
+
+    class KML_API Sprite : public Surface {
+      public:
         Shader* shader = nullptr;
         Shape* shape = nullptr;
         Camera* camera = nullptr;
-
-        int transparency = 0;
-        float rotation = 0.0f;
+        Texture tex = 0;
 
         void SetTexture(std::string texture);
         void SetColor_HSV(int H, int S = 100, int V = 100);
@@ -42,15 +51,11 @@ namespace KML {
 
         virtual void Draw();
 
-        Surface();
-        Surface(Shader* shader);
-        Surface(Vec4f transform);
-        Surface(std::string texture);
-        Surface(std::string texture, Vec4f transform);
-        Surface(std::string texture, Vec4f transform, Vec2f anchor);
-        Surface(std::string texture, Vec4f transform, Vec2f anchor, float rotation);
-      //protected:
-        unsigned int tex = 0;
+        Sprite();
+        Sprite(Shader* shader);
+        Sprite(Vec4f transform);
+        Sprite(std::string texture);
+        Sprite(std::string texture, Vec4f transform);
     };
 }
 

@@ -30,10 +30,10 @@ int main(void) {
 
     KML::Shape shape0(vertices, sizeof(vertices), indices, sizeof(indices));
 
-    KML::Surface background(KML::Vec4f{0.0f, 0.0f, 800.0f, 600.0f});
+    KML::Sprite background(KML::Vec4f{0.0f, 0.0f, 800.0f, 600.0f});
     background.SetColor_RGB(118, 144, 166);
 
-    KML::Surface surface{KML::Vec4f(400.0f, 300.0f, 300.0f, 300.0f)};
+    KML::Sprite surface{KML::Vec4f(400.0f, 300.0f, 300.0f, 300.0f)};
     surface.transparency = 25;
     surface.anchor = KML::Vec2f(0.5f, 0.5f);
     surface.shape = &shape0;
@@ -91,6 +91,6 @@ int main(void) {
     }
 
     std::cout << "This program took " << stopwatch.Stop() << " seconds" << std::endl;
-    KML::Terminate();
+    KML::Quit();
     return 0;
 }

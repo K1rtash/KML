@@ -89,10 +89,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1Clock.html">Clock</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-precission clock.  <a href="classKML_1_1Clock.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1Layer.html">Layer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classKML_1_1Surface.html">Surface</a> objects in this layer will be rendered in bulk and in the depth order they were added.  <a href="classKML_1_1Layer.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structKML_1_1Particle.html">Particle</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single particle.  <a href="structKML_1_1Particle.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1ParticleGroup.html">ParticleGroup</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class describes a particle group.  <a href="classKML_1_1ParticleGroup.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1Shape.html">Shape</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to set diferent shapes to render surfaces.  <a href="classKML_1_1Shape.html#details">More...</a><br /></td></tr>
@@ -103,10 +104,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1SoundPool.html">SoundPool</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages sounds lifetime.  <a href="classKML_1_1SoundPool.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1Sprite.html">Sprite</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1Stopwatch.html">Stopwatch</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Precise timing using a <a class="el" href="classKML_1_1Clock.html">Clock</a> object.  <a href="classKML_1_1Stopwatch.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1Surface.html">Surface</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structKML_1_1Surface.html">Surface</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1Text.html">Text</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders text as a <a class="el" href="structKML_1_1Surface.html">Surface</a>.  <a href="classKML_1_1Text.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKML_1_1Timer.html">Timer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structKML_1_1Vec2f.html">Vec2f</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,122 +170,119 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adaff475747cbe4dc1cbe240239abf225" id="r_adaff475747cbe4dc1cbe240239abf225"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#adaff475747cbe4dc1cbe240239abf225">LoadSound</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">streaming</a>=<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">false</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">loop</a>=<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">false</a>)</td></tr>
-<tr class="memdesc:adaff475747cbe4dc1cbe240239abf225"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a sound from disc.  <br /></td></tr>
-<tr class="separator:adaff475747cbe4dc1cbe240239abf225"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ba03a407df33ff62e8bab6ba10a7d87" id="r_a4ba03a407df33ff62e8bab6ba10a7d87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a4ba03a407df33ff62e8bab6ba10a7d87">UnloadSound</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
-<tr class="memdesc:a4ba03a407df33ff62e8bab6ba10a7d87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unloads a sound from memory.  <br /></td></tr>
-<tr class="separator:a4ba03a407df33ff62e8bab6ba10a7d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6343d4c1154211ca659c4351babf73f" id="r_af6343d4c1154211ca659c4351babf73f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#af6343d4c1154211ca659c4351babf73f">PlayMusic</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> volume=1.0f, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> pitch=1.0f)</td></tr>
-<tr class="memdesc:af6343d4c1154211ca659c4351babf73f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plays a unique sound.  <br /></td></tr>
-<tr class="separator:af6343d4c1154211ca659c4351babf73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9c417b94c61b03da21b02ad4e34909a" id="r_af9c417b94c61b03da21b02ad4e34909a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#af9c417b94c61b03da21b02ad4e34909a">StopMusic</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
-<tr class="memdesc:af9c417b94c61b03da21b02ad4e34909a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the music.  <br /></td></tr>
-<tr class="separator:af9c417b94c61b03da21b02ad4e34909a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd70b1d312697ce5ffa77bc2fe39648c" id="r_afd70b1d312697ce5ffa77bc2fe39648c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#afd70b1d312697ce5ffa77bc2fe39648c">ResetMusic</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
-<tr class="memdesc:afd70b1d312697ce5ffa77bc2fe39648c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the song.  <br /></td></tr>
-<tr class="separator:afd70b1d312697ce5ffa77bc2fe39648c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66ccdbca20a8998e7b74c1436bd420d0" id="r_a66ccdbca20a8998e7b74c1436bd420d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a66ccdbca20a8998e7b74c1436bd420d0">SetGlobalPitch</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> pitch=1.0f)</td></tr>
-<tr class="memdesc:a66ccdbca20a8998e7b74c1436bd420d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the global pitch multiplier.  <br /></td></tr>
-<tr class="separator:a66ccdbca20a8998e7b74c1436bd420d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cbc0dca785aeb390f50484ef631310b" id="r_a3cbc0dca785aeb390f50484ef631310b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a3cbc0dca785aeb390f50484ef631310b">SetGlobalVolume</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> volume=1.0f)</td></tr>
-<tr class="memdesc:a3cbc0dca785aeb390f50484ef631310b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the global volume.  <br /></td></tr>
-<tr class="separator:a3cbc0dca785aeb390f50484ef631310b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad972eb2e4faf62da678ae58961328e3e" id="r_ad972eb2e4faf62da678ae58961328e3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ad972eb2e4faf62da678ae58961328e3e">CreateWindow</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">width</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">height</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">title</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unsigned</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">flags</a>=NONE)</td></tr>
-<tr class="memdesc:ad972eb2e4faf62da678ae58961328e3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a unique graphical context for this library.  <br /></td></tr>
-<tr class="separator:ad972eb2e4faf62da678ae58961328e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2aa7a3fbdb3b0f135e57939ef7775c18" id="r_a2aa7a3fbdb3b0f135e57939ef7775c18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a2aa7a3fbdb3b0f135e57939ef7775c18">CreateWindowP</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">width</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">height</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">title</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">logical_width</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">logical_height</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">glCtxMajor</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">glCtxMinor</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unsigned</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">flags</a>)</td></tr>
-<tr class="memdesc:a2aa7a3fbdb3b0f135e57939ef7775c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a unique graphical context for this library with additional parameters.  <br /></td></tr>
-<tr class="separator:a2aa7a3fbdb3b0f135e57939ef7775c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36d2b284b16d0f96592c5c4454d59117" id="r_a36d2b284b16d0f96592c5c4454d59117"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a36d2b284b16d0f96592c5c4454d59117">ProcessEvents</a> ()</td></tr>
-<tr class="memdesc:a36d2b284b16d0f96592c5c4454d59117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process keystrokes, mouse input, and user events.  <br /></td></tr>
-<tr class="separator:a36d2b284b16d0f96592c5c4454d59117"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44b7a6f84443c94fe471ea7b3c521fe4" id="r_a44b7a6f84443c94fe471ea7b3c521fe4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a44b7a6f84443c94fe471ea7b3c521fe4">GetMouseCaptureState</a> ()</td></tr>
-<tr class="memdesc:a44b7a6f84443c94fe471ea7b3c521fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the mouse capture state.  <br /></td></tr>
-<tr class="separator:a44b7a6f84443c94fe471ea7b3c521fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa250303136207b3e81d629ab6a8533b0" id="r_aa250303136207b3e81d629ab6a8533b0"><td class="memItemLeft" align="right" valign="top"><a id="aa250303136207b3e81d629ab6a8533b0" name="aa250303136207b3e81d629ab6a8533b0"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Terminate</b> ()</td></tr>
-<tr class="memdesc:aa250303136207b3e81d629ab6a8533b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all resources used in the library You must not use any method aftern calling this. <br /></td></tr>
-<tr class="separator:aa250303136207b3e81d629ab6a8533b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23d0f74d34e9c5952ff0b3bc853c4d18" id="r_a23d0f74d34e9c5952ff0b3bc853c4d18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a23d0f74d34e9c5952ff0b3bc853c4d18">Event</a> (<a class="el" href="namespaceKML.html#a4b5e77ed178f16207b2a3c26285ea061">WindowEvent</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">event</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">value</a>)</td></tr>
-<tr class="memdesc:a23d0f74d34e9c5952ff0b3bc853c4d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls the window state using events.  <br /></td></tr>
-<tr class="separator:a23d0f74d34e9c5952ff0b3bc853c4d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aceef7b4c7d6b7549b2aa7bfe357a01c8" id="r_aceef7b4c7d6b7549b2aa7bfe357a01c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#aceef7b4c7d6b7549b2aa7bfe357a01c8">PresentFrame</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">r</a>=0.0f, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">g</a>=0.0f, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">b</a>=0.0f)</td></tr>
-<tr class="memdesc:aceef7b4c7d6b7549b2aa7bfe357a01c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the screen with the given color and draws the current frame.  <br /></td></tr>
-<tr class="separator:aceef7b4c7d6b7549b2aa7bfe357a01c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b11dc8a093a053468317e82a2b0a85f" id="r_a7b11dc8a093a053468317e82a2b0a85f"><td class="memItemLeft" align="right" valign="top"><a id="a7b11dc8a093a053468317e82a2b0a85f" name="a7b11dc8a093a053468317e82a2b0a85f"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PrintContext</b> ()</td></tr>
-<tr class="memdesc:a7b11dc8a093a053468317e82a2b0a85f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the current OpenGL context to stdout. <br /></td></tr>
-<tr class="separator:a7b11dc8a093a053468317e82a2b0a85f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81237264c99328d842a9554375b7aa57" id="r_a81237264c99328d842a9554375b7aa57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#a8b3eadd9002aae3f7659f7ae97209af4">KeyState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a81237264c99328d842a9554375b7aa57">GetKey</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">key</a>)</td></tr>
-<tr class="memdesc:a81237264c99328d842a9554375b7aa57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the key's state as enum.  <br /></td></tr>
-<tr class="separator:a81237264c99328d842a9554375b7aa57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea65cb3b1376db59148a9d614b55b9d6" id="r_aea65cb3b1376db59148a9d614b55b9d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#a8b3eadd9002aae3f7659f7ae97209af4">KeyState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#aea65cb3b1376db59148a9d614b55b9d6">GetMouseButton</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">button</a>)</td></tr>
-<tr class="memdesc:aea65cb3b1376db59148a9d614b55b9d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the mouse button state as enum.  <br /></td></tr>
-<tr class="separator:aea65cb3b1376db59148a9d614b55b9d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abad17d702bd801eab22e5cdfd8f60964" id="r_abad17d702bd801eab22e5cdfd8f60964"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#abad17d702bd801eab22e5cdfd8f60964">SetWindowTitle</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">title</a>)</td></tr>
-<tr class="memdesc:abad17d702bd801eab22e5cdfd8f60964"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the window title.  <br /></td></tr>
-<tr class="separator:abad17d702bd801eab22e5cdfd8f60964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dda7006bce7a1defc96bd51c09517fe" id="r_a6dda7006bce7a1defc96bd51c09517fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a6dda7006bce7a1defc96bd51c09517fe">SetWindowIcon</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
-<tr class="memdesc:a6dda7006bce7a1defc96bd51c09517fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the window icon.  <br /></td></tr>
-<tr class="separator:a6dda7006bce7a1defc96bd51c09517fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35c73249565f4cca1d89618530926906" id="r_a35c73249565f4cca1d89618530926906"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a35c73249565f4cca1d89618530926906">CreateShader</a> (std::filesystem::path <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">vertex</a>, std::filesystem::path <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">fragment</a>)</td></tr>
-<tr class="memdesc:a35c73249565f4cca1d89618530926906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a custom shader program from disc files.  <br /></td></tr>
-<tr class="separator:a35c73249565f4cca1d89618530926906"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8cd9244dbc0519511d503100c03591c" id="r_ab8cd9244dbc0519511d503100c03591c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ab8cd9244dbc0519511d503100c03591c">CreateShader</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">vertex</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">fragment</a>)</td></tr>
-<tr class="memdesc:ab8cd9244dbc0519511d503100c03591c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a custom shader program from raw source.  <br /></td></tr>
-<tr class="separator:ab8cd9244dbc0519511d503100c03591c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a171a53b1dadef57774c9d8d8f6c67284" id="r_a171a53b1dadef57774c9d8d8f6c67284"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a171a53b1dadef57774c9d8d8f6c67284">GetShaderUniformL</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>)</td></tr>
-<tr class="memdesc:a171a53b1dadef57774c9d8d8f6c67284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the location of a uniform in a shader program.  <br /></td></tr>
-<tr class="separator:a171a53b1dadef57774c9d8d8f6c67284"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8ae5749ecdcb3aa862665e7fe6a4dd1" id="r_ab8ae5749ecdcb3aa862665e7fe6a4dd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unsigned</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ab8ae5749ecdcb3aa862665e7fe6a4dd1">GetShaderID</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader)</td></tr>
-<tr class="memdesc:ab8ae5749ecdcb3aa862665e7fe6a4dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the shader id.  <br /></td></tr>
-<tr class="separator:ab8ae5749ecdcb3aa862665e7fe6a4dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fb3f36354fa5277ba78c847881957b7" id="r_a7fb3f36354fa5277ba78c847881957b7"><td class="memItemLeft" align="right" valign="top"><a id="a7fb3f36354fa5277ba78c847881957b7" name="a7fb3f36354fa5277ba78c847881957b7"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_1f</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>)</td></tr>
-<tr class="separator:a7fb3f36354fa5277ba78c847881957b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94519cda60a6ad854395d4ab9a3f44ab" id="r_a94519cda60a6ad854395d4ab9a3f44ab"><td class="memItemLeft" align="right" valign="top"><a id="a94519cda60a6ad854395d4ab9a3f44ab" name="a94519cda60a6ad854395d4ab9a3f44ab"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_1i</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>)</td></tr>
-<tr class="separator:a94519cda60a6ad854395d4ab9a3f44ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa15ebb4cbcf872731525ef7a656794aa" id="r_aa15ebb4cbcf872731525ef7a656794aa"><td class="memItemLeft" align="right" valign="top"><a id="aa15ebb4cbcf872731525ef7a656794aa" name="aa15ebb4cbcf872731525ef7a656794aa"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_2f</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v1</a>)</td></tr>
-<tr class="separator:aa15ebb4cbcf872731525ef7a656794aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a109e4e654aec88abd29a3686a21a3347" id="r_a109e4e654aec88abd29a3686a21a3347"><td class="memItemLeft" align="right" valign="top"><a id="a109e4e654aec88abd29a3686a21a3347" name="a109e4e654aec88abd29a3686a21a3347"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_3f</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v1</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v2</a>)</td></tr>
-<tr class="separator:a109e4e654aec88abd29a3686a21a3347"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7e9993e9e269e3ff6b9aa37b6653403" id="r_ad7e9993e9e269e3ff6b9aa37b6653403"><td class="memItemLeft" align="right" valign="top"><a id="ad7e9993e9e269e3ff6b9aa37b6653403" name="ad7e9993e9e269e3ff6b9aa37b6653403"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_4f</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v1</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v2</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v3</a>)</td></tr>
-<tr class="separator:ad7e9993e9e269e3ff6b9aa37b6653403"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac34a87a42b13c2ddc27e6c4ffd4c48b2" id="r_ac34a87a42b13c2ddc27e6c4ffd4c48b2"><td class="memItemLeft" align="right" valign="top"><a id="ac34a87a42b13c2ddc27e6c4ffd4c48b2" name="ac34a87a42b13c2ddc27e6c4ffd4c48b2"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_2fv</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec2f.html">Vec2f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">__v</a>)</td></tr>
-<tr class="separator:ac34a87a42b13c2ddc27e6c4ffd4c48b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04c981a9cee295e1fe989e50b842571a" id="r_a04c981a9cee295e1fe989e50b842571a"><td class="memItemLeft" align="right" valign="top"><a id="a04c981a9cee295e1fe989e50b842571a" name="a04c981a9cee295e1fe989e50b842571a"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_3fv</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec3f.html">Vec3f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">__v</a>)</td></tr>
-<tr class="separator:a04c981a9cee295e1fe989e50b842571a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d2fedfde0c642641a6d9d938c3580ec" id="r_a2d2fedfde0c642641a6d9d938c3580ec"><td class="memItemLeft" align="right" valign="top"><a id="a2d2fedfde0c642641a6d9d938c3580ec" name="a2d2fedfde0c642641a6d9d938c3580ec"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_4fv</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec4f.html">Vec4f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">__v</a>)</td></tr>
-<tr class="separator:a2d2fedfde0c642641a6d9d938c3580ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94d20057d75337dacaeafa8ab9600d8c" id="r_a94d20057d75337dacaeafa8ab9600d8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a94d20057d75337dacaeafa8ab9600d8c">ReloadShader</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader)</td></tr>
-<tr class="memdesc:a94d20057d75337dacaeafa8ab9600d8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compiles the shader's source files and maps uniform locations.  <br /></td></tr>
-<tr class="separator:a94d20057d75337dacaeafa8ab9600d8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a040207ec4031cc9a21f057b2d6492e78" id="r_a040207ec4031cc9a21f057b2d6492e78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a040207ec4031cc9a21f057b2d6492e78">DeleteShader</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&amp;shader)</td></tr>
-<tr class="memdesc:a040207ec4031cc9a21f057b2d6492e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all allocated resources in a shader program.  <br /></td></tr>
-<tr class="separator:a040207ec4031cc9a21f057b2d6492e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1e698c2426ee65ad6b986e4e62615d1" id="r_ac1e698c2426ee65ad6b986e4e62615d1"><td class="memItemLeft" align="right" valign="top">Texture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ac1e698c2426ee65ad6b986e4e62615d1">LoadTexture</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
-<tr class="memdesc:ac1e698c2426ee65ad6b986e4e62615d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a texture from file, will be saved as the char* you provided.  <br /></td></tr>
-<tr class="separator:ac1e698c2426ee65ad6b986e4e62615d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2751c17017734af095108891de845a6" id="r_ad2751c17017734af095108891de845a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ad2751c17017734af095108891de845a6">UnloadTexture</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
-<tr class="memdesc:ad2751c17017734af095108891de845a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all allocated resources in a texture.  <br /></td></tr>
-<tr class="separator:ad2751c17017734af095108891de845a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6751eec482f57a985e171e0dc2355bf7" id="r_a6751eec482f57a985e171e0dc2355bf7"><td class="memItemLeft" align="right" valign="top"><a id="a6751eec482f57a985e171e0dc2355bf7" name="a6751eec482f57a985e171e0dc2355bf7"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>DrawLayers</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">maxLayers</a>=0)</td></tr>
-<tr class="separator:a6751eec482f57a985e171e0dc2355bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd7ea959e9b3afb327331f3903d14e61" id="r_abd7ea959e9b3afb327331f3903d14e61"><td class="memItemLeft" align="right" valign="top"><a id="abd7ea959e9b3afb327331f3903d14e61" name="abd7ea959e9b3afb327331f3903d14e61"></a>
-<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>DrawParticle</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">count</a>, <a class="el" href="structKML_1_1Particle.html">Particle</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">p</a>)</td></tr>
-<tr class="separator:abd7ea959e9b3afb327331f3903d14e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e3ce03b61c0ccbc8289e5e3fbd10fe0" id="r_a4e3ce03b61c0ccbc8289e5e3fbd10fe0"><td class="memItemLeft" align="right" valign="top"><a id="a4e3ce03b61c0ccbc8289e5e3fbd10fe0" name="a4e3ce03b61c0ccbc8289e5e3fbd10fe0"></a>
-<a class="el" href="structKML_1_1Particle.html">Particle</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GenRandParticle</b> ()</td></tr>
-<tr class="separator:a4e3ce03b61c0ccbc8289e5e3fbd10fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e1a73a707b0175a9887d01037e1793c" id="r_a1e1a73a707b0175a9887d01037e1793c"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a1e1a73a707b0175a9887d01037e1793c">LoadSound</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">streaming</a>=<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">false</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">loop</a>=<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">false</a>)</td></tr>
+<tr class="memdesc:a1e1a73a707b0175a9887d01037e1793c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a sound from disc.  <br /></td></tr>
+<tr class="separator:a1e1a73a707b0175a9887d01037e1793c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae21a173e6d09cdffc393a29d9943ab78" id="r_ae21a173e6d09cdffc393a29d9943ab78"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ae21a173e6d09cdffc393a29d9943ab78">UnloadSound</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
+<tr class="memdesc:ae21a173e6d09cdffc393a29d9943ab78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unloads a sound from memory.  <br /></td></tr>
+<tr class="separator:ae21a173e6d09cdffc393a29d9943ab78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a752bb1e8ed11832cbb2ae09392d59bae" id="r_a752bb1e8ed11832cbb2ae09392d59bae"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a752bb1e8ed11832cbb2ae09392d59bae">PlayMusic</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> volume=1.0f, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> pitch=1.0f)</td></tr>
+<tr class="memdesc:a752bb1e8ed11832cbb2ae09392d59bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plays a unique sound.  <br /></td></tr>
+<tr class="separator:a752bb1e8ed11832cbb2ae09392d59bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32ff5ee8c7b0932807ebe1aec502a766" id="r_a32ff5ee8c7b0932807ebe1aec502a766"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a32ff5ee8c7b0932807ebe1aec502a766">StopMusic</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
+<tr class="memdesc:a32ff5ee8c7b0932807ebe1aec502a766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the music.  <br /></td></tr>
+<tr class="separator:a32ff5ee8c7b0932807ebe1aec502a766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa192fd8642b06808b14f5d0074a3e7d3" id="r_aa192fd8642b06808b14f5d0074a3e7d3"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#aa192fd8642b06808b14f5d0074a3e7d3">ResetMusic</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
+<tr class="memdesc:aa192fd8642b06808b14f5d0074a3e7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the song.  <br /></td></tr>
+<tr class="separator:aa192fd8642b06808b14f5d0074a3e7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac22b194b59f8e6c2ec3357ec4d897d24" id="r_ac22b194b59f8e6c2ec3357ec4d897d24"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ac22b194b59f8e6c2ec3357ec4d897d24">SetGlobalPitch</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> pitch=1.0f)</td></tr>
+<tr class="memdesc:ac22b194b59f8e6c2ec3357ec4d897d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the global pitch multiplier.  <br /></td></tr>
+<tr class="separator:ac22b194b59f8e6c2ec3357ec4d897d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0985dbcae19624b9c8e1caa1e31a9ba" id="r_ac0985dbcae19624b9c8e1caa1e31a9ba"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ac0985dbcae19624b9c8e1caa1e31a9ba">SetGlobalVolume</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> volume=1.0f)</td></tr>
+<tr class="memdesc:ac0985dbcae19624b9c8e1caa1e31a9ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the global volume.  <br /></td></tr>
+<tr class="separator:ac0985dbcae19624b9c8e1caa1e31a9ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c8407f17ef02e0747be129f94ed62d2" id="r_a5c8407f17ef02e0747be129f94ed62d2"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a5c8407f17ef02e0747be129f94ed62d2">CreateWindow</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">width</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">height</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">title</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unsigned</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">flags</a>=NONE)</td></tr>
+<tr class="memdesc:a5c8407f17ef02e0747be129f94ed62d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a unique graphical context for this library.  <br /></td></tr>
+<tr class="separator:a5c8407f17ef02e0747be129f94ed62d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c949c245c1e5f653054abbbc0816d0" id="r_ad0c949c245c1e5f653054abbbc0816d0"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ad0c949c245c1e5f653054abbbc0816d0">CreateWindowP</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">width</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">height</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">title</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">logical_width</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">logical_height</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">glCtxMajor</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">glCtxMinor</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unsigned</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">flags</a>)</td></tr>
+<tr class="memdesc:ad0c949c245c1e5f653054abbbc0816d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a unique graphical context for this library with additional parameters.  <br /></td></tr>
+<tr class="separator:ad0c949c245c1e5f653054abbbc0816d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4e2f73ac968a5c778d1b8e40f8677dd" id="r_af4e2f73ac968a5c778d1b8e40f8677dd"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#af4e2f73ac968a5c778d1b8e40f8677dd">ProcessEvents</a> ()</td></tr>
+<tr class="memdesc:af4e2f73ac968a5c778d1b8e40f8677dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process keystrokes, mouse input, and user events.  <br /></td></tr>
+<tr class="separator:af4e2f73ac968a5c778d1b8e40f8677dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8dc16314320371d6a671b001803198c" id="r_ad8dc16314320371d6a671b001803198c"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ad8dc16314320371d6a671b001803198c">GetMouseCaptureState</a> ()</td></tr>
+<tr class="memdesc:ad8dc16314320371d6a671b001803198c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the mouse capture state.  <br /></td></tr>
+<tr class="separator:ad8dc16314320371d6a671b001803198c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0337ef27d27a58c1288ae83ea3a66b1" id="r_ae0337ef27d27a58c1288ae83ea3a66b1"><td class="memItemLeft" align="right" valign="top"><a id="ae0337ef27d27a58c1288ae83ea3a66b1" name="ae0337ef27d27a58c1288ae83ea3a66b1"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Quit</b> ()</td></tr>
+<tr class="memdesc:ae0337ef27d27a58c1288ae83ea3a66b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all resources used in the library You must not use any method aftern calling this. <br /></td></tr>
+<tr class="separator:ae0337ef27d27a58c1288ae83ea3a66b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ae7caf0564a3487ccbc5168d069b93e" id="r_a5ae7caf0564a3487ccbc5168d069b93e"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a5ae7caf0564a3487ccbc5168d069b93e">Event</a> (<a class="el" href="namespaceKML.html#a4b5e77ed178f16207b2a3c26285ea061">WindowEvent</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">event</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">value</a>)</td></tr>
+<tr class="memdesc:a5ae7caf0564a3487ccbc5168d069b93e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls the window state using events.  <br /></td></tr>
+<tr class="separator:a5ae7caf0564a3487ccbc5168d069b93e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a971bdffe522bf64f1ddec2820cede83b" id="r_a971bdffe522bf64f1ddec2820cede83b"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a971bdffe522bf64f1ddec2820cede83b">PresentFrame</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">r</a>=0.0f, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">g</a>=0.0f, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">b</a>=0.0f)</td></tr>
+<tr class="memdesc:a971bdffe522bf64f1ddec2820cede83b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the screen with the given color and draws the current frame.  <br /></td></tr>
+<tr class="separator:a971bdffe522bf64f1ddec2820cede83b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36ceac0de3f4418c817b7082fc0c1786" id="r_a36ceac0de3f4418c817b7082fc0c1786"><td class="memItemLeft" align="right" valign="top"><a id="a36ceac0de3f4418c817b7082fc0c1786" name="a36ceac0de3f4418c817b7082fc0c1786"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PrintContext</b> ()</td></tr>
+<tr class="memdesc:a36ceac0de3f4418c817b7082fc0c1786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the current OpenGL context to stdout. <br /></td></tr>
+<tr class="separator:a36ceac0de3f4418c817b7082fc0c1786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa293de57842fba48bbbf7d3fdd22a7ef" id="r_aa293de57842fba48bbbf7d3fdd22a7ef"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#a8b3eadd9002aae3f7659f7ae97209af4">KeyState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#aa293de57842fba48bbbf7d3fdd22a7ef">GetKey</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">key</a>)</td></tr>
+<tr class="memdesc:aa293de57842fba48bbbf7d3fdd22a7ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the key's state as enum.  <br /></td></tr>
+<tr class="separator:aa293de57842fba48bbbf7d3fdd22a7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af87e4b8349335c6182aa315d6118e742" id="r_af87e4b8349335c6182aa315d6118e742"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#a8b3eadd9002aae3f7659f7ae97209af4">KeyState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#af87e4b8349335c6182aa315d6118e742">GetMouseButton</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">button</a>)</td></tr>
+<tr class="memdesc:af87e4b8349335c6182aa315d6118e742"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the mouse button state as enum.  <br /></td></tr>
+<tr class="separator:af87e4b8349335c6182aa315d6118e742"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cc2bffe3eb0971ebace54f501d9c0c5" id="r_a0cc2bffe3eb0971ebace54f501d9c0c5"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a0cc2bffe3eb0971ebace54f501d9c0c5">SetWindowTitle</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">title</a>)</td></tr>
+<tr class="memdesc:a0cc2bffe3eb0971ebace54f501d9c0c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the window title.  <br /></td></tr>
+<tr class="separator:a0cc2bffe3eb0971ebace54f501d9c0c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa433322cbdd9365fcface0414ae42c44" id="r_aa433322cbdd9365fcface0414ae42c44"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#aa433322cbdd9365fcface0414ae42c44">SetWindowIcon</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
+<tr class="memdesc:aa433322cbdd9365fcface0414ae42c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the window icon.  <br /></td></tr>
+<tr class="separator:aa433322cbdd9365fcface0414ae42c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a139f8329e131641caf95e9a165605ffe" id="r_a139f8329e131641caf95e9a165605ffe"><td class="memItemLeft" align="right" valign="top">KML_API std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a139f8329e131641caf95e9a165605ffe">LoadFont</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">resolution</a>)</td></tr>
+<tr class="memdesc:a139f8329e131641caf95e9a165605ffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a font.  <br /></td></tr>
+<tr class="separator:a139f8329e131641caf95e9a165605ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a665450246d4016660baf0dcbdfbc2a" id="r_a9a665450246d4016660baf0dcbdfbc2a"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a9a665450246d4016660baf0dcbdfbc2a">UnloadFont</a> (std::string <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">key</a>)</td></tr>
+<tr class="memdesc:a9a665450246d4016660baf0dcbdfbc2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all resources allocated to a font.  <br /></td></tr>
+<tr class="separator:a9a665450246d4016660baf0dcbdfbc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05ecfc96ff679bc27065958d548c7c12" id="r_a05ecfc96ff679bc27065958d548c7c12"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a05ecfc96ff679bc27065958d548c7c12">CreateShader</a> (std::filesystem::path <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">vertex</a>, std::filesystem::path <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">fragment</a>)</td></tr>
+<tr class="memdesc:a05ecfc96ff679bc27065958d548c7c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a custom shader program from disc files.  <br /></td></tr>
+<tr class="separator:a05ecfc96ff679bc27065958d548c7c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee5edbbb97fdfe5ba56e3cffce79073b" id="r_aee5edbbb97fdfe5ba56e3cffce79073b"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#aee5edbbb97fdfe5ba56e3cffce79073b">CreateShaderFS</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">vertex</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">fragment</a>)</td></tr>
+<tr class="memdesc:aee5edbbb97fdfe5ba56e3cffce79073b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a custom shader program from raw source.  <br /></td></tr>
+<tr class="separator:aee5edbbb97fdfe5ba56e3cffce79073b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f32e200068db758233a0e454a398f96" id="r_a9f32e200068db758233a0e454a398f96"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a9f32e200068db758233a0e454a398f96">GetShaderUniformL</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>)</td></tr>
+<tr class="memdesc:a9f32e200068db758233a0e454a398f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the location of a uniform in a shader program.  <br /></td></tr>
+<tr class="separator:a9f32e200068db758233a0e454a398f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab678837b50aa0de23ad2bda144c1ee5e" id="r_ab678837b50aa0de23ad2bda144c1ee5e"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unsigned</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ab678837b50aa0de23ad2bda144c1ee5e">GetShaderID</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader)</td></tr>
+<tr class="memdesc:ab678837b50aa0de23ad2bda144c1ee5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the shader id.  <br /></td></tr>
+<tr class="separator:ab678837b50aa0de23ad2bda144c1ee5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa56121ddb9e033d7fda903442c5c099e" id="r_aa56121ddb9e033d7fda903442c5c099e"><td class="memItemLeft" align="right" valign="top"><a id="aa56121ddb9e033d7fda903442c5c099e" name="aa56121ddb9e033d7fda903442c5c099e"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_1f</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>)</td></tr>
+<tr class="separator:aa56121ddb9e033d7fda903442c5c099e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e17228fdeb02b0f0b6935f15a1027cc" id="r_a5e17228fdeb02b0f0b6935f15a1027cc"><td class="memItemLeft" align="right" valign="top"><a id="a5e17228fdeb02b0f0b6935f15a1027cc" name="a5e17228fdeb02b0f0b6935f15a1027cc"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_1i</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>)</td></tr>
+<tr class="separator:a5e17228fdeb02b0f0b6935f15a1027cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c44018e3423ae215e6eb1ccce9615b2" id="r_a4c44018e3423ae215e6eb1ccce9615b2"><td class="memItemLeft" align="right" valign="top"><a id="a4c44018e3423ae215e6eb1ccce9615b2" name="a4c44018e3423ae215e6eb1ccce9615b2"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_2f</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v1</a>)</td></tr>
+<tr class="separator:a4c44018e3423ae215e6eb1ccce9615b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a081fa8848c897cf4e5b698f8d3eb44a4" id="r_a081fa8848c897cf4e5b698f8d3eb44a4"><td class="memItemLeft" align="right" valign="top"><a id="a081fa8848c897cf4e5b698f8d3eb44a4" name="a081fa8848c897cf4e5b698f8d3eb44a4"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_3f</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v1</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v2</a>)</td></tr>
+<tr class="separator:a081fa8848c897cf4e5b698f8d3eb44a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867d20e323d2fbe6a468f9c2ec9fc5a3" id="r_a867d20e323d2fbe6a468f9c2ec9fc5a3"><td class="memItemLeft" align="right" valign="top"><a id="a867d20e323d2fbe6a468f9c2ec9fc5a3" name="a867d20e323d2fbe6a468f9c2ec9fc5a3"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_4f</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v1</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v2</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v3</a>)</td></tr>
+<tr class="separator:a867d20e323d2fbe6a468f9c2ec9fc5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a521530c9685e854c3520fa2e84064e22" id="r_a521530c9685e854c3520fa2e84064e22"><td class="memItemLeft" align="right" valign="top"><a id="a521530c9685e854c3520fa2e84064e22" name="a521530c9685e854c3520fa2e84064e22"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_2fv</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec2f.html">Vec2f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">__v</a>)</td></tr>
+<tr class="separator:a521530c9685e854c3520fa2e84064e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a428bd92f9b672f00a0b80de26bb71f36" id="r_a428bd92f9b672f00a0b80de26bb71f36"><td class="memItemLeft" align="right" valign="top"><a id="a428bd92f9b672f00a0b80de26bb71f36" name="a428bd92f9b672f00a0b80de26bb71f36"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_3fv</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec3f.html">Vec3f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">__v</a>)</td></tr>
+<tr class="separator:a428bd92f9b672f00a0b80de26bb71f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d5b60129c0b6012328ba301c2562bd1" id="r_a6d5b60129c0b6012328ba301c2562bd1"><td class="memItemLeft" align="right" valign="top"><a id="a6d5b60129c0b6012328ba301c2562bd1" name="a6d5b60129c0b6012328ba301c2562bd1"></a>
+KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_4fv</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec4f.html">Vec4f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">__v</a>)</td></tr>
+<tr class="separator:a6d5b60129c0b6012328ba301c2562bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab21268e9582d6df7b16362e453c7763a" id="r_ab21268e9582d6df7b16362e453c7763a"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ab21268e9582d6df7b16362e453c7763a">ReloadShader</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader)</td></tr>
+<tr class="memdesc:ab21268e9582d6df7b16362e453c7763a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compiles the shader's source files and maps uniform locations.  <br /></td></tr>
+<tr class="separator:ab21268e9582d6df7b16362e453c7763a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4bd1a0622ae012ec5c1875a8b819835" id="r_ad4bd1a0622ae012ec5c1875a8b819835"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ad4bd1a0622ae012ec5c1875a8b819835">DeleteShader</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&amp;shader)</td></tr>
+<tr class="memdesc:ad4bd1a0622ae012ec5c1875a8b819835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all allocated resources in a shader program.  <br /></td></tr>
+<tr class="separator:ad4bd1a0622ae012ec5c1875a8b819835"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9c43a0a807384554bb35a11b4c78043" id="r_ac9c43a0a807384554bb35a11b4c78043"><td class="memItemLeft" align="right" valign="top">KML_API Texture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ac9c43a0a807384554bb35a11b4c78043">LoadTexture</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
+<tr class="memdesc:ac9c43a0a807384554bb35a11b4c78043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a texture from file, will be saved as the char* you provided.  <br /></td></tr>
+<tr class="separator:ac9c43a0a807384554bb35a11b4c78043"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2569d470206386a0f16a7918d18ead73" id="r_a2569d470206386a0f16a7918d18ead73"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a2569d470206386a0f16a7918d18ead73">UnloadTexture</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
+<tr class="memdesc:a2569d470206386a0f16a7918d18ead73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all allocated resources in a texture.  <br /></td></tr>
+<tr class="separator:a2569d470206386a0f16a7918d18ead73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae555436fd0cbcdadbc5fba05fd5db93d" id="r_ae555436fd0cbcdadbc5fba05fd5db93d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ae555436fd0cbcdadbc5fba05fd5db93d"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Clamp</a> (T x, T min=(T) 0.0f, T max=(T) 1.0f)</td></tr>
 <tr class="memdesc:ae555436fd0cbcdadbc5fba05fd5db93d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clamps a value.  <br /></td></tr>
@@ -300,18 +305,30 @@ Functions</h2></td></tr>
 <tr class="memitem:a171ad0f0d92045018a04820f285f5697" id="r_a171ad0f0d92045018a04820f285f5697"><td class="memItemLeft" align="right" valign="top"><a id="a171ad0f0d92045018a04820f285f5697" name="a171ad0f0d92045018a04820f285f5697"></a>
 <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>v3f_HSV</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec3f.html">Vec3f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">__v</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">H</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">S</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">V</a>)</td></tr>
 <tr class="separator:a171ad0f0d92045018a04820f285f5697"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acceae45fc12c0d8e77316447b2c9b413" id="r_acceae45fc12c0d8e77316447b2c9b413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structKML_1_1Vec4f.html">Vec4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#acceae45fc12c0d8e77316447b2c9b413">HSVtoRGBA</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec3f.html">Vec3f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">__v</a>)</td></tr>
-<tr class="memdesc:acceae45fc12c0d8e77316447b2c9b413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes HSV color to RGBA.  <br /></td></tr>
-<tr class="separator:acceae45fc12c0d8e77316447b2c9b413"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe4d744072d863497f378f2b2e1e35c6" id="r_abe4d744072d863497f378f2b2e1e35c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structKML_1_1Vec3f.html">Vec3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#abe4d744072d863497f378f2b2e1e35c6">RGBAtoHSV</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec4f.html">Vec4f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">c</a>)</td></tr>
-<tr class="memdesc:abe4d744072d863497f378f2b2e1e35c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes RGBA color to HSV.  <br /></td></tr>
-<tr class="separator:abe4d744072d863497f378f2b2e1e35c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55396d31f3d565ca9304e24f9c3a44c6" id="r_a55396d31f3d565ca9304e24f9c3a44c6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a55396d31f3d565ca9304e24f9c3a44c6">ReadFile</a> (std::filesystem::path <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">path</a>)</td></tr>
-<tr class="memdesc:a55396d31f3d565ca9304e24f9c3a44c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a file from disc.  <br /></td></tr>
-<tr class="separator:a55396d31f3d565ca9304e24f9c3a44c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a5e2ceedaf7d5890e727d52a5f2468b" id="r_a5a5e2ceedaf7d5890e727d52a5f2468b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a5a5e2ceedaf7d5890e727d52a5f2468b">RandFloat</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">min</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> max)</td></tr>
-<tr class="memdesc:a5a5e2ceedaf7d5890e727d52a5f2468b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random float.  <br /></td></tr>
-<tr class="separator:a5a5e2ceedaf7d5890e727d52a5f2468b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93e93c829d9fce91c9cc55fa2d087d07" id="r_a93e93c829d9fce91c9cc55fa2d087d07"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="structKML_1_1Vec4f.html">Vec4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a93e93c829d9fce91c9cc55fa2d087d07">HSVtoRGBA</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec3f.html">Vec3f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">__v</a>)</td></tr>
+<tr class="memdesc:a93e93c829d9fce91c9cc55fa2d087d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes HSV color to RGBA.  <br /></td></tr>
+<tr class="separator:a93e93c829d9fce91c9cc55fa2d087d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9a6de237c442db9034ecd584d11879c" id="r_ae9a6de237c442db9034ecd584d11879c"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="structKML_1_1Vec3f.html">Vec3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ae9a6de237c442db9034ecd584d11879c">RGBAtoHSV</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec4f.html">Vec4f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">c</a>)</td></tr>
+<tr class="memdesc:ae9a6de237c442db9034ecd584d11879c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes RGBA color to HSV.  <br /></td></tr>
+<tr class="separator:ae9a6de237c442db9034ecd584d11879c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaef2b0926359c90e1091aa4e6124094" id="r_afaef2b0926359c90e1091aa4e6124094"><td class="memItemLeft" align="right" valign="top">KML_API std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#afaef2b0926359c90e1091aa4e6124094">ReadFile</a> (std::filesystem::path <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">path</a>)</td></tr>
+<tr class="memdesc:afaef2b0926359c90e1091aa4e6124094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a file from disc.  <br /></td></tr>
+<tr class="separator:afaef2b0926359c90e1091aa4e6124094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ba730fc8289810b1c758dd4cb11fae" id="r_ad5ba730fc8289810b1c758dd4cb11fae"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ad5ba730fc8289810b1c758dd4cb11fae">RandFloat</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">min</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">max</a>)</td></tr>
+<tr class="memdesc:ad5ba730fc8289810b1c758dd4cb11fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random float.  <br /></td></tr>
+<tr class="separator:ad5ba730fc8289810b1c758dd4cb11fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a677d1f3cba039c1dd6082bd2fb204d8a" id="r_a677d1f3cba039c1dd6082bd2fb204d8a"><td class="memItemLeft" align="right" valign="top"><a id="a677d1f3cba039c1dd6082bd2fb204d8a" name="a677d1f3cba039c1dd6082bd2fb204d8a"></a>
+<a class="el" href="structKML_1_1Vec2f.html">Vec2f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator+</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">t</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec2f.html">Vec2f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v</a>)</td></tr>
+<tr class="separator:a677d1f3cba039c1dd6082bd2fb204d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ce7af49a2a412308ab7977fee4af62c" id="r_a8ce7af49a2a412308ab7977fee4af62c"><td class="memItemLeft" align="right" valign="top"><a id="a8ce7af49a2a412308ab7977fee4af62c" name="a8ce7af49a2a412308ab7977fee4af62c"></a>
+<a class="el" href="structKML_1_1Vec2f.html">Vec2f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator-</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">t</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec2f.html">Vec2f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v</a>)</td></tr>
+<tr class="separator:a8ce7af49a2a412308ab7977fee4af62c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd58cf1e133cf5a816dedc118b316189" id="r_acd58cf1e133cf5a816dedc118b316189"><td class="memItemLeft" align="right" valign="top"><a id="acd58cf1e133cf5a816dedc118b316189" name="acd58cf1e133cf5a816dedc118b316189"></a>
+<a class="el" href="structKML_1_1Vec2f.html">Vec2f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">t</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec2f.html">Vec2f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v</a>)</td></tr>
+<tr class="separator:acd58cf1e133cf5a816dedc118b316189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a536737abcb690f1f0fa9d090c247150e" id="r_a536737abcb690f1f0fa9d090c247150e"><td class="memItemLeft" align="right" valign="top"><a id="a536737abcb690f1f0fa9d090c247150e" name="a536737abcb690f1f0fa9d090c247150e"></a>
+<a class="el" href="structKML_1_1Vec2f.html">Vec2f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator/</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">t</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec2f.html">Vec2f</a> &amp;<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v</a>)</td></tr>
+<tr class="separator:a536737abcb690f1f0fa9d090c247150e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains all public methods, classes, enums, and structs of the library. </p>
@@ -371,52 +388,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab8cd9244dbc0519511d503100c03591c" name="ab8cd9244dbc0519511d503100c03591c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8cd9244dbc0519511d503100c03591c">&#9670;&#160;</a></span>CreateShader() <span class="overload">[1/2]</span></h2>
+<a id="a05ecfc96ff679bc27065958d548c7c12" name="a05ecfc96ff679bc27065958d548c7c12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ecfc96ff679bc27065958d548c7c12">&#9670;&#160;</a></span>CreateShader()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> * KML::CreateShader </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
-          <td class="paramname"><em>vertex</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
-          <td class="paramname"><em>fragment</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a custom shader program from raw source. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">vertex</td><td>Vertex shader source </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">fragment</td><td>Fragment shader source</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> </dd></dl>
-
-</div>
-</div>
-<a id="a35c73249565f4cca1d89618530926906" name="a35c73249565f4cca1d89618530926906"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35c73249565f4cca1d89618530926906">&#9670;&#160;</a></span>CreateShader() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> * KML::CreateShader </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> * KML::CreateShader </td>
           <td>(</td>
           <td class="paramtype">std::filesystem::path&#160;</td>
           <td class="paramname"><em>vertex</em>, </td>
@@ -447,14 +426,52 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ad972eb2e4faf62da678ae58961328e3e" name="ad972eb2e4faf62da678ae58961328e3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad972eb2e4faf62da678ae58961328e3e">&#9670;&#160;</a></span>CreateWindow()</h2>
+<a id="aee5edbbb97fdfe5ba56e3cffce79073b" name="aee5edbbb97fdfe5ba56e3cffce79073b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee5edbbb97fdfe5ba56e3cffce79073b">&#9670;&#160;</a></span>CreateShaderFS()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> KML::CreateWindow </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> * KML::CreateShaderFS </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
+          <td class="paramname"><em>vertex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
+          <td class="paramname"><em>fragment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a custom shader program from raw source. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">vertex</td><td>Vertex shader source </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fragment</td><td>Fragment shader source</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> </dd></dl>
+
+</div>
+</div>
+<a id="a5c8407f17ef02e0747be129f94ed62d2" name="a5c8407f17ef02e0747be129f94ed62d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c8407f17ef02e0747be129f94ed62d2">&#9670;&#160;</a></span>CreateWindow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> KML::CreateWindow </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td>
           <td class="paramname"><em>width</em>, </td>
@@ -499,14 +516,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a2aa7a3fbdb3b0f135e57939ef7775c18" name="a2aa7a3fbdb3b0f135e57939ef7775c18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2aa7a3fbdb3b0f135e57939ef7775c18">&#9670;&#160;</a></span>CreateWindowP()</h2>
+<a id="ad0c949c245c1e5f653054abbbc0816d0" name="ad0c949c245c1e5f653054abbbc0816d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0c949c245c1e5f653054abbbc0816d0">&#9670;&#160;</a></span>CreateWindowP()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> KML::CreateWindowP </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> KML::CreateWindowP </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td>
           <td class="paramname"><em>width</em>, </td>
@@ -579,14 +596,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a040207ec4031cc9a21f057b2d6492e78" name="a040207ec4031cc9a21f057b2d6492e78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a040207ec4031cc9a21f057b2d6492e78">&#9670;&#160;</a></span>DeleteShader()</h2>
+<a id="ad4bd1a0622ae012ec5c1875a8b819835" name="ad4bd1a0622ae012ec5c1875a8b819835"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4bd1a0622ae012ec5c1875a8b819835">&#9670;&#160;</a></span>DeleteShader()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::DeleteShader </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::DeleteShader </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&amp;&#160;</td>
           <td class="paramname"><em>shader</em></td><td>)</td>
@@ -605,14 +622,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a23d0f74d34e9c5952ff0b3bc853c4d18" name="a23d0f74d34e9c5952ff0b3bc853c4d18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23d0f74d34e9c5952ff0b3bc853c4d18">&#9670;&#160;</a></span>Event()</h2>
+<a id="a5ae7caf0564a3487ccbc5168d069b93e" name="a5ae7caf0564a3487ccbc5168d069b93e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae7caf0564a3487ccbc5168d069b93e">&#9670;&#160;</a></span>Event()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::Event </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::Event </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#a4b5e77ed178f16207b2a3c26285ea061">WindowEvent</a>&#160;</td>
           <td class="paramname"><em>event</em>, </td>
@@ -642,14 +659,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a81237264c99328d842a9554375b7aa57" name="a81237264c99328d842a9554375b7aa57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81237264c99328d842a9554375b7aa57">&#9670;&#160;</a></span>GetKey()</h2>
+<a id="aa293de57842fba48bbbf7d3fdd22a7ef" name="aa293de57842fba48bbbf7d3fdd22a7ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa293de57842fba48bbbf7d3fdd22a7ef">&#9670;&#160;</a></span>GetKey()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#a8b3eadd9002aae3f7659f7ae97209af4">KeyState</a> KML::GetKey </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#a8b3eadd9002aae3f7659f7ae97209af4">KeyState</a> KML::GetKey </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td>
           <td class="paramname"><em>key</em></td><td>)</td>
@@ -671,14 +688,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aea65cb3b1376db59148a9d614b55b9d6" name="aea65cb3b1376db59148a9d614b55b9d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea65cb3b1376db59148a9d614b55b9d6">&#9670;&#160;</a></span>GetMouseButton()</h2>
+<a id="af87e4b8349335c6182aa315d6118e742" name="af87e4b8349335c6182aa315d6118e742"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af87e4b8349335c6182aa315d6118e742">&#9670;&#160;</a></span>GetMouseButton()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#a8b3eadd9002aae3f7659f7ae97209af4">KeyState</a> KML::GetMouseButton </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#a8b3eadd9002aae3f7659f7ae97209af4">KeyState</a> KML::GetMouseButton </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td>
           <td class="paramname"><em>button</em></td><td>)</td>
@@ -700,14 +717,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a44b7a6f84443c94fe471ea7b3c521fe4" name="a44b7a6f84443c94fe471ea7b3c521fe4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44b7a6f84443c94fe471ea7b3c521fe4">&#9670;&#160;</a></span>GetMouseCaptureState()</h2>
+<a id="ad8dc16314320371d6a671b001803198c" name="ad8dc16314320371d6a671b001803198c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8dc16314320371d6a671b001803198c">&#9670;&#160;</a></span>GetMouseCaptureState()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> KML::GetMouseCaptureState </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> KML::GetMouseCaptureState </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -720,14 +737,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab8ae5749ecdcb3aa862665e7fe6a4dd1" name="ab8ae5749ecdcb3aa862665e7fe6a4dd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8ae5749ecdcb3aa862665e7fe6a4dd1">&#9670;&#160;</a></span>GetShaderID()</h2>
+<a id="ab678837b50aa0de23ad2bda144c1ee5e" name="ab678837b50aa0de23ad2bda144c1ee5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab678837b50aa0de23ad2bda144c1ee5e">&#9670;&#160;</a></span>GetShaderID()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unsigned</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> KML::GetShaderID </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unsigned</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> KML::GetShaderID </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&#160;</td>
           <td class="paramname"><em>shader</em></td><td>)</td>
@@ -747,14 +764,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a171a53b1dadef57774c9d8d8f6c67284" name="a171a53b1dadef57774c9d8d8f6c67284"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a171a53b1dadef57774c9d8d8f6c67284">&#9670;&#160;</a></span>GetShaderUniformL()</h2>
+<a id="a9f32e200068db758233a0e454a398f96" name="a9f32e200068db758233a0e454a398f96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f32e200068db758233a0e454a398f96">&#9670;&#160;</a></span>GetShaderUniformL()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> KML::GetShaderUniformL </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> KML::GetShaderUniformL </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&#160;</td>
           <td class="paramname"><em>shader</em>, </td>
@@ -838,14 +855,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="acceae45fc12c0d8e77316447b2c9b413" name="acceae45fc12c0d8e77316447b2c9b413"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acceae45fc12c0d8e77316447b2c9b413">&#9670;&#160;</a></span>HSVtoRGBA()</h2>
+<a id="a93e93c829d9fce91c9cc55fa2d087d07" name="a93e93c829d9fce91c9cc55fa2d087d07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93e93c829d9fce91c9cc55fa2d087d07">&#9670;&#160;</a></span>HSVtoRGBA()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structKML_1_1Vec4f.html">Vec4f</a> KML::HSVtoRGBA </td>
+          <td class="memname">KML_API <a class="el" href="structKML_1_1Vec4f.html">Vec4f</a> KML::HSVtoRGBA </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec3f.html">Vec3f</a> &amp;&#160;</td>
           <td class="paramname"><em>__v</em></td><td>)</td>
@@ -866,14 +883,52 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="adaff475747cbe4dc1cbe240239abf225" name="adaff475747cbe4dc1cbe240239abf225"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adaff475747cbe4dc1cbe240239abf225">&#9670;&#160;</a></span>LoadSound()</h2>
+<a id="a139f8329e131641caf95e9a165605ffe" name="a139f8329e131641caf95e9a165605ffe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a139f8329e131641caf95e9a165605ffe">&#9670;&#160;</a></span>LoadFont()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::LoadSound </td>
+          <td class="memname">KML_API std::string KML::LoadFont </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td>
+          <td class="paramname"><em>resolution</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads a font. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>TrueType font file </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resolution</td><td>Pixel size of each glyph</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Font key name formatted "&lt;file&gt;:&lt;resolution&gt;", use this to reference a rendered font </dd></dl>
+
+</div>
+</div>
+<a id="a1e1a73a707b0175a9887d01037e1793c" name="a1e1a73a707b0175a9887d01037e1793c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e1a73a707b0175a9887d01037e1793c">&#9670;&#160;</a></span>LoadSound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::LoadSound </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
           <td class="paramname"><em>file</em>, </td>
@@ -910,14 +965,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ac1e698c2426ee65ad6b986e4e62615d1" name="ac1e698c2426ee65ad6b986e4e62615d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1e698c2426ee65ad6b986e4e62615d1">&#9670;&#160;</a></span>LoadTexture()</h2>
+<a id="ac9c43a0a807384554bb35a11b4c78043" name="ac9c43a0a807384554bb35a11b4c78043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9c43a0a807384554bb35a11b4c78043">&#9670;&#160;</a></span>LoadTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Texture KML::LoadTexture </td>
+          <td class="memname">KML_API Texture KML::LoadTexture </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
           <td class="paramname"><em>file</em></td><td>)</td>
@@ -937,14 +992,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="af6343d4c1154211ca659c4351babf73f" name="af6343d4c1154211ca659c4351babf73f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6343d4c1154211ca659c4351babf73f">&#9670;&#160;</a></span>PlayMusic()</h2>
+<a id="a752bb1e8ed11832cbb2ae09392d59bae" name="a752bb1e8ed11832cbb2ae09392d59bae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a752bb1e8ed11832cbb2ae09392d59bae">&#9670;&#160;</a></span>PlayMusic()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::PlayMusic </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::PlayMusic </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
           <td class="paramname"><em>file</em>, </td>
@@ -981,14 +1036,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aceef7b4c7d6b7549b2aa7bfe357a01c8" name="aceef7b4c7d6b7549b2aa7bfe357a01c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aceef7b4c7d6b7549b2aa7bfe357a01c8">&#9670;&#160;</a></span>PresentFrame()</h2>
+<a id="a971bdffe522bf64f1ddec2820cede83b" name="a971bdffe522bf64f1ddec2820cede83b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a971bdffe522bf64f1ddec2820cede83b">&#9670;&#160;</a></span>PresentFrame()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::PresentFrame </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::PresentFrame </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a>&#160;</td>
           <td class="paramname"><em>r</em> = <code>0.0f</code>, </td>
@@ -1025,14 +1080,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a36d2b284b16d0f96592c5c4454d59117" name="a36d2b284b16d0f96592c5c4454d59117"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36d2b284b16d0f96592c5c4454d59117">&#9670;&#160;</a></span>ProcessEvents()</h2>
+<a id="af4e2f73ac968a5c778d1b8e40f8677dd" name="af4e2f73ac968a5c778d1b8e40f8677dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4e2f73ac968a5c778d1b8e40f8677dd">&#9670;&#160;</a></span>ProcessEvents()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> KML::ProcessEvents </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">bool</a> KML::ProcessEvents </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1046,14 +1101,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a5a5e2ceedaf7d5890e727d52a5f2468b" name="a5a5e2ceedaf7d5890e727d52a5f2468b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a5e2ceedaf7d5890e727d52a5f2468b">&#9670;&#160;</a></span>RandFloat()</h2>
+<a id="ad5ba730fc8289810b1c758dd4cb11fae" name="ad5ba730fc8289810b1c758dd4cb11fae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ba730fc8289810b1c758dd4cb11fae">&#9670;&#160;</a></span>RandFloat()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> KML::RandFloat </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> KML::RandFloat </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a>&#160;</td>
           <td class="paramname"><em>min</em>, </td>
@@ -1084,14 +1139,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a55396d31f3d565ca9304e24f9c3a44c6" name="a55396d31f3d565ca9304e24f9c3a44c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55396d31f3d565ca9304e24f9c3a44c6">&#9670;&#160;</a></span>ReadFile()</h2>
+<a id="afaef2b0926359c90e1091aa4e6124094" name="afaef2b0926359c90e1091aa4e6124094"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaef2b0926359c90e1091aa4e6124094">&#9670;&#160;</a></span>ReadFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string KML::ReadFile </td>
+          <td class="memname">KML_API std::string KML::ReadFile </td>
           <td>(</td>
           <td class="paramtype">std::filesystem::path&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -1111,14 +1166,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a94d20057d75337dacaeafa8ab9600d8c" name="a94d20057d75337dacaeafa8ab9600d8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94d20057d75337dacaeafa8ab9600d8c">&#9670;&#160;</a></span>ReloadShader()</h2>
+<a id="ab21268e9582d6df7b16362e453c7763a" name="ab21268e9582d6df7b16362e453c7763a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab21268e9582d6df7b16362e453c7763a">&#9670;&#160;</a></span>ReloadShader()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::ReloadShader </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::ReloadShader </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&#160;</td>
           <td class="paramname"><em>shader</em></td><td>)</td>
@@ -1138,14 +1193,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="afd70b1d312697ce5ffa77bc2fe39648c" name="afd70b1d312697ce5ffa77bc2fe39648c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd70b1d312697ce5ffa77bc2fe39648c">&#9670;&#160;</a></span>ResetMusic()</h2>
+<a id="aa192fd8642b06808b14f5d0074a3e7d3" name="aa192fd8642b06808b14f5d0074a3e7d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa192fd8642b06808b14f5d0074a3e7d3">&#9670;&#160;</a></span>ResetMusic()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::ResetMusic </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::ResetMusic </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
           <td class="paramname"><em>file</em></td><td>)</td>
@@ -1224,14 +1279,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="abe4d744072d863497f378f2b2e1e35c6" name="abe4d744072d863497f378f2b2e1e35c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe4d744072d863497f378f2b2e1e35c6">&#9670;&#160;</a></span>RGBAtoHSV()</h2>
+<a id="ae9a6de237c442db9034ecd584d11879c" name="ae9a6de237c442db9034ecd584d11879c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9a6de237c442db9034ecd584d11879c">&#9670;&#160;</a></span>RGBAtoHSV()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structKML_1_1Vec3f.html">Vec3f</a> KML::RGBAtoHSV </td>
+          <td class="memname">KML_API <a class="el" href="structKML_1_1Vec3f.html">Vec3f</a> KML::RGBAtoHSV </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="structKML_1_1Vec4f.html">Vec4f</a> &amp;&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
@@ -1252,14 +1307,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a66ccdbca20a8998e7b74c1436bd420d0" name="a66ccdbca20a8998e7b74c1436bd420d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66ccdbca20a8998e7b74c1436bd420d0">&#9670;&#160;</a></span>SetGlobalPitch()</h2>
+<a id="ac22b194b59f8e6c2ec3357ec4d897d24" name="ac22b194b59f8e6c2ec3357ec4d897d24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac22b194b59f8e6c2ec3357ec4d897d24">&#9670;&#160;</a></span>SetGlobalPitch()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::SetGlobalPitch </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::SetGlobalPitch </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a>&#160;</td>
           <td class="paramname"><em>pitch</em> = <code>1.0f</code></td><td>)</td>
@@ -1278,14 +1333,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a3cbc0dca785aeb390f50484ef631310b" name="a3cbc0dca785aeb390f50484ef631310b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cbc0dca785aeb390f50484ef631310b">&#9670;&#160;</a></span>SetGlobalVolume()</h2>
+<a id="ac0985dbcae19624b9c8e1caa1e31a9ba" name="ac0985dbcae19624b9c8e1caa1e31a9ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0985dbcae19624b9c8e1caa1e31a9ba">&#9670;&#160;</a></span>SetGlobalVolume()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::SetGlobalVolume </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::SetGlobalVolume </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a>&#160;</td>
           <td class="paramname"><em>volume</em> = <code>1.0f</code></td><td>)</td>
@@ -1304,14 +1359,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a6dda7006bce7a1defc96bd51c09517fe" name="a6dda7006bce7a1defc96bd51c09517fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dda7006bce7a1defc96bd51c09517fe">&#9670;&#160;</a></span>SetWindowIcon()</h2>
+<a id="aa433322cbdd9365fcface0414ae42c44" name="aa433322cbdd9365fcface0414ae42c44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa433322cbdd9365fcface0414ae42c44">&#9670;&#160;</a></span>SetWindowIcon()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::SetWindowIcon </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::SetWindowIcon </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
           <td class="paramname"><em>file</em></td><td>)</td>
@@ -1331,14 +1386,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="abad17d702bd801eab22e5cdfd8f60964" name="abad17d702bd801eab22e5cdfd8f60964"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abad17d702bd801eab22e5cdfd8f60964">&#9670;&#160;</a></span>SetWindowTitle()</h2>
+<a id="a0cc2bffe3eb0971ebace54f501d9c0c5" name="a0cc2bffe3eb0971ebace54f501d9c0c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cc2bffe3eb0971ebace54f501d9c0c5">&#9670;&#160;</a></span>SetWindowTitle()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::SetWindowTitle </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::SetWindowTitle </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
           <td class="paramname"><em>title</em></td><td>)</td>
@@ -1357,14 +1412,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="af9c417b94c61b03da21b02ad4e34909a" name="af9c417b94c61b03da21b02ad4e34909a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9c417b94c61b03da21b02ad4e34909a">&#9670;&#160;</a></span>StopMusic()</h2>
+<a id="a32ff5ee8c7b0932807ebe1aec502a766" name="a32ff5ee8c7b0932807ebe1aec502a766"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32ff5ee8c7b0932807ebe1aec502a766">&#9670;&#160;</a></span>StopMusic()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::StopMusic </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::StopMusic </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
           <td class="paramname"><em>file</em></td><td>)</td>
@@ -1383,14 +1438,40 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a4ba03a407df33ff62e8bab6ba10a7d87" name="a4ba03a407df33ff62e8bab6ba10a7d87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ba03a407df33ff62e8bab6ba10a7d87">&#9670;&#160;</a></span>UnloadSound()</h2>
+<a id="a9a665450246d4016660baf0dcbdfbc2a" name="a9a665450246d4016660baf0dcbdfbc2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a665450246d4016660baf0dcbdfbc2a">&#9670;&#160;</a></span>UnloadFont()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::UnloadSound </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::UnloadFont </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Frees all resources allocated to a font. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>Font key name formatted "&lt;file&gt;:&lt;resolution&gt;" </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae21a173e6d09cdffc393a29d9943ab78" name="ae21a173e6d09cdffc393a29d9943ab78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae21a173e6d09cdffc393a29d9943ab78">&#9670;&#160;</a></span>UnloadSound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::UnloadSound </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
           <td class="paramname"><em>file</em></td><td>)</td>
@@ -1409,14 +1490,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ad2751c17017734af095108891de845a6" name="ad2751c17017734af095108891de845a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2751c17017734af095108891de845a6">&#9670;&#160;</a></span>UnloadTexture()</h2>
+<a id="a2569d470206386a0f16a7918d18ead73" name="a2569d470206386a0f16a7918d18ead73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2569d470206386a0f16a7918d18ead73">&#9670;&#160;</a></span>UnloadTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::UnloadTexture </td>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::UnloadTexture </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *&#160;</td>
           <td class="paramname"><em>file</em></td><td>)</td>

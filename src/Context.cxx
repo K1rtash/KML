@@ -142,16 +142,18 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
 
     __KML::GenerateDefaultMembers();
     __KML::InitAudioDevice();
+    __KML::InitFreeType();
 
     __KML::contextActive = 1;
     return window.handle;
 }
 
-void KML::Terminate() {
+void KML::Quit() {
     if(!__KML::contextActive) return;
+    __KML::CloseAudioDevice();
+    __KML::QuitFreeType(); 
     glfwDestroyWindow(window.handle);
     glfwTerminate();
-    __KML::CloseAudioDevice();
     __KML::contextActive = 0;
 }
 
@@ -308,10 +310,17 @@ bool KML::GetMouseCaptureState() {
     return input.mouseCaptured;
 }
 
+void KML::UseFramebuffer(unsigned int framebuffer) {
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    glEnable(GL_DEPTH_TEST);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 void KML::PresentFrame(float r, float g, float b) {
     glfwSwapBuffers(window.handle);
     glClearColor(r, g, b, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 bool tryGLcontext(int major, int minor) {

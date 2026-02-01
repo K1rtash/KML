@@ -87,7 +87,7 @@ namespace KML {
      * @brief      Frees all resources used in the library
      *             You must not use any method aftern calling this
      */
-    KML_API void Terminate();
+    KML_API void Quit();
 
     /**
      * @brief          Controls the window state using events
@@ -148,5 +148,7 @@ namespace KML {
      * @param[in]  file  Image file in disc
      */
     KML_API void SetWindowIcon(const char* file);
+
+    KML_API void UseFramebuffer(unsigned int framebuffer);
 }
 #endif

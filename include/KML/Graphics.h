@@ -37,7 +37,7 @@ namespace KML {
      *
      * @return     @ref Shader
      */
-    KML_API Shader* CreateShader(const char* vertex, const char* fragment);
+    KML_API Shader* CreateShaderFS(const char* vertex, const char* fragment);
     
     /**
      * @brief      Retrieves the location of a uniform in a shader program

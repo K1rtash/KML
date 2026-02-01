@@ -16,11 +16,16 @@ namespace KML {
             Vec2f operator-(const Vec2f& __v) const { return {x - __v.x, y - __v.y }; }
             Vec2f operator*(const Vec2f& __v) const { return {x * __v.x, y * __v.y }; }
             Vec2f operator/(const Vec2f& __v) const { return {x / __v.x, y / __v.y }; }
+
+            Vec2f operator+(float t) const { return {x + t, y + t }; }
+            Vec2f operator-(float t) const { return {x - t, y - t }; }
+            Vec2f operator*(float t) const { return {x * t, y * t }; }
+            Vec2f operator/(float t) const { return {x / t, y / t}; }
             
             void operator+=(const Vec2f& __v) { x += __v.x; y += __v.y; }
             void operator-=(const Vec2f& __v) { x -= __v.x; y -= __v.y; }
-            void operator*=(const Vec2f& __v) { *this = {x * __v.x, y * __v.y }; }
-            void operator/=(const Vec2f& __v) { *this = {x / __v.x, y / __v.y }; }
+            void operator*=(const Vec2f& __v) { x *= __v.x; y *= __v.y; }
+            void operator/=(const Vec2f& __v) { x /= __v.x; y /= __v.y; }
 
             bool operator==(const Vec2f& __v) const { return x == __v.x && y == __v.y; }
             bool operator!=(const Vec2f& __v) const { return !(*this == __v); }
@@ -37,10 +42,10 @@ namespace KML {
             Vec3f operator*(const Vec3f& __v) const { return {x * __v.x, y * __v.y, z * __v.z }; }
             Vec3f operator/(const Vec3f& __v) const { return {x / __v.x, y / __v.y, z / __v.z }; }
             
-            void operator+=(const Vec3f& __v) { x += __v.x; y += __v.y, z += __v.z; }
-            void operator-=(const Vec3f& __v) { x -= __v.x; y -= __v.y, z -= __v.z; }
-            void operator*=(const Vec3f& __v) { *this = {x * __v.x, y * __v.y, z * __v.z }; }
-            void operator/=(const Vec3f& __v) { *this = {x / __v.x, y / __v.y, z / __v.z }; }
+            void operator+=(const Vec3f& __v) { x += __v.x; y += __v.y; z += __v.z; }
+            void operator-=(const Vec3f& __v) { x -= __v.x; y -= __v.y; z -= __v.z; }
+            void operator*=(const Vec3f& __v) { x *= __v.x; y *= __v.y; z *= __v.z; }
+            void operator/=(const Vec3f& __v) { x /= __v.x; y /= __v.y; z /= __v.z; }
 
             bool operator==(const Vec3f& __v) const { return x == __v.x && y == __v.y && z == __v.z; }
             bool operator!=(const Vec3f& __v) const { return !(*this == __v); }
@@ -66,6 +71,11 @@ namespace KML {
 
             void normalize();
         };
+
+        inline Vec2f operator+(float t, const Vec2f& v) { return v + t; }
+        inline Vec2f operator-(float t, const Vec2f& v) { return v - t; }
+        inline Vec2f operator*(float t, const Vec2f& v) { return v * t; }
+        inline Vec2f operator/(float t, const Vec2f& v) { return v / t; }
 }
 
 #endif
