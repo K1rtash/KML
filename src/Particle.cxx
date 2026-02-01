@@ -1,95 +1,118 @@
 #include "KML/Particle.h"
 #include "KML/Utils.h"
 
+#include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <fmt/core.h>
+
 #include "__KML/graphics.h"
 
-/*KML::Particle KML::GenRandParticle() {
+KML::Particle KML::GenRandParticle(double minT, double maxT, Vec2f origin, Vec2f spread) {
     Particle p;
     // Posición inicial dentro de un área de emisión
-    p.pos = KML::Vec3f{
-        KML::RandFloat(400.0f, 600.0f),  // eje X central
-        KML::RandFloat(300.0f, 500.0f),  // eje Y central
-        0.0f
+    p.pos = origin + Vec2f{
+        KML::RandFloat(0.0f, spread.x),
+        KML::RandFloat(0.0f, spread.y)
     };
 
     // Velocidad inicial moderada
-    p.vel = KML::Vec3f{
-        KML::RandFloat(-50.0f, 50.0f),   // permite moverse a la izquierda o derecha
-        KML::RandFloat(50.0f, 150.0f),   // dirección hacia arriba (como humo/partículas flotantes)
-        0.0f
+    p.vel = KML::Vec2f{
+        KML::RandFloat(-5.0f, 5.0f),   // permite moverse a la izquierda o derecha
+        KML::RandFloat(-5.0f, 5.0f)   // dirección hacia arriba (como humo/partículas flotantes)
     };
 
     // Aceleración pequeña para suavizar el movimiento
-    p.accel = KML::Vec3f{
-        KML::RandFloat(-5.0f, 5.0f),
-        KML::RandFloat(-10.0f, 0.0f),    // ligera gravedad hacia abajo
-        0.0f
+    p.acc = KML::Vec2f{
+        KML::RandFloat(-1.0f, 1.0f),
+        KML::RandFloat(-1.0f, 1.0f)    // ligera gravedad hacia abajo
     };
 
-    p.size = KML::RandFloat(5.0f, 20.0f);   // tamaño moderado
-    p.life = KML::RandFloat(2.0f, 4.0f);    // vida inicial más larga
-    p.maxLife = p.life;                      // maxLife igual a life para interpolar colores suavemente
-
+    p.size = KML::RandFloat(10.0f, 20.0f);   // tamaño moderado
+    p.maxTime = KML::RandFloat((float)minT, (float)maxT);    // vida inicial más larga     
+    p.color = KML::Vec3f {KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f), KML::RandFloat(0.0f, 1.0f)};    
+    p.time = p.maxTime;            
+                
+    fmt::println("Particula: pos({},{}), vel({},{}), acc({},{}), size({}), color({},{},{}), time({})", p.pos.x, p.pos.y, p.vel.x, p.vel.y, p.acc.x, p.acc.y, p.size, p.color.x, p.color.y, p.color.z, p.time);                            
     return p;
 }
 
-void KML::DrawParticle(Shader* shader, int count, Particle& p) {
-    float dt = 0.016f; // frame time aproximado a 60 FPS
-    p.vel.x += p.accel.x * dt;
-    p.vel.y += p.accel.y * dt;
 
-    // Actualizamos posición con velocidad
-    p.pos.x += p.vel.x * dt;
-    p.pos.y += p.vel.y * dt;
-
-    // Reducimos vida
-    p.life -= dt;
-
-    SetUniform_3fv("particlePos", shader, p.pos);
-    SetUniform_3fv("velocity", shader, p.vel);
-    SetUniform_3fv("acceleration", shader, p.accel);
-    SetUniform_1f("size", shader, p.size);
-    SetUniform_1f("life", shader, p.life);
-    SetUniform_1f("maxLife", shader, p.maxLife);
-
-    SetUniform_4f("startColor", shader, 1, 0.5, 0, 1);
-    SetUniform_4f("endColor", shader, 0.2, 0.2, 0.2, 0);
-
-    KML::SetUniform_1f("radius", shader, KML::RandFloat(0.2f, 0.8f));
-    KML::SetUniform_1f("softness", shader, KML::RandFloat(0.2f, 0.8f));
-    //__KML::draw_rect(shader);
-}*/
-
-KML::Particle::Particle(Clock& c, double l) : timer{c, l, nullptr, nullptr}, Surface(0, 0, 0, 0) {
-    if (l > 0) maxLife = l;
-    vel = Vec2f(0, 0);
-    acc = Vec2f(0, 0);
+KML::ParticleGroup::ParticleGroup(Shader* s, int n) {
+    shader = s;
     shape = __KML::defaultShape;
+    //particles = new Particle[n];
+    count = n;
 }
 
-void KML::Particle::Draw(double dt) {
+void KML::ParticleGroup::Generate(double minT, double maxT, Vec2f o, Vec2f s) {
+    origin = o;
+    for(int i = 0; i < count; i++) {
+        particles.push_back(GenRandParticle(2.0, 6.0, o, s));
+    }
+}
+
+/*void KML::ParticleGroup::Draw(double dt) {
+    shader = __KML::defaultShader;
     assert(shader);
     assert(shape);
 
-    if(!started) {
-        started = true;
-        timer.Start();
-    }
+    glUseProgram(GetShaderID(shader));
 
-    float t = (float)dt;
+    for(Particle& p : particles) {
 
-    Vec2f finalp = pos + vel * t + 0.5f * acc * t * t;
-    float timeLeft = (float)timer.Query();
+        //if(it->time <= 0.0f) continue;
+        p.vel += p.acc * (float)dt;
+        p.pos += p.vel * (float)dt;
+        p.time -= (float)dt;
 
-    SetUniform_3f("particlePos", shader, finalp.x, finalp.y, 0.0f);
-    SetUniform_1f("size", shader, size);
-    SetUniform_1f("timeLeft", shader, timeLeft);
+        float timeLeft = p.time / p.maxTime;
 
-    SetUniform_4f("startColor", shader, 1, 0.5, 0, 1);
-    SetUniform_4f("endColor", shader, 0.2, 0.2, 0.2, 0);
+        glm::mat4 view = glm::mat4{1.0f}, model = glm::mat4{1.0f}, 
+        proj = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
 
-    KML::SetUniform_1f("radius", shader, KML::RandFloat(0.2f, 0.8f));
-    KML::SetUniform_1f("softness", shader, KML::RandFloat(0.2f, 0.8f));
+        model = glm::translate(model, glm::vec3{p.pos.x, p.pos.y, 0});
+        model = glm::scale(model, glm::vec3(p.size, p.size, 1));
 
-    shape->Use();
+        glm::mat4 PVM = proj * view * model;
+
+        glUniformMatrix4fv(KML::GetShaderUniformL(shader, "MVP"), 1, GL_FALSE, glm::value_ptr(PVM));
+        glUniform4f(KML::GetShaderUniformL(shader, "color"), p.color.x, p.color.y, p.color.z, 1.0f);
+
+        shape->Use();
+    }    
+}*/
+
+void KML::ParticleGroup::Draw(double dt) {
+    shader = __KML::defaultShader;
+    assert(shader);
+    assert(shape);
+
+    for(Particle& p : particles) {
+
+        //if(it->time <= 0.0f) continue;
+        p.vel += p.acc * (float)dt;
+        p.pos += p.vel * (float)dt;
+        p.time -= (float)dt;
+
+        glm::mat4 view = glm::mat4{1.0f}, model = glm::mat4{1.0f}, 
+        proj = glm::ortho(0.0f, __KML::LOG_SCREEN_WIDTH, 0.0f, __KML::LOG_SCREEN_HEIGHT, -1.0f, 1.0f);
+
+        model = glm::translate(model, glm::vec3{p.pos.x, p.pos.y, 0});
+        model = glm::scale(model, glm::vec3(p.size, p.size, 1));
+
+        glUseProgram(KML::GetShaderID(shader));
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, tex);
+
+        glUniform1i(KML::GetShaderUniformL(shader, "uTex"), 0);
+        glUniform1i(KML::GetShaderUniformL(shader, "useTex"), tex > 0 ? 1 : 0);
+        glUniformMatrix4fv(KML::GetShaderUniformL(shader, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(KML::GetShaderUniformL(shader, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
+        glUniformMatrix4fv(KML::GetShaderUniformL(shader, "view"), 1, GL_FALSE, glm::value_ptr(view));
+        glUniform4f(KML::GetShaderUniformL(shader, "tint"), p.color.x, p.color.y, p.color.z, 1.0f);
+        
+        shape->Use();
+    }    
 }

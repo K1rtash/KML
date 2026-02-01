@@ -10,13 +10,14 @@ digraph "include/KML/Vector.h"
   Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="include/KML/KML.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$KML_8h_source.html",tooltip=" "];
   Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="include/KML/Particle.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Particle_8h_source.html",tooltip=" "];
+  Node4 [id="Node000004",label="include/KML/Particle.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Particle_8h.html",tooltip="Abstracts SFX."];
   Node4 -> Node3 [id="edge4_Node000004_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node1 -> Node5 [id="edge5_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node5 [id="Node000005",label="include/KML/Surface.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Surface_8h.html",tooltip="Abstracts GL rendering as a Shape, a Texture, and a Shader."];
   Node5 -> Node2 [id="edge6_Node000005_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node5 -> Node3 [id="edge7_Node000005_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node1 -> Node6 [id="edge8_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 -> Node4 [id="edge8_Node000005_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node6 [id="edge9_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node6 [id="Node000006",label="include/KML/Utils.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Utils_8h.html",tooltip="Abstracts usefull methods."];
-  Node6 -> Node3 [id="edge9_Node000006_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 -> Node3 [id="edge10_Node000006_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
 }

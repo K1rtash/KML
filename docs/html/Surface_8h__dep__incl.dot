@@ -10,4 +10,7 @@ digraph "include/KML/Surface.h"
   Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="include/KML/KML.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$KML_8h_source.html",tooltip=" "];
   Node1 -> Node3 [id="edge3_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node4 [id="edge4_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="include/KML/Particle.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Particle_8h.html",tooltip="Abstracts SFX."];
+  Node4 -> Node3 [id="edge5_Node000004_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
 }
