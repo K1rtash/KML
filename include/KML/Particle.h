@@ -28,6 +28,7 @@ namespace KML {
         float size;
         float time;
         float maxTime;
+        Particle() {}
     };
 
     /**

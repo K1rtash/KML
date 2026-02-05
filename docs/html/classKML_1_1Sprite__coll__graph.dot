@@ -15,5 +15,5 @@ digraph "KML::Sprite"
   Node5 [id="Node000005",label="KML::Shape",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classKML_1_1Shape.html",tooltip="Used to set diferent shapes to render surfaces."];
   Node6 -> Node1 [id="edge5_Node000001_Node000006",dir="back",color="darkorchid3",style="dashed",tooltip=" ",label=" camera",fontcolor="grey" ];
   Node6 [id="Node000006",label="KML::Camera",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$classKML_1_1Camera.html",tooltip=" "];
-  Node3 -> Node6 [id="edge6_Node000006_Node000003",dir="back",color="darkorchid3",style="dashed",tooltip=" ",label=" pos\nsize",fontcolor="grey" ];
+  Node3 -> Node6 [id="edge6_Node000006_Node000003",dir="back",color="darkorchid3",style="dashed",tooltip=" ",label=" pivot\npos\nsize",fontcolor="grey" ];
 }

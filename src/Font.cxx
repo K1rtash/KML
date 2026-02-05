@@ -40,7 +40,10 @@ void loadFontAsFace(const char* file, int px) {
 	FT_Face face;
     if (FT_New_Face(ft, file, 0, &face))
     {
-        std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;  
+        #ifdef KML_PRINT_ERRORS
+        #include <iostream>
+        std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl; 
+        #endif 
         return;
     }
 
@@ -56,7 +59,9 @@ void loadFontAsFace(const char* file, int px) {
 	    // load character glyph 
 	    if (FT_Load_Char(face, c, FT_LOAD_RENDER))
 	    {
+            #ifdef KML_PRINT_ERRORS
 	        std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
+            #endif
 	        continue;
 	    }
 	    // generate texture
@@ -114,7 +119,9 @@ void KML::UnloadFont(std::string key) {
 void __KML::InitFreeType() {
     if (FT_Init_FreeType(&ft))
     {
+        #ifdef KML_PRINT_ERRORS
         std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+        #endif
     }
 
     const char* vert_src = 

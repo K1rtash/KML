@@ -1,6 +1,5 @@
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <fmt/core.h>
 
 #include <iostream>
 #include <cassert>
@@ -56,7 +55,9 @@ int KML::GetShaderUniformL(Shader* shader, const char* uniform) {
     auto i = shader->uniforms.find(uniform);
     if(i == shader->uniforms.end()) {
         shader->uniforms[uniform] = -1;
-        fmt::print("[WARNING] Accesed unmaped uniform on shader id {}: {}\n", shader->id, uniform);
+        #ifdef KML_PRINT_ERRORS
+            printf("[KML] Accesed unmaped uniform on shader id %d: %s\n", shader->id, uniform);
+        #endif
         return -1;
     }
     return i->second;  
@@ -145,7 +146,10 @@ GLuint create_shader_program(const char* v_src, const char* f_src) {
     if(!status) {
         char buffer[1024];
         glGetProgramInfoLog(program, sizeof(buffer), nullptr, buffer);
-        std::cout << "ERROR:PROGRAM_LINK: " << buffer << "\n";
+        #ifdef KML_PRINT_ERRORS
+            #include <iostream>
+            std::cout << "ERROR:PROGRAM_LINK: " << buffer << "\nSOURCE =>\n" << src << std::endl;
+        #endif
     } 
     glDeleteShader(vert);
     glDeleteShader(frag);
@@ -163,7 +167,10 @@ GLuint compile_shader_src(GLenum type, const char* src, GLuint program) {
     if(!status) {
         char buffer[1024];
         glGetShaderInfoLog(id, 1024, nullptr, buffer);
-        std::cout << "ERROR:SHADER_COMPILATION: " << buffer << "\nSOURCE =>\n" << src << std::endl;
+        #ifdef KML_PRINT_ERRORS
+            #include <iostream>
+            std::cout << "ERROR:SHADER_COMPILATION: " << buffer << "\nSOURCE =>\n" << src << std::endl;
+        #endif
         return 0;
     } 
     glAttachShader(program, id);
@@ -187,8 +194,5 @@ void map_shader_uniforms(KML::Shader* shader) {
         GLint location = glGetUniformLocation(shader->id, name);
 
         shader->uniforms[std::string(name)] = location;
-        #ifdef KML_PRINT_SHADER_MAPPINGS 
-            std::cout << "mapped: " << name << " loc: " << location  << "id: " << shader->id << std::endl; 
-        #endif
     }
 }

@@ -1,7 +1,5 @@
 #include <miniaudio/miniaudio.h>
 
-#include <fmt/core.h>
-
 #include <unordered_map>
 #include <string>
 
@@ -17,7 +15,6 @@ float g_pitch_mod = 1.0f;
 
 ma_sound* getSound(const char* f) {
     if(sounds.find(f) == sounds.end()) {
-        fmt::println("[DEBUG] ERROR | Tried to get sound not loaded: {}", f);
         return nullptr;
     }
     return sounds.at(f);
@@ -38,8 +35,6 @@ void __KML::CloseAudioDevice() {
 }
 
 void KML::LoadSound(const char* file, bool streaming, bool loop) {
-    fmt::println("[DEBUG] Loading sound: {}", file);
-
     if(sounds.find(file) != sounds.end()) return;
 
     ma_sound* sound = new ma_sound;
@@ -52,7 +47,9 @@ void KML::LoadSound(const char* file, bool streaming, bool loop) {
 
     if(result != MA_SUCCESS) {
         delete sound;
-        fmt::print("[DEBUG] ERROR | Failed to load sound: {} (Error code: {})\n", file, ma_result_description(result));
+        #ifdef KML_PRINT_ERRORS
+        printf("Failed to load sound: %s (Error code: %s)\n", file, ma_result_description(result));
+        #endif
         return;
     }
 
@@ -94,9 +91,6 @@ void KML::UnloadSound(const char* file) {
     delete s;
     sounds.erase(file); 
 }
-
-
-
 
 struct KML::Sound::IMP {
     ma_sound instance;

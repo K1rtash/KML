@@ -1,7 +1,7 @@
 #define GLFW_INCLUDE_NONE
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <fmt/core.h>
+
 #include <stb/stb_image.h>
 
 #include <iostream>
@@ -114,7 +114,9 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
     if(glfwRawMouseMotionSupported())
         glfwSetInputMode(window.handle, GLFW_RAW_MOUSE_MOTION, 1);
     else 
+        #ifdef KML_PRINT_ERRORS
         std::cout << "Raw mouse imput is not supported on this device!\n";
+        #endif
 
     glfwSetWindowSizeCallback(window.handle, resize_callback);
     glfwSetScrollCallback(window.handle, scroll_callback);
@@ -208,7 +210,9 @@ void setLogicalPresentation(int width, int height) {
 }
 
 void error_callback(int error, const char* description) {
-    fmt::print("GLFW error: {} -> {}\n", error, description);
+    #ifdef KML_PRINT_ERRORS
+    std::cout << "GLFW error: " << error << " -> " << description << std::endl;
+    #endif
 }
 
 void resize_callback(GLFWwindow* handle, int width, int height) {
@@ -242,14 +246,18 @@ void window_focus_callback(GLFWwindow* handle, int focused) {
         window.focused = true;
         /* Si el ratón estaba capturado, devolverlo al modo */
         if(input.mouseCaptured) glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        #ifdef KML_PRINT_ERRORS
         std::cout << "[DEBUG] Window is focused\n";
+        #endif
     }
     else {
         window.focused = false;
         /* Opcional: el ratón deja de estar capturado */
         //input.mouseCaptured = 0;
         glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        #ifdef KML_PRINT_ERRORS
         std::cout << "[DEBUG] Window lost focus\n";
+        #endif
     }
 }
 
@@ -271,11 +279,15 @@ void iconify_callback(GLFWwindow* window, int iconified)
 {
     if (iconified)
     {
+        #ifdef KML_PRINT_ERRORS
         std::cout << "[DEBUG] Window iconified!\n";
+        #endif
     }
     else
     {
+        #ifdef KML_PRINT_ERRORS
         std::cout << "[DEBUG] Window NOT iconified!\n";
+        #endif
     }
 }
 
@@ -353,7 +365,7 @@ void setGLcontext(int& major, int& minor, bool useLatestCtx) {
 }
 
 void KML::PrintContext() {
-    fmt::print("Screen aspect: {}x{}\nLogical aspect: {}x{}\n", window.width, window.height, __KML::LOG_SCREEN_WIDTH, __KML::LOG_SCREEN_HEIGHT);
+    printf("Screen aspect: %dx%d\nLogical aspect: %dx%d\n", window.width, window.height, __KML::LOG_SCREEN_WIDTH, __KML::LOG_SCREEN_HEIGHT);
 }
 
 void KML::SetWindowTitle(const char* t) {

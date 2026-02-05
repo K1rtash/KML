@@ -92,7 +92,7 @@ void Sprite::SetTexture(std::string texture) {
 }
 
 void Sprite::SetColor_RGB(int R, int G, int B) {
-    color = RGBAtoHSV({(float)R, (float)G, (float)B});
+    color = RGBAtoHSV({(float)R, (float)G, (float)B, 255.0f});
 }
 
 void Sprite::SetColor_HSV(int H, int S, int V) {

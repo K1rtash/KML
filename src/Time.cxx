@@ -2,8 +2,6 @@
 #define KSL_CLOCK_IMPLEMENTATION
 #include "KSL/ksl_clock.h"
 
-#include <cassert>
-
 using namespace KML;
 
 Stopwatch::Stopwatch(Clock& __c) : _clock{__c} {

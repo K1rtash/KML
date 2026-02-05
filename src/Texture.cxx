@@ -54,9 +54,11 @@ unsigned int __KML::Texture::load(const char* file) {
     stbi_set_flip_vertically_on_load(true);
     unsigned char* bytes = stbi_load(file, &w, &h, &cc, 0);
     
-    if(!bytes) printf("FAILED (bytes): %s\n", file);
-    if(w == 0 || h == 0) printf("FAILED (w/h): %s\n", file);
-    if(!cc) printf("FAILED (cc): %s\n", file);
+    #ifdef KML_PRINT_ERRORS
+        if(!bytes) printf("FAILED (bytes): %s\n", file);
+        if(w == 0 || h == 0) printf("FAILED (w/h): %s\n", file);
+        if(!cc) printf("FAILED (cc): %s\n", file);
+    #endif
     assert(bytes && cc && h && w);
     
     GLuint id = loadTexToGL(bytes, w, h, cc);
