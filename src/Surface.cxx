@@ -18,11 +18,14 @@ Sprite::Sprite() {
     anchor = Vec2f{0.0f, 0.0f}; //x y para anchor, z para angulo
     color = Vec3f{0.0f, 0.0f, 100.0f};
     rotation = 0.0f;
-}
-
-Sprite::Sprite(Shader* shader) : shader{shader} {
     shape = __KML::defaultShape;
     shader = __KML::defaultShader;
+}
+
+Sprite::Sprite(Shader* s) {
+    if(s) shader = s;
+    else shader = __KML::defaultShader;
+    shape = __KML::defaultShape;
 }
 
 Sprite::Sprite(std::string texture) {
