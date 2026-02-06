@@ -146,10 +146,7 @@ GLuint create_shader_program(const char* v_src, const char* f_src) {
     if(!status) {
         char buffer[1024];
         glGetProgramInfoLog(program, sizeof(buffer), nullptr, buffer);
-        #ifdef KML_PRINT_ERRORS
-            #include <iostream>
             std::cout << "ERROR:PROGRAM_LINK: " << buffer << "\nSOURCE =>\n" << src << std::endl;
-        #endif
     } 
     glDeleteShader(vert);
     glDeleteShader(frag);
@@ -167,10 +164,7 @@ GLuint compile_shader_src(GLenum type, const char* src, GLuint program) {
     if(!status) {
         char buffer[1024];
         glGetShaderInfoLog(id, 1024, nullptr, buffer);
-        #ifdef KML_PRINT_ERRORS
-            #include <iostream>
             std::cout << "ERROR:SHADER_COMPILATION: " << buffer << "\nSOURCE =>\n" << src << std::endl;
-        #endif
         return 0;
     } 
     glAttachShader(program, id);
