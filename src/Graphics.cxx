@@ -146,7 +146,7 @@ GLuint create_shader_program(const char* v_src, const char* f_src) {
     if(!status) {
         char buffer[1024];
         glGetProgramInfoLog(program, sizeof(buffer), nullptr, buffer);
-            std::cout << "ERROR:PROGRAM_LINK: " << buffer << "\nSOURCE =>\n" << src << std::endl;
+            std::cout << "ERROR:PROGRAM_LINK: " << buffer << std::endl;
     } 
     glDeleteShader(vert);
     glDeleteShader(frag);
