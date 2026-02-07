@@ -7,10 +7,23 @@ extern "C" {
 
 typedef struct ksl_clock ksl_clock;
 
+//      Creates a new system clock object
+//      and returns a pointer
 ksl_clock* ksl_clock_start();
+
+//      Returns the time  that passed since the 
+//      last call to this function with this clock object
+//      
+//      If this function was never called, instead returns
+//      the time since this object was created with ksl_clock_start()
 double ksl_clock_step(ksl_clock* t);
+
+//      Returns the time in seconds that passed since this object
+//      was created with ksl_clock_start()
 double ksl_clock_abs(ksl_clock* t);
-double ksl_clock_now(ksl_clock* t);
+
+//      Deallocates the resources used in the clock object
+//      Sets the pointer to NULL
 void ksl_clock_free(ksl_clock** t);
 
 #ifdef KSL_CLOCK_IMPLEMENTATION
@@ -48,13 +61,6 @@ void ksl_clock_free(ksl_clock** t) {
         return dt;
     }
 
-    double ksl_clock_now(ksl_clock* t) {
-        if (!t) return 0;
-        LARGE_INTEGER now;
-        QueryPerformanceCounter(&now);
-        return (double)now.QuadPart / t->freq.QuadPart;
-    }
-
     double ksl_clock_abs(ksl_clock* t) {
         if(!t) return 0;
         LARGE_INTEGER now;
@@ -82,13 +88,6 @@ void ksl_clock_free(ksl_clock** t) {
         double dt = (now.tv_sec - t->start.tv_sec) + (now.tv_usec - t->start.tv_usec) / 1000000.0;
         t->start = now;
         return dt;
-    }
-
-    double ksl_clock_now(ksl_clock* t) {
-        (void)t;
-        struct timeval now;
-        gettimeofday(&now, NULL);
-        return (double)now.tv_sec + (double)now.tv_usec / 1000000.0;
     }
     
     double ksl_clock_abs(ksl_clock* t) {

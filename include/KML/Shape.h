@@ -32,9 +32,9 @@ namespace KML {
         void Delete();
 
         /**
-         * @brief      Called after each draw instance to render with the current shader program
+         * @brief      Draws the vertices to the bind shader
          */
-        void Use();
+        void Draw();
         ~Shape();
     };
 }

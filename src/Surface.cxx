@@ -77,8 +77,7 @@ void Sprite::Draw() {
         view = glm::translate(view, glm::vec3(-camera->pivot.x, -camera->pivot.y, 0));
     }
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
+    BindTexture(tex, 0);
 
     glUniform1i(KML::GetShaderUniformL(shader, "uTex"), 0);
     glUniform1i(KML::GetShaderUniformL(shader, "useTex"), tex > 0 ? 1 : 0);
@@ -87,7 +86,7 @@ void Sprite::Draw() {
     glUniformMatrix4fv(KML::GetShaderUniformL(shader, "view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniform4f(KML::GetShaderUniformL(shader, "tint"), finalColor.x, finalColor.y, finalColor.z, finalColor.w);
     
-    shape->Use();
+    shape->Draw();
 }
 
 void Sprite::SetTexture(std::string texture) {

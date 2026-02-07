@@ -36,7 +36,7 @@ Clock::Clock() {
 }
 
 double Clock::Now() const {
-    return ksl_clock_now(imp->clock);
+    return ksl_clock_abs(imp->clock);
 }
 
 double Clock::Tick() const {

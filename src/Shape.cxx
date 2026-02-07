@@ -38,9 +38,8 @@ KML::Shape::~Shape() {
 }
 
 
-void KML::Shape::Use() {
+void KML::Shape::Draw() {
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, ind_size/sizeof(unsigned int), GL_UNSIGNED_INT, 0);
-    glUseProgram(0);
     glBindVertexArray(0);
 }

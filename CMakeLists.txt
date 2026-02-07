@@ -102,21 +102,6 @@ endif()
 #                       DEMO
 # ---------------------      ---------------------
 if(KML_BUILD_DEMO)
-    FetchContent_Declare(
-      fmt
-      GIT_REPOSITORY https://github.com/fmtlib/fmt
-      GIT_TAG        e69e5f977d458f2650bb346dadf2ad30c5320281
-    ) # 10.2.1
-    add_executable(${PROJECT_NAME}test demo/Test.cxx)
-    target_link_libraries(${PROJECT_NAME}test PRIVATE 
-        KML::KML
-        fmt::fmt
-        glm::glm
-        OpenGL::GL
-        freetype
-    )
-    target_include_directories(${PROJECT_NAME}test PRIVATE include ext)
-
     add_executable(${PROJECT_NAME}demo demo/Main.cxx)
     target_link_libraries(${PROJECT_NAME}demo PRIVATE KML::KML)
     target_include_directories(${PROJECT_NAME}demo PRIVATE include)

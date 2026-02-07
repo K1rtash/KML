@@ -15,6 +15,13 @@ KML::Texture KML::LoadTexture(const char* file) {
     return id;
 }
 
+void KML::BindTexture(Texture t, int u) {
+    if(t > 0 && u >= 0) {
+        glActiveTexture(GL_TEXTURE0 + u);
+        glBindTexture(GL_TEXTURE_2D, t);
+    }
+}
+
 void KML::UnloadTexture(const char* file) {
     GLuint id = __KML::Texture::get(file);
     glDeleteTextures(1, &id);

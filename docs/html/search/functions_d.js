@@ -1,5 +1,11 @@
 var searchData=
 [
-  ['tick_0',['Tick',['../classKML_1_1Clock.html#a494e59c306843aea6b4659dd7f1eed4b',1,'KML::Clock']]],
-  ['timer_1',['Timer',['../classKML_1_1Timer.html#a3c52677ddabfb0e6aed0be650444272b',1,'KML::Timer']]]
+  ['setglobalpitch_0',['SetGlobalPitch',['../namespaceKML.html#ac22b194b59f8e6c2ec3357ec4d897d24',1,'KML']]],
+  ['setglobalvolume_1',['SetGlobalVolume',['../namespaceKML.html#ac0985dbcae19624b9c8e1caa1e31a9ba',1,'KML']]],
+  ['setwindowicon_2',['SetWindowIcon',['../namespaceKML.html#aa433322cbdd9365fcface0414ae42c44',1,'KML']]],
+  ['setwindowtitle_3',['SetWindowTitle',['../namespaceKML.html#a0cc2bffe3eb0971ebace54f501d9c0c5',1,'KML']]],
+  ['shape_4',['Shape',['../classKML_1_1Shape.html#af21fb49ace2c1fd6bfb0784aa53e14ed',1,'KML::Shape']]],
+  ['start_5',['start',['../classKML_1_1Stopwatch.html#a8a7fd184c76c46c9389e602c94f5a499',1,'KML::Stopwatch::Start()'],['../classKML_1_1Timer.html#acba06a458c199d892cc4148e219ae67b',1,'KML::Timer::Start()']]],
+  ['stop_6',['stop',['../classKML_1_1Sound.html#aa45acf05b57c85d10a5789f2ff978d6f',1,'KML::Sound::Stop()'],['../classKML_1_1SoundPool.html#a9c3edde27043b86b293c7dd99d143e2d',1,'KML::SoundPool::Stop()'],['../classKML_1_1Stopwatch.html#a51ffefbc7d7484d3cd331729be8cedd9',1,'KML::Stopwatch::Stop()'],['../classKML_1_1Timer.html#ab615d097a790fca2f57b6c9a26ff301d',1,'KML::Timer::Stop()']]],
+  ['stopmusic_7',['StopMusic',['../namespaceKML.html#a32ff5ee8c7b0932807ebe1aec502a766',1,'KML']]]
 ];

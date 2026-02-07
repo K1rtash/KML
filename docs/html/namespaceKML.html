@@ -250,6 +250,9 @@ KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d"
 <tr class="memitem:ab678837b50aa0de23ad2bda144c1ee5e" id="r_ab678837b50aa0de23ad2bda144c1ee5e"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unsigned</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ab678837b50aa0de23ad2bda144c1ee5e">GetShaderID</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader)</td></tr>
 <tr class="memdesc:ab678837b50aa0de23ad2bda144c1ee5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the shader id.  <br /></td></tr>
 <tr class="separator:ab678837b50aa0de23ad2bda144c1ee5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f6c281c34f7991d513b49ae192756c" id="r_ae3f6c281c34f7991d513b49ae192756c"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ae3f6c281c34f7991d513b49ae192756c">UseShader</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader)</td></tr>
+<tr class="memdesc:ae3f6c281c34f7991d513b49ae192756c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binds a shader program so all subsecuent GL calls will be performed on it.  <br /></td></tr>
+<tr class="separator:ae3f6c281c34f7991d513b49ae192756c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa56121ddb9e033d7fda903442c5c099e" id="r_aa56121ddb9e033d7fda903442c5c099e"><td class="memItemLeft" align="right" valign="top"><a id="aa56121ddb9e033d7fda903442c5c099e" name="aa56121ddb9e033d7fda903442c5c099e"></a>
 KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SetUniform_1f</b> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">uniform</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *shader, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">float</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">v0</a>)</td></tr>
 <tr class="separator:aa56121ddb9e033d7fda903442c5c099e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -283,6 +286,9 @@ KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d"
 <tr class="memitem:ac9c43a0a807384554bb35a11b4c78043" id="r_ac9c43a0a807384554bb35a11b4c78043"><td class="memItemLeft" align="right" valign="top">KML_API Texture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#ac9c43a0a807384554bb35a11b4c78043">LoadTexture</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
 <tr class="memdesc:ac9c43a0a807384554bb35a11b4c78043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a texture from file, will be saved as the char* you provided.  <br /></td></tr>
 <tr class="separator:ac9c43a0a807384554bb35a11b4c78043"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76239d77d0f5aee6bb108ca686963069" id="r_a76239d77d0f5aee6bb108ca686963069"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a76239d77d0f5aee6bb108ca686963069">BindTexture</a> (Texture <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">texture</a>, <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">unit</a>)</td></tr>
+<tr class="memdesc:a76239d77d0f5aee6bb108ca686963069"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binds a loaded texture to a texture unit, which can be passed to a shader's sampler2D uniform.  <br /></td></tr>
+<tr class="separator:a76239d77d0f5aee6bb108ca686963069"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2569d470206386a0f16a7918d18ead73" id="r_a2569d470206386a0f16a7918d18ead73"><td class="memItemLeft" align="right" valign="top">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceKML.html#a2569d470206386a0f16a7918d18ead73">UnloadTexture</a> (<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">const</a> <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">char</a> *<a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">file</a>)</td></tr>
 <tr class="memdesc:a2569d470206386a0f16a7918d18ead73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all allocated resources in a texture.  <br /></td></tr>
 <tr class="separator:a2569d470206386a0f16a7918d18ead73"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -336,6 +342,43 @@ KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d"
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains all public methods, classes, enums, and structs of the library. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a76239d77d0f5aee6bb108ca686963069" name="a76239d77d0f5aee6bb108ca686963069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76239d77d0f5aee6bb108ca686963069">&#9670;&#160;</a></span>BindTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::BindTexture </td>
+          <td>(</td>
+          <td class="paramtype">Texture&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">int</a>&#160;</td>
+          <td class="paramname"><em>unit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Binds a loaded texture to a texture unit, which can be passed to a shader's sampler2D uniform. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">texture</td><td>Texture </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">unit</td><td>Texture unit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae555436fd0cbcdadbc5fba05fd5db93d" name="ae555436fd0cbcdadbc5fba05fd5db93d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae555436fd0cbcdadbc5fba05fd5db93d">&#9670;&#160;</a></span>Clamp()</h2>
 
@@ -1513,6 +1556,32 @@ template&lt;typename T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>Disc file </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae3f6c281c34f7991d513b49ae192756c" name="ae3f6c281c34f7991d513b49ae192756c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3f6c281c34f7991d513b49ae192756c">&#9670;&#160;</a></span>UseShader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KML_API <a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">void</a> KML::UseShader </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> *&#160;</td>
+          <td class="paramname"><em>shader</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Binds a shader program so all subsecuent GL calls will be performed on it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shader</td><td><a class="el" href="namespaceKML.html#ae555436fd0cbcdadbc5fba05fd5db93d">Shader</a> </td></tr>
   </table>
   </dd>
 </dl>

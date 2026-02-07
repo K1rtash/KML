@@ -57,6 +57,13 @@ namespace KML {
      * @return     Shader id
      */
     KML_API unsigned int GetShaderID(Shader* shader);
+
+    /**
+     * @brief      Binds a shader program so all subsecuent GL calls will be performed on it
+     *
+     * @param      shader  @ref Shader
+     */
+    KML_API void UseShader(Shader* shader);
     
     KML_API void SetUniform_1f(const char* uniform, Shader* shader, float v0);
     KML_API void SetUniform_1i(const char* uniform, Shader* shader, int v0);
@@ -93,6 +100,14 @@ namespace KML {
      * @return     Unique id
      */
     KML_API Texture LoadTexture(const char* file);
+
+    /**
+     * @brief      Binds a loaded texture to a texture unit, which can be passed to a shader's sampler2D uniform
+     *
+     * @param[in]  texture  @ref Texture
+     * @param[in]  unit     Texture unit
+     */
+    KML_API void BindTexture(Texture texture, int unit);
 
     /**
      * @brief      Frees all allocated resources in a texture

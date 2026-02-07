@@ -1,96 +1,61 @@
-#include "KML/KML.h"
-
-#include <string>
 #include <iostream>
+#include <KML/KML.h>
 
-bool keyDown(int k) {
-    if(KML::GetKey(k) == KML::KeyState::PRESS || KML::GetKey(k) == KML::KeyState::HOLD) return true;
-    return false;
-}
+int main() {
+    KML::CreateWindowP(410, 280, "Conditioned Subject", 410, 280, 3, 3, KML::MSAA8 | KML::RESIZABLE);
 
-int main(void) {
-    KML::Clock clock;
-    KML::Stopwatch stopwatch(clock);
-    stopwatch.Start();
+    KML::Clock clock0{};
 
-    KML::CreateWindow(800, 600, "KML Window", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
-    KML::PrintContext();
+    KML::Shader* shader0 = KML::CreateShader("assets/shaders/logo.vs", "assets/shaders/logo.fs");
 
-    float vertices[] = {
-        //  x     y    z     u    v
-        0.0f,  0.5f, 0.0f, 0.5f, 1.0f,   // cima
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,   // izquierda
-        0.5f, -0.5f, 0.0f, 1.0f, 0.0f    // derecha
+    KML::Texture tex0 = KML::LoadTexture("assets/logo.png");
+
+    float quad[] = {
+     //  x     y     z      u     v
+       -1.f, -1.f, 0.f,   0.f, 0.f,
+        1.f, -1.f, 0.f,   1.f, 0.f,
+        1.f,  1.f, 0.f,   1.f, 1.f,
+       -1.f,  1.f, 0.f,   0.f, 1.f
     };
 
-    // Índices para un solo triángulo
-    unsigned int indices[] = {
-        0, 1, 2
+    unsigned int quadIdx[] = {
+        0, 1, 2,
+        2, 3, 0
     };
 
-    KML::Shape shape0(vertices, sizeof(vertices), indices, sizeof(indices));
 
-    KML::Sprite background(KML::Vec4f{0.0f, 0.0f, 800.0f, 600.0f});
-    background.SetColor_RGB(118, 144, 166);
+    KML::Shape shape0{quad, sizeof(quad), quadIdx, sizeof(quadIdx)};
 
-    KML::Sprite surface{KML::Vec4f(400.0f, 300.0f, 300.0f, 300.0f)};
-    surface.transparency = 25;
-    surface.anchor = KML::Vec2f(0.5f, 0.5f);
-    surface.shape = &shape0;
+    KML::Sprite sprite0;
+    sprite0.pos = KML::Vec2f(0.0f, 0.0f);
+    //sprite0.shape = &shape0;
+    //sprite0.shader = shader0;
+    sprite0.scale = KML::Vec2f(100.0f, 100.0f);
+    sprite0.color = KML::HSV_v3f(219, 83, 24);
 
-    surface.SetColor_RGB(255, 107, 30);
-
-   
-    double accum = 0;
-    int fps = 0;
-
-    clock.Tick();
     while(KML::ProcessEvents()) {
-        double deltaTime = clock.Tick();
-        accum += deltaTime;
-        fps++;
+        float time = (float)clock0.Now();
+
+        KML::SetUniform_1f("u_time", shader0, time);
+        KML::SetUniform_2fv("u_resolution", shader0, KML::Vec2f(410.0f, 280.0f));
+        KML::SetUniform_3fv("u_logoColor", shader0, KML::Vec3f(1.0f, 0.0f, 0.0f));
+
+        KML::UseShader(shader0);
+        KML::BindTexture(tex0, 0);
+        shape0.Draw();
+        sprite0.Draw();
 
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
-            if (!KML::GetMouseCaptureState())
-                KML::Event(KML::WindowEvent::EXIT, 1);
-            else 
-                KML::Event(KML::WindowEvent::MOUSE_CAPTURED, 0);
+            KML::Event(KML::WindowEvent::EXIT, 1);
         }
 
-        if(keyDown(KML_KEY_W)) surface.pos += KML::Vec2f{0.0f, 1.0f};
-        if(keyDown(KML_KEY_S)) surface.pos += KML::Vec2f{0.0f, -1.0f};
-        if(keyDown(KML_KEY_A)) surface.pos += KML::Vec2f{-1.0f, 0.0f};
-        if(keyDown(KML_KEY_D)) surface.pos += KML::Vec2f{1.0f, 0.0f};
-        if(keyDown(KML_KEY_LEFT)) surface.rotation += 10.0f;
-        if(keyDown(KML_KEY_RIGHT)) surface.rotation -= 10.0f;
-        if(keyDown(KML_KEY_UP)) surface.scale += KML::Vec2f{1.0f, 1.0f};
-        if(keyDown(KML_KEY_DOWN)) surface.scale -= KML::Vec2f{1.0f, 1.0f};
-        if(keyDown(KML_KEY_F)) {
-            surface.color.y += 10.0f;
-            surface.color.x += 5.0f;
-        }
-        if(keyDown(KML_KEY_V)) {
-            surface.color.y -= 10.0f;
-            surface.color.x -= 5.0f;
+        if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
+            KML::ReloadShader(shader0);
         }
 
-        if(KML::GetMouseButton(KML_MOUSE_BUTTON_LEFT) == KML::KeyState::PRESS) 
-            KML::Event(KML::WindowEvent::MOUSE_CAPTURED, 1);
-
-        background.Draw();
-        surface.Draw();
-
-        KML::PresentFrame();
-
-        if(accum >= 1.0) {
-            std::string title = "KML Window | " + std::to_string(fps) + " FPS";
-            KML::SetWindowTitle(title.c_str());
-            accum -= 1.0;
-            fps = 0;
-        }
+        KML::PresentFrame(1.0, 1.0, 1.0);
     }
 
-    std::cout << "This program took " << stopwatch.Stop() << " seconds" << std::endl;
     KML::Quit();
     return 0;
 }

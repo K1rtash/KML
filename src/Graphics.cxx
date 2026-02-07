@@ -80,6 +80,10 @@ void KML::DeleteShader(Shader*& shader) {
     shader = nullptr;
 }
 
+void KML::UseShader(Shader* shader) {
+    if(shader) glUseProgram(shader->id);
+} 
+
 void KML::SetUniform_1f(const char* u, Shader* s, float v0) {
     int loc = GetShaderUniformL(s, u);
     if (loc >= 0) { 
