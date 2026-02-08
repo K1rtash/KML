@@ -2,7 +2,7 @@
 #include <KML/KML.h>
 
 int main() {
-    KML::CreateWindowP(410, 280, "Conditioned Subject", 410, 280, 3, 3, KML::MSAA8 | KML::RESIZABLE);
+    KML::CreateWindow(410, 280, "Conditioned Subject", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
 
     KML::Clock clock0{};
 

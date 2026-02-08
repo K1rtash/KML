@@ -4,6 +4,8 @@
 
 #include <stb/stb_image.h>
 
+#include <glad/glad.h>
+
 #include <iostream>
 #include <cassert>
 
@@ -15,7 +17,13 @@
 /* ---------- Declaraciones de callbacks ---------- */
 
 void error_callback(int, const char*);
-void resize_callback(GLFWwindow*, int, int);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    printf("SIZE CALLBACK: %d %d\n", width, height);
+    fflush(stdout);
+    glViewport(0, 0, width, height);
+}
+
 void scroll_callback(GLFWwindow*, double, double);
 void cursor_callback(GLFWwindow*, double, double);
 void window_focus_callback(GLFWwindow*, int);
@@ -108,7 +116,7 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
     else window.handle = glfwCreateWindow(width, height, title, nullptr, nullptr);
 
     glfwMakeContextCurrent(window.handle);
-    glfwGetWindowSize(window.handle, &window.width, &window.height);
+    glfwGetFramebufferSize(window.handle, &window.width, &window.height);
     window.title = title;
 
     if(glfwRawMouseMotionSupported())
@@ -118,7 +126,7 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
         std::cout << "Raw mouse imput is not supported on this device!\n";
         #endif
 
-    glfwSetWindowSizeCallback(window.handle, resize_callback);
+    glfwSetFramebufferSizeCallback(window.handle, framebuffer_size_callback);
     glfwSetScrollCallback(window.handle, scroll_callback);
     glfwSetCursorPosCallback(window.handle, cursor_callback);
     glfwSetWindowFocusCallback(window.handle, window_focus_callback);
@@ -216,7 +224,8 @@ void error_callback(int error, const char* description) {
 }
 
 void resize_callback(GLFWwindow* handle, int width, int height) {
-    setLogicalPresentation(width, height);
+    std::cout << "Resize callback: " << width << " " << height << std::flush;
+    glViewport(0, 0, width, height);
 }
 
 void scroll_callback(GLFWwindow* handle, double xoffset, double yoffset) {
