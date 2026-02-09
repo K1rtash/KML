@@ -3,11 +3,6 @@
 #include <iostream>
 #include <string>
 
-#include <fmt/core.h>
-#include <fmt/format.h>
-
-#include <glad/glad.h>
-
 void myFunc(void* numero) {
     int* n = (int*)numero;
     printf("Function pointer numero: %d\n", *n);
@@ -74,6 +69,10 @@ int main(void) {
 
     std::string font0 = KML::LoadFont("assets/arial.ttf", 48);
 
+    KML::LoadSound("assets/test.wav", true, true);
+    KML::LoadSound("assets/test.ogg", false, false);
+    KML::LoadSound("assets/voice.wav", false, false);
+
     KML::Shader* shaderParticles = KML::CreateShader("assets/particulas/vert.glsl", "assets/particulas/frag.glsl");
 
     KML::Text text0{font0};
@@ -97,6 +96,9 @@ int main(void) {
     surface.camera = &cam0;
     text0.camera = &cam0;
     particle0.camera = &cam0;
+
+    KML::PlayMusic("assets/test.wav", 1.0f, 0.5f);
+    KML::SoundPool sp0;
 
     g_clock.Tick();
     while(KML::ProcessEvents()) {
@@ -139,16 +141,20 @@ int main(void) {
             float size = 30.0f;
 
             particle0.Generate(30, (void*)(&size));
+            sp0.Add(KML::Sound{"assets/test.ogg", 1.0f, KML::RandFloat(0.4f, 1.0f)});
+            //sp0.Play();
         }
 
         if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
             KML::ReloadShader(shaderParticles);
         }
 
-        if(KML::GetKey(KML_KEY_P) == KML::KeyState::PRESS) fmt::print("pos: {}, {} scale: {}, {} rot: {})\n", cam0.pos.x, cam0.pos.y, cam0.size.x, cam0.size.y, cam0.rotation); 
+        //f(KML::GetKey(KML_KEY_P) == KML::KeyState::PRESS) //fmt::print("pos: {}, {} scale: {}, {} rot: {})\n", cam0.pos.x, cam0.pos.y, cam0.size.x, cam0.size.y, cam0.rotation); 
 
-        if(KML::GetMouseButton(KML_MOUSE_BUTTON_LEFT) == KML::KeyState::PRESS) 
+        if(KML::GetMouseButton(KML_MOUSE_BUTTON_LEFT) == KML::KeyState::PRESS) {
             KML::Event(KML::WindowEvent::MOUSE_CAPTURED, 1);
+            sp0.Add(KML::Sound{"assets/voice.wav", 1.0f, 2.0f});
+        }
 
         if(keyDown(KML_KEY_U)) cam0.pos += KML::Vec2f{0.0f, 1.0f};
         if(keyDown(KML_KEY_J)) cam0.pos += KML::Vec2f{0.0f, -1.0f};
@@ -168,6 +174,8 @@ int main(void) {
         surface.Draw();
         text0.Draw();
         particle0.Draw(deltaTime);
+
+        sp0.Update();
 
         KML::PresentFrame();
     }

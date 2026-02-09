@@ -4,8 +4,6 @@
 
 #include <stb/stb_image.h>
 
-#include <glad/glad.h>
-
 #include <iostream>
 #include <cassert>
 
@@ -17,13 +15,7 @@
 /* ---------- Declaraciones de callbacks ---------- */
 
 void error_callback(int, const char*);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    printf("SIZE CALLBACK: %d %d\n", width, height);
-    fflush(stdout);
-    glViewport(0, 0, width, height);
-}
-
+void resize_callback(GLFWwindow*, int, int);
 void scroll_callback(GLFWwindow*, double, double);
 void cursor_callback(GLFWwindow*, double, double);
 void window_focus_callback(GLFWwindow*, int);
@@ -116,17 +108,15 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
     else window.handle = glfwCreateWindow(width, height, title, nullptr, nullptr);
 
     glfwMakeContextCurrent(window.handle);
-    glfwGetFramebufferSize(window.handle, &window.width, &window.height);
+    glfwGetWindowSize(window.handle, &window.width, &window.height);
     window.title = title;
 
     if(glfwRawMouseMotionSupported())
         glfwSetInputMode(window.handle, GLFW_RAW_MOUSE_MOTION, 1);
     else 
-        #ifdef KML_PRINT_ERRORS
         std::cout << "Raw mouse imput is not supported on this device!\n";
-        #endif
 
-    glfwSetFramebufferSizeCallback(window.handle, framebuffer_size_callback);
+    glfwSetWindowSizeCallback(window.handle, resize_callback);
     glfwSetScrollCallback(window.handle, scroll_callback);
     glfwSetCursorPosCallback(window.handle, cursor_callback);
     glfwSetWindowFocusCallback(window.handle, window_focus_callback);
@@ -218,14 +208,11 @@ void setLogicalPresentation(int width, int height) {
 }
 
 void error_callback(int error, const char* description) {
-    #ifdef KML_PRINT_ERRORS
-    std::cout << "GLFW error: " << error << " -> " << description << std::endl;
-    #endif
+    printf("GLFW error: %s\n", description);
 }
 
 void resize_callback(GLFWwindow* handle, int width, int height) {
-    std::cout << "Resize callback: " << width << " " << height << std::flush;
-    glViewport(0, 0, width, height);
+    setLogicalPresentation(width, height);
 }
 
 void scroll_callback(GLFWwindow* handle, double xoffset, double yoffset) {
@@ -255,18 +242,14 @@ void window_focus_callback(GLFWwindow* handle, int focused) {
         window.focused = true;
         /* Si el ratón estaba capturado, devolverlo al modo */
         if(input.mouseCaptured) glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-        #ifdef KML_PRINT_ERRORS
         std::cout << "[DEBUG] Window is focused\n";
-        #endif
     }
     else {
         window.focused = false;
         /* Opcional: el ratón deja de estar capturado */
         //input.mouseCaptured = 0;
         glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-        #ifdef KML_PRINT_ERRORS
         std::cout << "[DEBUG] Window lost focus\n";
-        #endif
     }
 }
 
@@ -288,15 +271,11 @@ void iconify_callback(GLFWwindow* window, int iconified)
 {
     if (iconified)
     {
-        #ifdef KML_PRINT_ERRORS
         std::cout << "[DEBUG] Window iconified!\n";
-        #endif
     }
     else
     {
-        #ifdef KML_PRINT_ERRORS
         std::cout << "[DEBUG] Window NOT iconified!\n";
-        #endif
     }
 }
 
@@ -374,7 +353,7 @@ void setGLcontext(int& major, int& minor, bool useLatestCtx) {
 }
 
 void KML::PrintContext() {
-    printf("Screen aspect: %dx%d\nLogical aspect: %dx%d\n", window.width, window.height, __KML::LOG_SCREEN_WIDTH, __KML::LOG_SCREEN_HEIGHT);
+    printf("Screen aspect: %dx%d\nLogical aspect: %fx%f\n", window.width, window.height, __KML::LOG_SCREEN_WIDTH, __KML::LOG_SCREEN_HEIGHT);
 }
 
 void KML::SetWindowTitle(const char* t) {

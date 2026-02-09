@@ -126,18 +126,13 @@ namespace KML {
         void Update();
 
         /**
-         * @brief      Adds the specified sound.
+         * @brief      Adds the specified sound and starts playing it
          *
          * @param      sound  Sound
          *
          * @return     Iterator in the vector
          */
         int Add(Sound&& sound);
-
-        /**
-         * @brief      Starts to play all sounds
-         */
-        void Play();
 
         /**
          * @brief      Stops and removes all sounds

@@ -158,20 +158,20 @@ KML::SoundPool::SoundPool() {
 
 int KML::SoundPool::Add(Sound&& sound) {
     pool.emplace_back(std::move(sound));
-    return pool.size();
+    int i = pool.size() - 1;
+    pool[i].Play();
+    return i;
 }
 
-void KML::SoundPool::Play() {
-    for (auto& s : pool) {
-        if (!s.IsPlaying()) {
-            s.Play();
-            return;
-        }
-    }
-} 
-
 void KML::SoundPool::Update() {
-    for (auto& s : pool) if (s.IsPlaying()) s.Update();
+    pool.erase(
+        std::remove_if(pool.begin(), pool.end(),
+        [](const Sound& s){ return s.IsPlaying() == false; }), pool.end()
+    );
+
+    for (auto& s : pool) {
+        if (s.IsPlaying()) s.Update();
+    }
 }
 
 void KML::SoundPool::Stop() {
