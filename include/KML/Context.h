@@ -40,6 +40,16 @@ namespace KML {
     };
 
     /**
+     * @brief      Sets the targeted GL context
+     *
+     *             Must be called before a window is initialized
+     *
+     * @param[in]  major  Major version
+     * @param[in]  minor  Minor version
+     */
+    KML_API void SetGLContextVersion(int major, int minor);
+
+    /**
      * @brief      Creates a unique graphical context for this library
      *
      * @param[in]  width   Window width
@@ -49,23 +59,7 @@ namespace KML {
      *
      * @return     True on success, false on failure
      */
-    KML_API bool CreateWindow(int width, int height, const char* title, unsigned int flags = NONE);
-
-    /**
-     * @brief      Creates a unique graphical context for this library with additional parameters
-     *
-     * @param[in]  width           Window width
-     * @param[in]  height          Window height
-     * @param[in]  title           Window title
-     * @param[in]  logical_width   Logical width in px
-     * @param[in]  logical_height  Logical height in px
-     * @param[in]  glCtxMajor      OpenGL's requested version x.0
-     * @param[in]  glCtxMinor      OpenGL's requested version 0.x
-     * @param[in]  flags           Window flags
-     *
-     * @return     True on success, false on failure
-     */
-    KML_API bool CreateWindowP(int width, int height, const char* title, float logical_width, float logical_height, int glCtxMajor, int glCtxMinor, unsigned int flags);
+    KML_API bool InitWindow(int width, int height, const char* title, unsigned int flags = NONE);
 
     /**
      * @brief      Process keystrokes, mouse input, and user events

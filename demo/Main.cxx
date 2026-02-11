@@ -1,61 +1,60 @@
-#include <iostream>
 #include <KML/KML.h>
+#include <iostream>
+#include <cstdlib>
+
+using namespace KML;
+
+bool exitGame = false;
+
+void GamePhysics();
 
 int main() {
-    KML::CreateWindow(410, 280, "Conditioned Subject", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
+    SetGLContextVersion(3, 3);
+    InitWindow(320, 180, "Conditioned Subject", RESIZABLE | MSAA8 | ENABLE_VSYNC);
+    PrintContext();
 
-    KML::Clock clock0{};
+    int fps = 0;
+    int tps = 0;
+    double timeCounter = 0.0;
 
-    //KML::Shader* shader0 = KML::CreateShader("assets/shaders/logo.vs", "assets/shaders/logo.fs");
+    double timeAccum = 0.0;
+    Clock g_clock;
 
-    //KML::Texture tex0 = KML::LoadTexture("assets/logo.png");
+    constexpr int TARGET_TPS = 20;
+    constexpr double TICK_LENGTH = 1.0 / (double)TARGET_TPS; 
 
-    float quad[] = {
-     //  x     y     z      u     v
-       -1.f, -1.f, 0.f,   0.f, 0.f,
-        1.f, -1.f, 0.f,   1.f, 0.f,
-        1.f,  1.f, 0.f,   1.f, 1.f,
-       -1.f,  1.f, 0.f,   0.f, 1.f
-    };
+    while(!exitGame) {
+        double deltaTime = g_clock.Tick();
+        timeAccum += deltaTime;
 
-    unsigned int quadIdx[] = {
-        0, 1, 2,
-        2, 3, 0
-    };
+        if (!ProcessEvents()) exitGame = true;
 
-
-    KML::Shape shape0{quad, sizeof(quad), quadIdx, sizeof(quadIdx)};
-
-    KML::Sprite sprite0;
-    sprite0.pos = KML::Vec2f(0.0f, 0.0f);
-    //sprite0.shape = &shape0;
-    //sprite0.shader = shader0;
-    sprite0.scale = KML::Vec2f(410.0f, 280.0f);
-    sprite0.color = KML::HSV_v3f(219, 83, 24);
-
-    while(KML::ProcessEvents()) {
-        float time = (float)clock0.Now();
-
-        //KML::SetUniform_1f("u_time", shader0, time);
-        //KML::SetUniform_2fv("u_resolution", shader0, KML::Vec2f(410.0f, 280.0f));
-        //KML::SetUniform_3fv("u_logoColor", shader0, KML::Vec3f(1.0f, 0.0f, 0.0f));
-
-        //KML::UseShader(shader0);
-        //KML::BindTexture(tex0, 0);
-        //shape0.Draw();
-        sprite0.Draw();
-
-        if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
-            KML::Event(KML::WindowEvent::EXIT, 1);
+        while(timeAccum >= TICK_LENGTH) {
+            GamePhysics();
+            timeAccum -= TICK_LENGTH;
+            tps++;
         }
 
-        if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
-            //KML::ReloadShader(shader0);
+        fps++;
+        timeCounter += deltaTime;
+
+        if(timeCounter >= 1.0) {
+            std::cout << "In " << timeCounter << " seconds the game rendered " << fps << " frames and simulated " << tps << " ticks\n";
+            char buffer[64] = {0};
+            sprintf(buffer, "Conditioned Subject | %d FPS - %d TPS", fps, tps);
+            SetWindowTitle(buffer);
+            timeCounter -= 1.0; 
+            fps = 0;
+            tps = 0;
         }
 
-        KML::PresentFrame(1.0, 1.0, 1.0);
+        PresentFrame(0.64f, 0.23f, 0.72f);
     }
 
-    KML::Quit();
+    Quit();
     return 0;
+}
+
+void GamePhysics() {
+
 }

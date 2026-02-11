@@ -47,17 +47,18 @@ struct Input {
 
 namespace __KML {
     float LOG_SCREEN_WIDTH = 1080.0f, LOG_SCREEN_HEIGHT = 720.0f, LOG_SCREEN_ASPECT = LOG_SCREEN_WIDTH / LOG_SCREEN_HEIGHT;
+    int glContext[2] = {3,3};
     int contextActive = 0;
 }
 
 /* ---------- Definiciones ---------- */
-bool KML::CreateWindow(int width, int height, const char* title, unsigned int flags) {
-    return CreateWindowP(width, height, title, (float)width, (float)height, 3, 3, flags | GL_CONTEXT_LATEST | RESIZABLE);
+void KML::SetGLContextVersion(int major, int minor) {
+    __KML::glContext[0] = major;
+    __KML::glContext[1] = minor;
 }
-
-bool KML::CreateWindowP(int width, int height, const char* title, float logical_width, float logical_height, int glCtxMajor, int glCtxMinor, unsigned int flags) {
-    __KML::LOG_SCREEN_WIDTH = logical_width;
-    __KML::LOG_SCREEN_HEIGHT = logical_height;
+bool KML::InitWindow(int width, int height, const char* title, unsigned int flags) {
+    __KML::LOG_SCREEN_WIDTH = width;
+    __KML::LOG_SCREEN_HEIGHT = height;
     __KML::LOG_SCREEN_ASPECT = __KML::LOG_SCREEN_WIDTH / __KML::LOG_SCREEN_HEIGHT;
     glfwSetErrorCallback(error_callback);
     glfwInit();
@@ -65,9 +66,9 @@ bool KML::CreateWindowP(int width, int height, const char* title, float logical_
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* video = glfwGetVideoMode(monitor);
     
-    setGLcontext(glCtxMajor, glCtxMinor, (flags & KML::GL_CONTEXT_LATEST) ? true : false);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, glCtxMajor);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, glCtxMinor);
+    setGLcontext(__KML::glContext[0], __KML::glContext[1], (flags & KML::GL_CONTEXT_LATEST) ? true : false);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, __KML::glContext[0]);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, __KML::glContext[1]);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     if(flags & KML::ENABLE_VSYNC) glfwWindowHint(GLFW_REFRESH_RATE, video->refreshRate);
     #ifdef __APPLE__
@@ -357,8 +358,7 @@ void KML::PrintContext() {
 }
 
 void KML::SetWindowTitle(const char* t) {
-    assert(t);
-    glfwSetWindowTitle(window.handle, t);
+    if(t) glfwSetWindowTitle(window.handle, t);
 }
 
 void KML::SetWindowIcon(const char* file) {

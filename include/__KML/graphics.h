@@ -16,10 +16,12 @@ namespace __KML {
     extern float LOG_SCREEN_WIDTH, LOG_SCREEN_HEIGHT, LOG_SCREEN_ASPECT;
     extern KML::Shape* defaultShape;
     extern KML::Shader* defaultShader;
+    extern int glContext[2];
+    extern int contextActive;
+    
     void GenerateDefaultMembers();
     void InitAudioDevice();
     void CloseAudioDevice();
-    extern int contextActive;
     unsigned char* getTTF(std::string name);
     void InitFreeType();
     void QuitFreeType(); 
