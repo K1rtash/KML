@@ -29,13 +29,29 @@ namespace KML {
          * @param[in]  indices_size   Size of the indices array
          */
         Shape(float* vertices, size_t vertices_size, unsigned int* indices, size_t indices_size);
+
+        Shape(Shape&& other) noexcept {
+            vao = other.vao;
+            ind_size = other.ind_size;
+            other.vao = 0;
+        }
+        
+        Shape& operator=(Shape&& other) noexcept {
+            if (this != &other) {
+                Delete();
+                vao = other.vao;
+                ind_size = other.ind_size;
+                other.vao = 0;
+            }
+            return *this;
+        }
+
         void Delete();
 
         /**
          * @brief      Draws the vertices to the bind shader
          */
         void Draw();
-        ~Shape();
     };
 }
 

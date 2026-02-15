@@ -33,11 +33,6 @@ void KML::Shape::Delete() {
     if(vao) glDeleteVertexArrays(1, &vao);
 }
 
-KML::Shape::~Shape() {
-    if(__KML::contextActive) Delete();
-}
-
-
 void KML::Shape::Draw() {
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, ind_size/sizeof(unsigned int), GL_UNSIGNED_INT, 0);
