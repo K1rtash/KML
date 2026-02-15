@@ -35,7 +35,6 @@ namespace KML {
          * @brief      Draws the vertices to the bind shader
          */
         void Draw();
-        ~Shape();
     };
 }
 
