@@ -28,8 +28,8 @@ namespace __KML {
 }
 
 namespace __KML::Texture {
-    unsigned int loadTexToGL(unsigned char* bytes, int w, int h, int cc);
-    unsigned int load(const char* file);
+    unsigned int loadTexToGL(unsigned char* bytes, int w, int h, int cc, int ws = 0);
+    unsigned int load(const char* file, int ws);
     unsigned int get(std::string name);
 }
 

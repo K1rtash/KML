@@ -11,6 +11,10 @@
  * @brief       Handles shaders and textures
  */
 
+#define KML_TEXTURE_WRAP_STYLE int
+#define KML_TEXTURE_WS_REPEAT 0
+#define KML_TEXTURE_WS_CLAMP 1
+
 namespace KML {
     struct Vec2f;
     struct Vec3f;
@@ -99,7 +103,7 @@ namespace KML {
      *
      * @return     Unique id
      */
-    KML_API Texture LoadTexture(const char* file);
+    KML_API Texture LoadTexture(const char* file, KML_TEXTURE_WRAP_STYLE wrapStyle = 0);
 
     /**
      * @brief      Binds a loaded texture to a texture unit, which can be passed to a shader's sampler2D uniform

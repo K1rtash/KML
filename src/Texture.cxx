@@ -7,9 +7,9 @@
 
 std::unordered_map<std::string, unsigned int>textures;
 
-KML::Texture KML::LoadTexture(const char* file) {
+KML::Texture KML::LoadTexture(const char* file, KML_TEXTURE_WRAP_STYLE ws) {
     if(textures.find(file) != textures.end()) return __KML::Texture::get(file);
-    unsigned int id = __KML::Texture::load(file);
+    unsigned int id = __KML::Texture::load(file, ws);
     assert(id != 0);
     textures.insert({file, id});
     return id;
@@ -28,16 +28,20 @@ void KML::UnloadTexture(const char* file) {
     textures.erase(file);
 }
 
-unsigned int __KML::Texture::loadTexToGL(unsigned char* bytes, int w, int h, int cc) {
+unsigned int __KML::Texture::loadTexToGL(unsigned char* bytes, int w, int h, int cc, int ws) {
     GLuint id = 0;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
+    if(ws == KML_TEXTURE_WS_REPEAT) {
+    	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    } else {
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    }
     GLenum format;
     if (cc >= 4) format = GL_RGBA;
     else switch (cc) {
@@ -56,7 +60,7 @@ unsigned int __KML::Texture::loadTexToGL(unsigned char* bytes, int w, int h, int
     return id;
 }
 
-unsigned int __KML::Texture::load(const char* file) {
+unsigned int __KML::Texture::load(const char* file, KML_TEXTURE_WRAP_STYLE ws) {
     int w, h, cc;
     stbi_set_flip_vertically_on_load(true);
     unsigned char* bytes = stbi_load(file, &w, &h, &cc, 0);
@@ -68,7 +72,7 @@ unsigned int __KML::Texture::load(const char* file) {
     #endif
     assert(bytes && cc && h && w);
     
-    GLuint id = loadTexToGL(bytes, w, h, cc);
+    GLuint id = loadTexToGL(bytes, w, h, cc, ws);
 
     stbi_image_free(bytes);
     return id;
