@@ -186,10 +186,7 @@ bool KML::ProcessEvents() {
     return !glfwWindowShouldClose(window.handle);
 }
 
-void setLogicalPresentation(int width, int height) {
-    window.width = width;
-    window.height = height;
-
+void KML::setLogicalPresentation(int width, int height) {
     float aspect = (float)width / (float)height;
     int viewportX, viewportY, viewportW, viewportH;
 
@@ -208,12 +205,20 @@ void setLogicalPresentation(int width, int height) {
     glViewport(viewportX, viewportY, viewportW, viewportH);
 }
 
+void KML::getScreenMeasure(int* w, int* h) {
+    assert(w && h);
+    *w = window.width;
+    *h = window.height;
+}
+
 void error_callback(int error, const char* description) {
     printf("GLFW error: %s\n", description);
 }
 
 void resize_callback(GLFWwindow* handle, int width, int height) {
-    setLogicalPresentation(width, height);
+    //setLogicalPresentation(width, height);
+    window.width = width;
+    window.height = height;
 }
 
 void scroll_callback(GLFWwindow* handle, double xoffset, double yoffset) {
@@ -318,8 +323,9 @@ void KML::UseFramebuffer(unsigned int framebuffer) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void KML::PresentFrame(float r, float g, float b) {
+void KML::PresentFrame(float r, float g, float b, bool TEMP) {
     glfwSwapBuffers(window.handle);
+    if(TEMP) return;
     glClearColor(r, g, b, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

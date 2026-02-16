@@ -97,7 +97,10 @@ namespace KML {
      * @param[in]  g     Green color
      * @param[in]  b     Blue color
      */
-    KML_API void PresentFrame(float r = 0.0f, float g = 0.0f, float b = 0.0f);
+    KML_API void PresentFrame(float r = 0.0f, float g = 0.0f, float b = 0.0f, bool TEMP = true);
+
+    KML_API void getScreenMeasure(int* w, int* h);
+    KML_API void setLogicalPresentation(int width, int height);
 
     /**
      * @brief      Prints the current OpenGL context to stdout

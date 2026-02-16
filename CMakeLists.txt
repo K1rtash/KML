@@ -102,9 +102,9 @@ endif()
 #                       DEMO
 # ---------------------      ---------------------
 if(KML_BUILD_DEMO)
-    add_executable(${PROJECT_NAME}demo demo/Main.cxx)
+    add_executable(${PROJECT_NAME}demo demo/main2.cxx)
     target_link_libraries(${PROJECT_NAME}demo PRIVATE KML::KML)
-    target_include_directories(${PROJECT_NAME}demo PRIVATE include)
+    target_include_directories(${PROJECT_NAME}demo PRIVATE include ext)
 endif()
 
 # --- Copiar assets ---
