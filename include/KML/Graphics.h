@@ -20,6 +20,7 @@ namespace KML {
     struct Vec3f;
     struct Vec4f;
     struct Shader;
+    struct Framebuffer;
 
     typedef unsigned int Texture;
 
@@ -119,6 +120,37 @@ namespace KML {
      * @param[in]  file  Disc file
      */
     KML_API void UnloadTexture(const char* file);
+
+    /**
+     * @brief       Creates a new framebuffer in GPU memory
+     * @param[in]   width Logical screeen width
+     * @param[in]   height Logical screen height
+     * @returns     @ref Framebuffer      
+     */
+    KML_API Framebuffer* CreateFramebuffer(int width, int height);
+
+
+    /**
+     * @brief      Binds a framebuffer, where all next drawing operations will be performed
+     *
+     * @param      framebuffer  @ref Framebuffer
+     * @param[in]  width            Screen width
+     * @param[in]  height            Screeen height
+     * @param[in]  cc          Clear color
+     */
+    KML_API void BindFramebuffer(Framebuffer* framebuffer, Vec3f cc);
+
+    /**
+     * @brief      Draws a framebuffer to the backbuffer
+     *
+     * @param      framebuffer  @ref Framebuffer
+     * @param      shader       @ref Shader
+     * @param[in]  width        Width in pixels to draw in the backbuffer
+     * @param[in]  height       Height in pixels to draw in the backbuffer
+     */
+    KML_API void DrawFramebuffer(Framebuffer* framebuffer, Shader* shader, int width, int height);
+
+    KML_API void DestroyFramebuffer(Framebuffer* framebuffer); 
 }
 
 #endif

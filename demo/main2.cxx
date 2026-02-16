@@ -30,62 +30,7 @@ int main() {
 
     KML::Shape shape0{quad, sizeof(quad), quadIdx, sizeof(quadIdx)};
 
-    float u = 1.0f - (1.0f / 320.0f);
-    float v = 1.0f - (1.0f / 180.0f);
-
-    float rectangleVertices[] =
-    {
-         1.0f, -1.0f,  u, 0.0f,
-        -1.0f, -1.0f,  0.0f, 0.0f,
-        -1.0f,  1.0f,  0.0f, v,
-
-         1.0f,  1.0f,  u, v,
-         1.0f, -1.0f,  u, 0.0f,
-        -1.0f,  1.0f,  0.0f, v
-    };
-
-
-    unsigned int rectVAO, rectVBO;
-    glGenVertexArrays(1, &rectVAO);
-    glGenBuffers(1, &rectVBO);
-    glBindVertexArray(rectVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, rectVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), &rectangleVertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-
-    // Create Frame Buffer Object
-    unsigned int FBO;
-    glGenFramebuffers(1, &FBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, FBO);
-
-    // Create Framebuffer Texture
-    unsigned int framebufferTexture;
-    glGenTextures(1, &framebufferTexture);
-    glBindTexture(GL_TEXTURE_2D, framebufferTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // Prevents edge bleeding
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); // Prevents edge bleeding
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, framebufferTexture, 0);
-
-    // Create Render Buffer Object
-    unsigned int RBO;
-    glGenRenderbuffers(1, &RBO);
-    glBindRenderbuffer(GL_RENDERBUFFER, RBO);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, RBO);
-
-
-    // Error checking framebuffer
-    auto fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-    if (fboStatus != GL_FRAMEBUFFER_COMPLETE)
-        std::cout << "Framebuffer error: " << fboStatus << std::endl;
-
-
+    KML::Framebuffer* framebuff = KML::CreateFramebuffer(width, height);
 
     while(KML::ProcessEvents()) {
         float time = (float)clock0.Now();
@@ -94,17 +39,11 @@ int main() {
         KML::SetUniform_2fv("u_resolution", shader0, KML::Vec2f((float)width, (float)height));
         KML::SetUniform_3fv("u_logoColor", shader0, KML::Vec3f(1.0f, 0.0f, 0.0f));
 
-        glBindFramebuffer(GL_FRAMEBUFFER, FBO);
-        glViewport(0, 0, width, height);
-        glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glEnable(GL_DEPTH_TEST);
-
-        // Drawing
+        KML::BindFramebuffer(framebuff, KML::Vec3f(0.07f, 0.13f, 0.17f));
 
         KML::UseShader(shader0);
         KML::BindTexture(tex0, 0);
-        //shape0.Draw();
+        shape0.Draw();
 
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
             KML::Event(KML::WindowEvent::EXIT, 1);
@@ -112,25 +51,19 @@ int main() {
 
         if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
             KML::ReloadShader(shader0);
+            KML::ReloadShader(framebufferProgram);
         }
 
         //
         int w, h;
-        KML::getScreenMeasure(&w, &h);
-        KML::setLogicalPresentation(w, h);
+        KML::GetWindowSize(&w, &h);
+        KML::SetWindowViewport(w, h);
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glClearColor(1,1,1,1);
-        glClear(GL_COLOR_BUFFER_BIT);
-        KML::UseShader(framebufferProgram);
-        glBindVertexArray(rectVAO);
-        glDisable(GL_DEPTH_TEST); // prevents framebuffer rectangle from being discarded
-        glBindTexture(GL_TEXTURE_2D, framebufferTexture);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-
-        KML::PresentFrame(1.0f, 1.0f, 1.0f, true);
+        KML::DrawFramebuffer(framebuff, framebufferProgram, w, h);
+        KML::SwapBuffers();
+        //KML::PresentFrame(KML::Vec3f(0.5f));
     }
-
+    KML::DestroyFramebuffer(framebuff);
     KML::Quit();
     return 0;
 }

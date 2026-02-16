@@ -26,7 +26,6 @@ void iconify_callback(GLFWwindow* window, int iconified);
 /* ---------- Declaraciones propias ---------- */
 
 void setGLcontext(int& major, int& minor, bool useLatestCtx);
-void setLogicalPresentation(int, int);
 void printGLInfo(bool);
 void updateKeyboard();
 
@@ -128,7 +127,6 @@ bool KML::InitWindow(int width, int height, const char* title, unsigned int flag
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) return false;
     if(flags & KML::ENABLE_VSYNC) glfwSwapInterval(1);
 
-    setLogicalPresentation(window.width, window.height);
     printGLInfo(false);
 
     if(aasamples > 0) glEnable(GL_MULTISAMPLE); 
@@ -186,7 +184,7 @@ bool KML::ProcessEvents() {
     return !glfwWindowShouldClose(window.handle);
 }
 
-void KML::setLogicalPresentation(int width, int height) {
+void KML::SetWindowViewport(int width, int height) {
     float aspect = (float)width / (float)height;
     int viewportX, viewportY, viewportW, viewportH;
 
@@ -205,7 +203,7 @@ void KML::setLogicalPresentation(int width, int height) {
     glViewport(viewportX, viewportY, viewportW, viewportH);
 }
 
-void KML::getScreenMeasure(int* w, int* h) {
+void KML::GetWindowSize(int* w, int* h) {
     assert(w && h);
     *w = window.width;
     *h = window.height;
@@ -216,7 +214,6 @@ void error_callback(int error, const char* description) {
 }
 
 void resize_callback(GLFWwindow* handle, int width, int height) {
-    //setLogicalPresentation(width, height);
     window.width = width;
     window.height = height;
 }
@@ -316,18 +313,16 @@ bool KML::GetMouseCaptureState() {
     return input.mouseCaptured;
 }
 
-void KML::UseFramebuffer(unsigned int framebuffer) {
-    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-    glEnable(GL_DEPTH_TEST);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void KML::SwapBuffers() {
+    glfwSwapBuffers(window.handle);
 }
 
-void KML::PresentFrame(float r, float g, float b, bool TEMP) {
+void KML::PresentFrame(Vec3f c) {
     glfwSwapBuffers(window.handle);
-    if(TEMP) return;
-    glClearColor(r, g, b, 1.0f);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glClearColor(c.x, c.y, c.z, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    SetWindowViewport(window.width, window.height);
 }
 
 bool tryGLcontext(int major, int minor) {

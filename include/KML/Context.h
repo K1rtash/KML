@@ -2,6 +2,7 @@
 #define KML_CONTEXT_H
 
 #include "ABI.h"
+#include "Vector.h"
 
 /**
  * @file       Context.h 
@@ -78,8 +79,8 @@ namespace KML {
     KML_API bool GetMouseCaptureState();
 
     /**
-     * @brief      Frees all resources used in the library
-     *             You must not use any method aftern calling this
+     * @brief      Frees all resources allocated to susbsystems of this library, such as audio and window management
+     *             You must not call any libary function or use any object method after this
      */
     KML_API void Quit();
 
@@ -91,16 +92,32 @@ namespace KML {
     KML_API void Event(WindowEvent event, int value);
     
     /**
-     * @brief      Clears the screen with the given color and draws the current frame
+     * @brief       Draws the default framebuffer, updates the viewport, and clears the screen with the given color
      *
-     * @param[in]  r     Red color
-     * @param[in]  g     Green color
-     * @param[in]  b     Blue color
+     * @param[in]  color Screen clear color
      */
-    KML_API void PresentFrame(float r = 0.0f, float g = 0.0f, float b = 0.0f, bool TEMP = true);
+    KML_API void PresentFrame(Vec3f color = 0.0f);
 
-    KML_API void getScreenMeasure(int* w, int* h);
-    KML_API void setLogicalPresentation(int width, int height);
+    /**
+     * @brief      Swaps the backbuffer with the bind framebuffer
+     */
+    KML_API void SwapBuffers();
+
+    /**
+     * @brief      Gets the window's width and height
+     *
+     * @param      width      Window width
+     * @param      height     Window height
+     */
+    KML_API void GetWindowSize(int* width, int* height);
+
+    /**
+     * @brief      Sets the logical presentation and viewport in a letterbox format
+     *
+     * @param[in]  width   Screen width
+     * @param[in]  height  Screen height
+     */
+    KML_API void SetWindowViewport(int width, int height);
 
     /**
      * @brief      Prints the current OpenGL context to stdout
