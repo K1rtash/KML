@@ -105,7 +105,7 @@ void KML::DrawFramebuffer(Framebuffer* framebuffer, Shader* shader, int w, int h
 	assert(framebuffer);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     UseShader(shader);
     glBindVertexArray(framebuffer->VAO);
