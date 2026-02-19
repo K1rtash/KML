@@ -101,7 +101,7 @@ void KML::BindFramebuffer(Framebuffer* framebuffer, Vec3f col) {
     glEnable(GL_DEPTH_TEST);
 }
 
-void KML::DrawFramebuffer(Framebuffer* framebuffer, Shader* shader, int w, int h) {
+void KML::DrawFramebuffer(Framebuffer* framebuffer, Shader* shader) {
 	assert(framebuffer);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

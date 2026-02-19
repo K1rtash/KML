@@ -145,10 +145,8 @@ namespace KML {
      *
      * @param      framebuffer  @ref Framebuffer
      * @param      shader       @ref Shader
-     * @param[in]  width        Width in pixels to draw in the backbuffer
-     * @param[in]  height       Height in pixels to draw in the backbuffer
      */
-    KML_API void DrawFramebuffer(Framebuffer* framebuffer, Shader* shader, int width, int height);
+    KML_API void DrawFramebuffer(Framebuffer* framebuffer, Shader* shader);
 
     KML_API void DestroyFramebuffer(Framebuffer* framebuffer); 
 }

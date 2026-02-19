@@ -112,6 +112,13 @@ namespace KML {
     KML_API void GetWindowSize(int* width, int* height);
 
     /**
+     * @brief      Checks if the window is focused
+     *
+     * @return     True if the window is focused
+     */
+    KML_API bool GetWindowFocused();
+
+    /**
      * @brief      Sets the logical presentation and viewport in a letterbox format
      *
      * @param[in]  width   Screen width

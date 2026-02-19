@@ -245,14 +245,11 @@ void window_focus_callback(GLFWwindow* handle, int focused) {
         window.focused = true;
         /* Si el ratón estaba capturado, devolverlo al modo */
         if(input.mouseCaptured) glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-        std::cout << "[DEBUG] Window is focused\n";
+        
     }
     else {
         window.focused = false;
-        /* Opcional: el ratón deja de estar capturado */
-        //input.mouseCaptured = 0;
         glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-        std::cout << "[DEBUG] Window lost focus\n";
     }
 }
 
@@ -270,15 +267,15 @@ void mouse_button_callback(GLFWwindow* handle, int button, int action, int mods)
     input.rawButtons[button] = action;
 }
 
-void iconify_callback(GLFWwindow* window, int iconified)
+void iconify_callback(GLFWwindow* handle, int iconified)
 {
-    if (iconified)
-    {
-        std::cout << "[DEBUG] Window iconified!\n";
+    if (iconified) {
+        window.focused = false;
+        glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
-    else
-    {
-        std::cout << "[DEBUG] Window NOT iconified!\n";
+    else {
+        window.focused = true;
+        if(input.mouseCaptured) glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
 }
 
@@ -370,6 +367,10 @@ void KML::SetWindowIcon(const char* file) {
     const GLFWimage* iptr = &img;
     assert(iptr->pixels);
     glfwSetWindowIcon(window.handle, 1, iptr);    
+}
+
+bool KML::GetWindowFocused() {
+    return window.focused;
 }
 
 void printGLInfo(bool showExt) /// Se debe llamar siempre despues de crear el contexto OpenGL makeContextCurrent

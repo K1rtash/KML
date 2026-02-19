@@ -15,6 +15,10 @@ int main() {
 
     KML::Texture tex0 = KML::LoadTexture("assets/logo.png");
 
+    KML::Sprite sprite0;
+    sprite0.scale = KML::Vec2f(32.0f, 18.0f);
+    sprite0.SetColor_RGB(255, 215, 200);
+
     float quad[] = {
      //  x     y     z      u     v
        -1.f, -1.f, 0.f,   0.f, 0.f,
@@ -43,7 +47,9 @@ int main() {
 
         KML::UseShader(shader0);
         KML::BindTexture(tex0, 0);
-        shape0.Draw();
+        //shape0.Draw();
+
+
 
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
             KML::Event(KML::WindowEvent::EXIT, 1);
@@ -54,12 +60,18 @@ int main() {
             KML::ReloadShader(framebufferProgram);
         }
 
+        if(KML::GetKey(KML_KEY_A) == KML::KeyState::PRESS || KML::GetKey(KML_KEY_A) == KML::KeyState::HOLD) sprite0.pos.x -= 1.0f;
+        if(KML::GetKey(KML_KEY_D) == KML::KeyState::PRESS || KML::GetKey(KML_KEY_D) == KML::KeyState::HOLD) sprite0.pos.x += 1.0f;
+        if(KML::GetKey(KML_KEY_W) == KML::KeyState::PRESS || KML::GetKey(KML_KEY_W) == KML::KeyState::HOLD) sprite0.pos.y += 1.0f;
+        if(KML::GetKey(KML_KEY_S) == KML::KeyState::PRESS || KML::GetKey(KML_KEY_S) == KML::KeyState::HOLD) sprite0.pos.y -= 1.0f;
+
+        sprite0.Draw();
         //
         int w, h;
         KML::GetWindowSize(&w, &h);
         KML::SetWindowViewport(w, h);
 
-        KML::DrawFramebuffer(framebuff, framebufferProgram, w, h);
+        KML::DrawFramebuffer(framebuff, framebufferProgram);
         KML::SwapBuffers();
         //KML::PresentFrame(KML::Vec3f(0.5f));
     }
