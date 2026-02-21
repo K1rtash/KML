@@ -111,6 +111,8 @@ bool KML::InitWindow(int width, int height, const char* title, unsigned int flag
     glfwGetWindowSize(window.handle, &window.width, &window.height);
     window.title = title;
 
+    if(flags & KML::LOCK_ASPECT) glfwSetWindowAspectRatio(window.handle, width, height);
+
     if(glfwRawMouseMotionSupported())
         glfwSetInputMode(window.handle, GLFW_RAW_MOUSE_MOTION, 1);
     else 
@@ -157,6 +159,7 @@ void KML::Quit() {
 }
 
 void KML::Event(WindowEvent event, int value) {
+    static int windowedX = 0, windowedY = 0, windowedWidth = 0, windowedHeight = 0;
     switch(event) {
     case WindowEvent::EXIT: 
         glfwSetWindowShouldClose(window.handle, value);
@@ -173,6 +176,28 @@ void KML::Event(WindowEvent event, int value) {
     case WindowEvent::HIDE:
         if(value) glfwHideWindow(window.handle);        
         else glfwShowWindow(window.handle);
+        break;
+    case WindowEvent::FULLSCREEN: {
+        GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+        if (value) {
+            glfwGetWindowPos(window.handle, &windowedX, &windowedY);
+            glfwGetWindowSize(window.handle, &windowedWidth, &windowedHeight);
+
+            glfwSetWindowMonitor(window.handle, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+        } else {
+            if(windowedWidth == 0) windowedWidth = __KML::LOG_SCREEN_WIDTH;
+            if(windowedHeight == 0) windowedHeight = __KML::LOG_SCREEN_HEIGHT;
+            glfwSetWindowMonitor(window.handle, nullptr, windowedX, windowedY, windowedWidth, windowedHeight, 0);
+        }
+        break;
+    }
+    case WindowEvent::MAXIMIZE:
+        if(value) glfwMaximizeWindow(window.handle);
+        else glfwRestoreWindow(window.handle);
+        break;
+    case WindowEvent::HIGHLIGHT:
+        if(value) glfwRequestWindowAttention(window.handle);
         break;
     }
 }

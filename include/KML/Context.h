@@ -22,7 +22,7 @@ namespace KML {
     /**
      * @brief      Defines the name of a window event, needs a flag
      */
-    enum class WindowEvent{EXIT, FULLSCREEN, ICONIFY, HIDE, MAXIMIZE, MOUSE_CAPTURED};
+    enum class WindowEvent{EXIT, FULLSCREEN, ICONIFY, HIDE, MAXIMIZE, MOUSE_CAPTURED, HIGHLIGHT};
 
     /**
      * @brief      Flags used to create the graphical context
@@ -37,7 +37,8 @@ namespace KML {
         MAXIMIZED = 1 << 5,
         BORDERLESS = 1 << 6,
         FULLSCREEN = 1 << 7,
-        GL_CONTEXT_LATEST = 1 << 8
+        GL_CONTEXT_LATEST = 1 << 8,
+        LOCK_ASPECT = 1 << 9
     };
 
     /**

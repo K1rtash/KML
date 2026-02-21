@@ -2,10 +2,10 @@
 #include <KML/KML.h>
 #include <glad/glad.h>
 
-int width = 320, height = 180;
+int width = 1920, height = 1080;
 
 int main() {
-    KML::InitWindow(width, height, "Conditioned Subject", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST);
+    KML::InitWindow(width, height, "Conditioned Subject", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST | KML::LOCK_ASPECT);
 
     KML::Clock clock0{};
 
@@ -39,15 +39,19 @@ int main() {
     while(KML::ProcessEvents()) {
         float time = (float)clock0.Now();
 
+        if(time >= 3.0f) KML::Event(KML::WindowEvent::HIGHLIGHT, 1);
+
         KML::SetUniform_1f("u_time", shader0, time);
-        KML::SetUniform_2fv("u_resolution", shader0, KML::Vec2f((float)width, (float)height));
+        KML::SetUniform_2fv("u_resolution", shader0, KML::Vec2f(420.0f, 280.0f));
         KML::SetUniform_3fv("u_logoColor", shader0, KML::Vec3f(1.0f, 0.0f, 0.0f));
+        SetUniform_1f("u_fadeLenght", shader0, 5.0f);
+        SetUniform_1f("u_fadeTime", shader0, 0);
 
         KML::BindFramebuffer(framebuff, KML::Vec3f(0.07f, 0.13f, 0.17f));
 
         KML::UseShader(shader0);
         KML::BindTexture(tex0, 0);
-        //shape0.Draw();
+        shape0.Draw();
 
 
 
@@ -64,6 +68,12 @@ int main() {
         if(KML::GetKey(KML_KEY_D) == KML::KeyState::PRESS || KML::GetKey(KML_KEY_D) == KML::KeyState::HOLD) sprite0.pos.x += 1.0f;
         if(KML::GetKey(KML_KEY_W) == KML::KeyState::PRESS || KML::GetKey(KML_KEY_W) == KML::KeyState::HOLD) sprite0.pos.y += 1.0f;
         if(KML::GetKey(KML_KEY_S) == KML::KeyState::PRESS || KML::GetKey(KML_KEY_S) == KML::KeyState::HOLD) sprite0.pos.y -= 1.0f;
+        if(KML::GetKey(KML_KEY_SPACE) == KML::KeyState::PRESS) {
+            KML::Event(KML::WindowEvent::FULLSCREEN, 1);
+        }
+        if(KML::GetKey(KML_KEY_X) == KML::KeyState::PRESS) {
+            KML::Event(KML::WindowEvent::FULLSCREEN, 0);
+        }
 
         sprite0.Draw();
         //
@@ -75,7 +85,7 @@ int main() {
         KML::SwapBuffers();
         //KML::PresentFrame(KML::Vec3f(0.5f));
     }
-    KML::DestroyFramebuffer(framebuff);
+    KML::DeleteFramebuffer(framebuff);
     KML::Quit();
     return 0;
 }

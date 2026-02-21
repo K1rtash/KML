@@ -80,7 +80,7 @@ KML::Framebuffer* KML::CreateFramebuffer(int width, int height) {
     return framebuff;
 }
 
-void KML::DestroyFramebuffer(Framebuffer* fb) {
+void KML::DeleteFramebuffer(Framebuffer* fb) {
 	assert(fb);
 
 	glDeleteBuffers(1, &(fb->VBO));

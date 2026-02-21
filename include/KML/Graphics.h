@@ -148,7 +148,7 @@ namespace KML {
      */
     KML_API void DrawFramebuffer(Framebuffer* framebuffer, Shader* shader);
 
-    KML_API void DestroyFramebuffer(Framebuffer* framebuffer); 
+    KML_API void DeleteFramebuffer(Framebuffer* framebuffer); 
 }
 
 #endif
