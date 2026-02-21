@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cassert>
+#include <filesystem>
 
 #include "KML/Graphics.h"
 #include "KML/Vector.h"
