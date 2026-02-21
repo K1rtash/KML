@@ -6,11 +6,11 @@
  * @brief   Default and user defined shapes to create surfaces
  */ 
 
-#include "Graphics.h"
 #include "ABI.h"
+#include "Graphics.h"
 
 namespace KML {
-    struct Shape;
+    struct KML_API Shape;
 
     /**
      * @brief      Creates a shape.
@@ -22,7 +22,7 @@ namespace KML {
      *
      * @return     @ref Shape
      */
-    Shape* CreateShape(float* vertices, size_t verticesSize, unsigned int* indices, size_t indicesSize);
+    KML_API Shape* CreateShape(float* vertices, size_t verticesSize, unsigned int* indices, size_t indicesSize);
 
     /**
      * @brief      Defines a single attribute in a vertex
@@ -41,9 +41,9 @@ namespace KML {
      * layout (location = INDEX) in NAME
      * 
      */
-    void VertexFloatAttribute(Shape* shape, int index, int attributeSize, int stride, int offset);
-    void DrawShape(Shape* shape);
-    void DeleteShape(Shape* shape);
+    KML_API void VertexFloatAttribute(Shape* shape, int index, int attributeSize, int stride, int offset);
+    KML_API void DrawShape(Shape* shape);
+    KML_API void DeleteShape(Shape* shape);
 }
 
 

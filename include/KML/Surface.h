@@ -43,7 +43,7 @@ namespace KML {
         Shader* shader = nullptr;
         Shape* shape = nullptr;
         Camera* camera = nullptr;
-        Texture tex = 0;
+        Texture* tex = nullptr;
 
         void SetColor_HSV(int H, int S = 100, int V = 100);
         void SetColor_RGB(int R, int G, int B);

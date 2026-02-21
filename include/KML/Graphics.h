@@ -21,8 +21,7 @@ namespace KML {
     struct Vec4f;
     struct Shader;
     struct Framebuffer;
-
-    typedef unsigned int Texture;
+    struct Texture;
 
     /**
      * @brief      Creates a custom shader program from disc files
@@ -104,7 +103,7 @@ namespace KML {
      *
      * @return     Unique id
      */
-    KML_API Texture CreateTexture(const char* file, KML_TEXTURE_WRAP_STYLE wrapStyle = 0);
+    KML_API Texture* CreateTexture(const char* file, KML_TEXTURE_WRAP_STYLE wrapStyle = 0);
 
     /**
      * @brief      Binds a loaded texture to a texture unit, which can be passed to a shader's sampler2D uniform
@@ -112,14 +111,14 @@ namespace KML {
      * @param[in]  texture  @ref Texture
      * @param[in]  unit     Texture unit
      */
-    KML_API void BindTexture(Texture texture, int unit);
+    KML_API void BindTexture(Texture* texture, int unit);
 
     /**
      * @brief      Frees all allocated resources in a texture
      *
      * @param[in]  file  Disc file
      */
-    KML_API void DeleteTexture(Texture texture);
+    KML_API void DeleteTexture(Texture* texture);
 
     /**
      * @brief       Creates a new framebuffer in GPU memory

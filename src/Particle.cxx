@@ -35,7 +35,7 @@ void KML::ParticleGroup::Draw(double dt) {
     for(Particle& p : _particles) {
         glUseProgram(KML::GetShaderID(shader));
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, tex);
+        if(tex) BindTexture(tex, 0);
 
         CustomRenderer(p);
 

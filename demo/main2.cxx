@@ -9,6 +9,10 @@ void removeShaderCallback(KML::Shader* shader, void* uptr) {
     KML::DeleteShader(shader);
 }
 
+void removeTexCb(KML::Texture* tex, void* uptr) {
+
+}
+
 int main() {
     KML::InitWindow(width, height, "Conditioned Subject", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST | KML::LOCK_ASPECT);
 
@@ -20,7 +24,10 @@ int main() {
 
 
     KML::ResourceManager <KML::Shader*>shaderManager{nullptr, removeShaderCallback, nullptr};
-    KML::Texture tex0 = KML::CreateTexture("assets/logo.png");
+    KML::ResourceManager <KML::Texture*>texManager{nullptr, removeTexCb, nullptr};
+
+    KML::Texture* tex0 = KML::CreateTexture("assets/logo.png");
+    texManager.Add("assets/logo.png", tex0);
 
     shaderManager.Add("shader0", shader0);
 
@@ -61,10 +68,8 @@ int main() {
         KML::BindFramebuffer(framebuff, KML::Vec3f(0.07f, 0.13f, 0.17f));
 
         KML::UseShader(shaderManager.Get("shader0"));
-        KML::BindTexture(tex0, 0);
+        KML::BindTexture(texManager.Get("assets/logo.png"), 0);
         KML::DrawShape(shape0);
-
-
 
         if(KML::GetKey(KML_KEY_ESCAPE) == KML::KeyState::PRESS) {
             KML::Event(KML::WindowEvent::EXIT, 1);
@@ -98,7 +103,7 @@ int main() {
     }
     KML::DeleteFramebuffer(framebuff);
     KML::DeleteShape(shape0);
-    KML::DeleteTexture(tex0);
+    texManager.Clear();
     shaderManager.Clear();
     KML::Quit();
     return 0;

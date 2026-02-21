@@ -1,12 +1,13 @@
 #ifndef KML_RESOURCE_MANAGER_H
 #define KML_RESOURCE_MANAGER_H
 
-#include "Graphics.h"
+#include "ABI.h"
+
 #include <unordered_map>
 #include <string>
 
 namespace KML {
-    template <typename T> class ResourceManager {
+    template <typename T> class KML_API ResourceManager {
       protected:
         std::unordered_map<std::string, T> resources;
         void* uptr = nullptr;

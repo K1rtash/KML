@@ -75,10 +75,10 @@ void Sprite::Draw() {
         view = glm::translate(view, glm::vec3(-camera->pivot.x, -camera->pivot.y, 0));
     }
 
-    BindTexture(tex, 0);
+    if(tex) BindTexture(tex, 0);
 
     glUniform1i(KML::GetShaderUniformL(shader, "uTex"), 0);
-    glUniform1i(KML::GetShaderUniformL(shader, "useTex"), tex > 0 ? 1 : 0);
+    glUniform1i(KML::GetShaderUniformL(shader, "useTex"), tex ? 1 : 0);
     glUniformMatrix4fv(KML::GetShaderUniformL(shader, "model"), 1, GL_FALSE, glm::value_ptr(model));
     glUniformMatrix4fv(KML::GetShaderUniformL(shader, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
     glUniformMatrix4fv(KML::GetShaderUniformL(shader, "view"), 1, GL_FALSE, glm::value_ptr(view));
