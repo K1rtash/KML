@@ -1,8 +1,12 @@
 #ifndef KML_TEXTURE_H
 #define KML_TEXTURE_H     
 
-
 #include "ABI.h"
+
+/**
+ * @file    Texture.h
+ * @brief   GPU texture
+ */ 
 
 #define KML_TEXTURE_WRAP_STYLE int
 #define KML_TEXTURE_WS_REPEAT 0

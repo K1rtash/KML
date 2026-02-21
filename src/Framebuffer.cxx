@@ -2,8 +2,7 @@
 #include <cassert>
 #include <iostream>
 
-#include "KML/Graphics.h"
-#include "KML/Vector.h"
+#include "KML/Framebuffer.h"
 #include "__KML/graphics.h"
 
 struct KML::Framebuffer {

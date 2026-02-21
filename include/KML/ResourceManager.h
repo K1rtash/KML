@@ -6,6 +6,11 @@
 #include <unordered_map>
 #include <string>
 
+/**
+ * @file    ResourceManager.h
+ * @brief   Provides global storage abstraction
+ */ 
+
 namespace KML {
     template <typename T> class KML_API ResourceManager {
       protected:

@@ -5,6 +5,11 @@
 
 #include <filesystem>
 
+/**
+ * @file    Shader.h
+ * @brief   GPU shaders and GLSL abstraction
+ */ 
+
 namespace KML {
     struct Vec2f;
     struct Vec3f;

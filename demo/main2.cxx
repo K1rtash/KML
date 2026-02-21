@@ -49,7 +49,7 @@ int main() {
     };
 
     KML::Shape* shape0 = KML::CreateShape(quad, sizeof(quad), quadIdx, sizeof(quadIdx));
-    KML::VertexFloatAttribute(shape0, 0, 3, 4, 0);
+    KML::VertexFloatAttribute(shape0, 0, 2, 4, 0);
     KML::VertexFloatAttribute(shape0, 1, 2, 4, 2);
 
     KML::Framebuffer* framebuff = KML::CreateFramebuffer(width, height);
