@@ -16,6 +16,10 @@ include(FetchContent)
 # ---------------------      ---------------------
 option(KML_SHARED_LIBS "Build KML as shared library" OFF)
 option(KML_BUILD_DEMO "Build a demo" OFF)
+option(KML_PRINT_ERRORS "Print library errors to stdout" OFF)
+if(KML_PRINT_ERRORS)
+add_compile_definitions(KML_PRINT_ERRORS)
+endif()
 
 if(KML_SHARED_LIBS)
     set(BUILD_SHARED_LIBS ON)

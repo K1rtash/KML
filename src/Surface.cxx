@@ -29,7 +29,6 @@ Sprite::Sprite(Shader* s) {
 }
 
 Sprite::Sprite(std::string texture) {
-    SetTexture(texture);
     shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
@@ -40,7 +39,6 @@ Sprite::Sprite(Vec4f transform) : Surface{transform.x, transform.y, transform.z,
 }
 
 Sprite::Sprite(std::string texture, Vec4f transform) : Surface{transform.x, transform.y, transform.z, transform.w} {
-    SetTexture(texture);
     shape = __KML::defaultShape;
     shader = __KML::defaultShader;
 }
@@ -87,10 +85,6 @@ void Sprite::Draw() {
     glUniform4f(KML::GetShaderUniformL(shader, "tint"), finalColor.x, finalColor.y, finalColor.z, finalColor.w);
     
     KML::DrawShape(shape);
-}
-
-void Sprite::SetTexture(std::string texture) {
-    this->tex = __KML::Texture::get(texture);
 }
 
 void Sprite::SetColor_RGB(int R, int G, int B) {

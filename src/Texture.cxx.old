@@ -5,24 +5,14 @@
 #include "KML/Graphics.h"
 #include "__KML/graphics.h"
 
-KML::Texture KML::CreateTexture(const char* file, KML_TEXTURE_WRAP_STYLE ws) {
-    int w, h, cc;
-    stbi_set_flip_vertically_on_load(true);
-    unsigned char* bytes = stbi_load(file, &w, &h, &cc, 0);
-    
-    #ifdef KML_PRINT_ERRORS
-        if(!bytes) printf("FAILED (bytes): %s\n", file);
-        if(w == 0 || h == 0) printf("FAILED (w/h): %s\n", file);
-        if(!cc) printf("FAILED (cc): %s\n", file);
-    #endif
-    assert(bytes && cc && h && w);
-    
-    unsigned int id = __KML::Texture::loadTexToGL(bytes, w, h, cc, ws);
+std::unordered_map<std::string, unsigned int>textures;
 
-    Texture tex = id;
-
-    stbi_image_free(bytes);
-    return tex;
+KML::Texture KML::LoadTexture(const char* file, KML_TEXTURE_WRAP_STYLE ws) {
+    if(textures.find(file) != textures.end()) return __KML::Texture::get(file);
+    unsigned int id = __KML::Texture::load(file, ws);
+    assert(id != 0);
+    textures.insert({file, id});
+    return id;
 }
 
 void KML::BindTexture(Texture t, int u) {
@@ -32,8 +22,10 @@ void KML::BindTexture(Texture t, int u) {
     }
 }
 
-void KML::DeleteTexture(Texture t) {
-    glDeleteTextures(1, &t);
+void KML::UnloadTexture(const char* file) {
+    GLuint id = __KML::Texture::get(file);
+    glDeleteTextures(1, &id);
+    textures.erase(file);
 }
 
 unsigned int __KML::Texture::loadTexToGL(unsigned char* bytes, int w, int h, int cc, int ws) {
@@ -66,4 +58,27 @@ unsigned int __KML::Texture::loadTexToGL(unsigned char* bytes, int w, int h, int
     glBindTexture(GL_TEXTURE_2D, 0);
 
     return id;
+}
+
+unsigned int __KML::Texture::load(const char* file, KML_TEXTURE_WRAP_STYLE ws) {
+    int w, h, cc;
+    stbi_set_flip_vertically_on_load(true);
+    unsigned char* bytes = stbi_load(file, &w, &h, &cc, 0);
+    
+    #ifdef KML_PRINT_ERRORS
+        if(!bytes) printf("FAILED (bytes): %s\n", file);
+        if(w == 0 || h == 0) printf("FAILED (w/h): %s\n", file);
+        if(!cc) printf("FAILED (cc): %s\n", file);
+    #endif
+    assert(bytes && cc && h && w);
+    
+    GLuint id = loadTexToGL(bytes, w, h, cc, ws);
+
+    stbi_image_free(bytes);
+    return id;
+}
+
+unsigned int __KML::Texture::get(std::string name) {
+    if(textures.find(name) == textures.end()) return 0;
+    return textures.at(name);
 }

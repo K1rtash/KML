@@ -74,10 +74,9 @@ void KML::ReloadShader(Shader* shader) {
     map_shader_uniforms(shader);
 }
 
-void KML::DeleteShader(Shader*& shader) {
+void KML::DeleteShader(Shader* shader) {
     glDeleteProgram(shader->id);
     delete shader;
-    shader = nullptr;
 }
 
 void KML::UseShader(Shader* shader) {

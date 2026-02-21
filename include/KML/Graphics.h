@@ -95,7 +95,7 @@ namespace KML {
      *
      * @param      shader  @ref Shader
      */
-    KML_API void DeleteShader(Shader*& shader);
+    KML_API void DeleteShader(Shader* shader);
 
     /**
      * @brief      Loads a texture from file, will be saved as the char* you provided
@@ -104,7 +104,7 @@ namespace KML {
      *
      * @return     Unique id
      */
-    KML_API Texture LoadTexture(const char* file, KML_TEXTURE_WRAP_STYLE wrapStyle = 0);
+    KML_API Texture CreateTexture(const char* file, KML_TEXTURE_WRAP_STYLE wrapStyle = 0);
 
     /**
      * @brief      Binds a loaded texture to a texture unit, which can be passed to a shader's sampler2D uniform
@@ -119,7 +119,7 @@ namespace KML {
      *
      * @param[in]  file  Disc file
      */
-    KML_API void UnloadTexture(const char* file);
+    KML_API void DeleteTexture(Texture texture);
 
     /**
      * @brief       Creates a new framebuffer in GPU memory

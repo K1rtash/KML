@@ -1,8 +1,13 @@
 #include <iostream>
 #include <KML/KML.h>
+#include <KML/ResourceManager.h>
 #include <glad/glad.h>
 
 int width = 1920, height = 1080;
+
+void removeShaderCallback(KML::Shader* shader, void* uptr) {
+    KML::DeleteShader(shader);
+}
 
 int main() {
     KML::InitWindow(width, height, "Conditioned Subject", KML::RESIZABLE | KML::ENABLE_VSYNC | KML::MSAA8 | KML::GL_CONTEXT_LATEST | KML::LOCK_ASPECT);
@@ -13,7 +18,11 @@ int main() {
     KML::Shader* framebufferProgram = KML::CreateShader("assets/shaders/fb.vs", "assets/shaders/fb.fs");
     KML::SetUniform_1i("screenTexture", framebufferProgram, 0);
 
-    KML::Texture tex0 = KML::LoadTexture("assets/logo.png");
+
+    KML::ResourceManager <KML::Shader*>shaderManager{nullptr, removeShaderCallback, nullptr};
+    KML::Texture tex0 = KML::CreateTexture("assets/logo.png");
+
+    shaderManager.Add("shader0", shader0);
 
     KML::Sprite sprite0;
     sprite0.scale = KML::Vec2f(32.0f, 18.0f);
@@ -43,15 +52,15 @@ int main() {
 
         if(time >= 3.0f) KML::Event(KML::WindowEvent::HIGHLIGHT, 1);
 
-        KML::SetUniform_1f("u_time", shader0, time);
-        KML::SetUniform_2fv("u_resolution", shader0, KML::Vec2f(420.0f, 280.0f));
-        KML::SetUniform_3fv("u_logoColor", shader0, KML::Vec3f(1.0f, 0.0f, 0.0f));
-        SetUniform_1f("u_fadeLenght", shader0, 5.0f);
-        SetUniform_1f("u_fadeTime", shader0, 0);
+        KML::SetUniform_1f("u_time", shaderManager.Get("shader0"), time);
+        KML::SetUniform_2fv("u_resolution", shaderManager.Get("shader0"), KML::Vec2f(420.0f, 280.0f));
+        KML::SetUniform_3fv("u_logoColor", shaderManager.Get("shader0"), KML::Vec3f(1.0f, 0.0f, 0.0f));
+        SetUniform_1f("u_fadeLenght", shaderManager.Get("shader0"), 5.0f);
+        SetUniform_1f("u_fadeTimer", shaderManager.Get("shader0"), 0);
 
         KML::BindFramebuffer(framebuff, KML::Vec3f(0.07f, 0.13f, 0.17f));
 
-        KML::UseShader(shader0);
+        KML::UseShader(shaderManager.Get("shader0"));
         KML::BindTexture(tex0, 0);
         KML::DrawShape(shape0);
 
@@ -62,7 +71,7 @@ int main() {
         }
 
         if(KML::GetKey(KML_KEY_R) == KML::KeyState::PRESS) {
-            KML::ReloadShader(shader0);
+            KML::ReloadShader(shaderManager.Get("shader0"));
             KML::ReloadShader(framebufferProgram);
         }
 
@@ -89,6 +98,8 @@ int main() {
     }
     KML::DeleteFramebuffer(framebuff);
     KML::DeleteShape(shape0);
+    KML::DeleteTexture(tex0);
+    shaderManager.Clear();
     KML::Quit();
     return 0;
 }
