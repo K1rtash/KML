@@ -147,7 +147,7 @@ void __KML::InitFreeType() {
 	    "color = vec4(textColor, 1.0) * sampled;\n"
 		"}";
 
-	text_shader = KML::CreateShaderFS(vert_src, frag_src);
+	text_shader = KML::CreateShaderS(vert_src, frag_src);
 	assert(text_shader);
 	glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);

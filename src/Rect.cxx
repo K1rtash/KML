@@ -58,5 +58,5 @@ void __KML::GenerateDefaultMembers() {
     KML::VertexFloatAttribute(defaultShape, 0, 3, 5, 0);
     KML::VertexFloatAttribute(defaultShape, 1, 2, 5, 3);    
 
-    defaultShader = KML::CreateShaderFS(vertex_src, fragment_src);
+    defaultShader = KML::CreateShaderS(vertex_src, fragment_src);
 }
