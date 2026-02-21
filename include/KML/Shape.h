@@ -10,49 +10,40 @@
 #include "ABI.h"
 
 namespace KML {
+    struct Shape;
 
     /**
-     * @class      Shape Shape.h Shape
-     * @brief      Used to set diferent shapes to render surfaces
+     * @brief      Creates a shape.
+     *
+     * @param      vertices      Array of floats representing
+     * @param[in]  verticesSize  Size of the array of vertices
+     * @param      indices       Array of unsigned integers
+     * @param[in]  indicesSize   Size of the array of indices
+     *
+     * @return     @ref Shape
      */
-    class KML_API Shape {
-      private:
-        unsigned int vao;
-        size_t ind_size;
-      public:
-        /**
-         * @brief      Constructs a new instance.
-         *
-         * @param[in]      vertices       Array of vertices composed of Pos(x, y ,z = 0.0f) and UV Normals(x, y)
-         * @param[in]  vertices_size  Size of the vertices array
-         * @param[in]      indices        Array of indexed vertices to reuse 
-         * @param[in]  indices_size   Size of the indices array
-         */
-        Shape(float* vertices, size_t vertices_size, unsigned int* indices, size_t indices_size);
+    Shape* CreateShape(float* vertices, size_t verticesSize, unsigned int* indices, size_t indicesSize);
 
-        Shape(Shape&& other) noexcept {
-            vao = other.vao;
-            ind_size = other.ind_size;
-            other.vao = 0;
-        }
-        
-        Shape& operator=(Shape&& other) noexcept {
-            if (this != &other) {
-                Delete();
-                vao = other.vao;
-                ind_size = other.ind_size;
-                other.vao = 0;
-            }
-            return *this;
-        }
-
-        void Delete();
-
-        /**
-         * @brief      Draws the vertices to the bind shader
-         */
-        void Draw();
-    };
+    /**
+     * @brief      Defines a single attribute in a vertex
+     * 
+     * Attributes are a number of consecutive floats in a vertex, you must specify where it starts in the vertex, and the distance between an attribute and
+     * the next one in the consecutive vertex
+     *
+     * @param[in]  shape           @ref Shape
+     * @param[in]  index           Location of the attribute in the layout
+     * @param[in]  attributeSize   How many components does this attribute have
+     * @param[in]  stride          Components between an attribute and the same attribute in the next vertex
+     * @param[in]  offset          Components to advance from the start of a vertex to reach the attribute
+     * 
+     * In the vertex shader, you should import the vertices as a layout like this:
+     * 
+     * layout (location = INDEX) in NAME
+     * 
+     */
+    void VertexFloatAttribute(Shape* shape, int index, int attributeSize, int stride, int offset);
+    void DrawShape(Shape* shape);
+    void DeleteShape(Shape* shape);
 }
 
 

@@ -61,6 +61,6 @@ void KML::ParticleGroup::Draw(double dt) {
         glUniformMatrix4fv(KML::GetShaderUniformL(shader, "view"), 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(KML::GetShaderUniformL(shader, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
-        shape->Draw();
+        KML::DrawShape(shape);
     }    
 }

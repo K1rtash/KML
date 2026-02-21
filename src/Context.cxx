@@ -153,6 +153,8 @@ void KML::Quit() {
     if(!__KML::contextActive) return;
     __KML::CloseAudioDevice();
     __KML::QuitFreeType(); 
+    DeleteShader(__KML::defaultShader);
+    DeleteShape(__KML::defaultShape);
     glfwDestroyWindow(window.handle);
     glfwTerminate();
     __KML::contextActive = 0;

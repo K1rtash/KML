@@ -86,7 +86,7 @@ void Sprite::Draw() {
     glUniformMatrix4fv(KML::GetShaderUniformL(shader, "view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniform4f(KML::GetShaderUniformL(shader, "tint"), finalColor.x, finalColor.y, finalColor.z, finalColor.w);
     
-    shape->Draw();
+    KML::DrawShape(shape);
 }
 
 void Sprite::SetTexture(std::string texture) {

@@ -1,40 +1,60 @@
 #include <glad/glad.h>
 
+#include <cassert>
+
 #include "KML/Shape.h"
 
-#include "__KML/graphics.h"
+struct KML::Shape {
+    GLuint vao = 0, vbo = 0, ebo = 0;
+    GLsizei count = {}; 
+};
 
-KML::Shape::Shape(float* vertices, size_t vs, unsigned int* indices, size_t is) {
-    GLuint VBO, EBO;
-    glGenVertexArrays(1, &vao);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
+KML::Shape* KML::CreateShape(float* vertices, size_t vertSize, unsigned int* indices, size_t indSize) {
+    Shape* shape = new Shape;
+    assert(shape && vertices && vertSize > 0 && indices && indSize > 0);
 
-    glBindVertexArray(vao);
+    shape->count = indSize/sizeof(unsigned int);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vs, vertices, GL_STATIC_DRAW);
+    glGenVertexArrays(1, &(shape->vao));
+    glGenBuffers(1, &(shape->vbo));
+    glGenBuffers(1, &(shape->ebo));
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, is, indices, GL_STATIC_DRAW);
+    glBindVertexArray(shape->vao);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, shape->vbo);
+    glBufferData(GL_ARRAY_BUFFER, vertSize, vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shape->ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indSize, indices, GL_STATIC_DRAW);
 
     glBindVertexArray(0);
-    this->ind_size = is;
 
-    assert(vao != 0);
+    assert(shape->vbo && shape->ebo && shape->count && shape->vao);
+
+    return shape;
 }
 
-void KML::Shape::Delete() {
-    if(vao) glDeleteVertexArrays(1, &vao);
+void KML::DeleteShape(Shape* shape) {
+    assert(shape && shape->vao);
+
+    glDeleteVertexArrays(1, &(shape->vao));
+        glDeleteBuffers(1, &(shape->vbo));
+    glDeleteBuffers(1, &(shape->ebo));
+    delete shape;
 }
 
-void KML::Shape::Draw() {
-    glBindVertexArray(vao);
-    glDrawElements(GL_TRIANGLES, ind_size/sizeof(unsigned int), GL_UNSIGNED_INT, 0);
+void KML::DrawShape(Shape* shape) {
+    assert(shape && shape->vao && shape->count);
+    glBindVertexArray(shape->vao);
+    glDrawElements(GL_TRIANGLES, shape->count, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+}
+
+void KML::VertexFloatAttribute(Shape* shape, int index, int attributeSize, int stride, int offset) {
+    assert(shape && index >= 0 && attributeSize > 0 && stride > 0 && offset >= 0);
+
+    glBindVertexArray(shape->vao);
+    glVertexAttribPointer(index, attributeSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(offset * sizeof(float)));
+    glEnableVertexAttribArray(index);
     glBindVertexArray(0);
 }

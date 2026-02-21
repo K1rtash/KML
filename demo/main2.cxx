@@ -21,10 +21,10 @@ int main() {
 
     float quad[] = {
      //  x     y     z      u     v
-       -1.f, -1.f, 0.f,   0.f, 0.f,
-        1.f, -1.f, 0.f,   1.f, 0.f,
-        1.f,  1.f, 0.f,   1.f, 1.f,
-       -1.f,  1.f, 0.f,   0.f, 1.f
+       -1.f, -1.f,   0.f, 0.f,
+        1.f, -1.f,   1.f, 0.f,
+        1.f,  1.f,   1.f, 1.f,
+       -1.f,  1.f,   0.f, 1.f
     };
 
     unsigned int quadIdx[] = {
@@ -32,7 +32,9 @@ int main() {
         2, 3, 0
     };
 
-    KML::Shape shape0{quad, sizeof(quad), quadIdx, sizeof(quadIdx)};
+    KML::Shape* shape0 = KML::CreateShape(quad, sizeof(quad), quadIdx, sizeof(quadIdx));
+    KML::VertexFloatAttribute(shape0, 0, 3, 4, 0);
+    KML::VertexFloatAttribute(shape0, 1, 2, 4, 2);
 
     KML::Framebuffer* framebuff = KML::CreateFramebuffer(width, height);
 
@@ -51,7 +53,7 @@ int main() {
 
         KML::UseShader(shader0);
         KML::BindTexture(tex0, 0);
-        shape0.Draw();
+        KML::DrawShape(shape0);
 
 
 
@@ -86,6 +88,7 @@ int main() {
         //KML::PresentFrame(KML::Vec3f(0.5f));
     }
     KML::DeleteFramebuffer(framebuff);
+    KML::DeleteShape(shape0);
     KML::Quit();
     return 0;
 }
